@@ -224,7 +224,7 @@ def main():
                 if not is_not_auto_generated:
                     st.warning("⚠️ Transkrip ini merupakan Auto-Generated dan mungkin mengandung kesalahan.")
 
-                full_text = " ".join([entry['text'] + ". " for entry in transcript_entries]) # Menambahkan titik di setiap entry
+                full_text = " ".join([entry['text'] for entry in transcript_entries]) # Tidak menambahkan titik di setiap entry
                 st.success("✅ Transcript berhasil diambil! ")
 
                 with st.expander("📄 Cuplikan Transcript"):
