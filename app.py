@@ -253,10 +253,23 @@ def main():
 
                     if is_problematic:
                         problematic_sentences_count += 1
+                        # Temukan timestamp dari kalimat
+                        matched_entry = next((entry for entry in transcript_entries if sentence.strip().startswith(entry['text'].strip()[:10])), None)
+                        timestamp = matched_entry["start"] if matched_entry else None
+                        timestamp_str = f"{int(timestamp // 60):02d}:{int(timestamp % 60):02d}" if timestamp is not None else "??:??"
+
+                        # Urutkan label dengan probabilitas tertinggi
+                        sorted_probs = sorted(
+                            [(LABEL_DESCRIPTIONS[label], prob) for label, prob in label_probs.items() if prob > 0.5 and label != "PS"],
+                            key=lambda x: x[1],
+                            reverse=True
+                        )
+
                         problematic_sentences_details.append({
                             "kalimat": sentence,
-                            "label_terdeteksi": [LABEL_DESCRIPTIONS[label] for label in detected_labels if label != "PS"], # Hanya tampilkan label selain PS
-                            "probabilitas": {LABEL_DESCRIPTIONS[k]: f"{v:.1%}" for k, v in label_probs.items()}
+                            "timestamp": timestamp_str,
+                            "label_terdeteksi": [label for label, _ in sorted_probs],
+                            "probabilitas": {label: f"{prob:.1%}" for label, prob in sorted_probs}
                         })
 
                     progress_percentage = (i + 1) / len(clean_sentences)
@@ -280,7 +293,7 @@ def main():
                     st.info("🚨 Berikut adalah kalimat-kalimat yang terdeteksi bermasalah:")
                     for idx, detail in enumerate(problematic_sentences_details, 1):
                         st.markdown(f"---")
-                        st.markdown(f"**Kalimat {idx}:** {detail['kalimat']}")
+                        st.markdown(f"**Kalimat {idx}** _(pada menit {detail['timestamp']})_: {detail['kalimat']}")
                         # Pastikan hanya menampilkan label yang terdeteksi dan bukan PS
                         display_labels = [label for label in detail['label_terdeteksi'] if label != "Konten Positif"]
                         if display_labels:
