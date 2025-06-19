@@ -253,23 +253,27 @@ def main():
 
                     if is_problematic:
                         problematic_sentences_count += 1
-                        # Temukan timestamp dari kalimat
+                        
+                        # Temukan timestamp
                         matched_entry = next((entry for entry in transcript_entries if sentence.strip().startswith(entry['text'].strip()[:10])), None)
                         timestamp = matched_entry["start"] if matched_entry else None
                         timestamp_str = f"{int(timestamp // 60):02d}:{int(timestamp % 60):02d}" if timestamp is not None else "??:??"
 
-                        # Urutkan label dengan probabilitas tertinggi
-                        sorted_probs = sorted(
-                            [(LABEL_DESCRIPTIONS[label], prob) for label, prob in label_probs.items() if prob > 0.5 and label != "PS"],
+                        # Urutkan hanya label aktif (prob > threshold dan bukan PS)
+                        sorted_active = sorted(
+                            [(LABEL_DESCRIPTIONS[label], float(prob)) for label, prob in label_probs.items() if prob > 0.5 and label != "PS"],
                             key=lambda x: x[1],
                             reverse=True
                         )
 
+                        # Simpan seluruh probabilitas (untuk dropdown), tapi aktif label saja untuk ringkasan
+                        all_probs = {LABEL_DESCRIPTIONS[label]: f"{float(prob):.1%}" for label, prob in label_probs.items()}
+
                         problematic_sentences_details.append({
                             "kalimat": sentence,
                             "timestamp": timestamp_str,
-                            "label_terdeteksi": [label for label, _ in sorted_probs],
-                            "probabilitas": {label: f"{prob:.1%}" for label, prob in sorted_probs}
+                            "label_terdeteksi": [label for label, _ in sorted_active],
+                            "probabilitas": all_probs
                         })
 
                     progress_percentage = (i + 1) / len(clean_sentences)
