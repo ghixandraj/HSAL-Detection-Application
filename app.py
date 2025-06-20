@@ -238,9 +238,6 @@ def main():
                 with st.expander("📄 Cuplikan Transcript"):
                     st.text_area("", full_text[:1000] + ("..." if len(full_text) > 1000 else ""), height=200)
 
-                if st.session_state.is_analyzing:
-                    st.subheader("🔍 Menganalisis Konten Video per Kalimat...")
-
                 sentences = re.split(r'(?<=[.!?])\s+|\n', full_text)
                 clean_sentences = [s.strip() for s in sentences if s.strip()]
 
@@ -301,7 +298,7 @@ def main():
                     # Tambahan Warning jika lebih dari 50% kalimat tidak positif
                     if percentage_problematic > 10.0:
                         st.error("⚠️ **PERINGATAN**: Lebih dari 10% konten video ini terdeteksi sebagai **konten tidak positif** (ujaran kebencian/abusive) dan **tidak layak dikonsumsi** secara umum.")
-                    st.error(f"Dari **{total_sentences} kalimat**, **{problematic_sentences_count} kalimat ({percentage_problematic:.1f}%)** terklasifikasi sebagai **konten bermasalah** (Ujaran Kebencian / Abusive).")
+                    st.warning(f"Dari **{total_sentences} kalimat**, **{problematic_sentences_count} kalimat ({percentage_problematic:.1f}%)** terklasifikasi sebagai **konten bermasalah** (Ujaran Kebencian / Abusive).")
                 else:
                     st.warning("Tidak ada kalimat untuk dianalisis.")
 
@@ -322,6 +319,9 @@ def main():
                                 st.write(f"- **{label_desc}**: {prob}")
                 else:
                     st.success("✅ Tidak terdeteksi adanya hate speech atau konten bermasalah dalam transkrip ini.")
+
+        if st.session_state.is_analyzing and not st.session_state.analysis_done:
+            st.subheader("🔍 Menganalisis Konten Video per Kalimat...")
 
         else:
             st.error("❌ URL tidak valid. Harap masukkan URL video YouTube yang benar.")
