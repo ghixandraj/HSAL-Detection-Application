@@ -290,7 +290,7 @@ def main():
                 st.session_state.is_analyzing = False
                 st.session_state.analysis_done = True
 
-                st.subheader("📊 Ringkasan Hasil Deteksi Hate Speech:")
+                st.subheader("📊 Ringkasan Hasil Deteksi:")
 
                 total_sentences = len(clean_sentences)
                 if total_sentences > 0:
