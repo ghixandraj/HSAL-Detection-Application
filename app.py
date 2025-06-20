@@ -183,6 +183,8 @@ def main():
     # SearchAPI key disematkan langsung di sini
     api_key = "Quq35w6JgdtV1fJcnACFK4qF"
 
+    if "is_analyzing" not in st.session_state:
+        st.session_state.is_analyzing = False
     if "analysis_done" not in st.session_state:
         st.session_state.analysis_done = False
 
@@ -213,6 +215,7 @@ def main():
                 return
 
             if st.button("🚀 Analisis Video", use_container_width=True):
+                st.session_state.is_analyzing = True
                 st.session_state.analysis_done = False
 
                 with st.spinner("📥 Mengambil transcript dari video..."):
@@ -235,7 +238,7 @@ def main():
                 with st.expander("📄 Cuplikan Transcript"):
                     st.text_area("", full_text[:1000] + ("..." if len(full_text) > 1000 else ""), height=200)
 
-                if not st.session_state.analysis_done:
+                if st.session_state.is_analyzing:
                     st.subheader("🔍 Menganalisis Konten Video per Kalimat...")
 
                 sentences = re.split(r'(?<=[.!?])\s+|\n', full_text)
@@ -287,6 +290,7 @@ def main():
 
                 my_bar.empty()
 
+                st.session_state.is_analyzing = False
                 st.session_state.analysis_done = True
 
                 st.subheader("📊 Ringkasan Hasil Deteksi Hate Speech:")
