@@ -320,8 +320,8 @@ def main():
                 else:
                     st.success("✅ Tidak terdeteksi adanya hate speech atau konten bermasalah dalam transkrip ini.")
 
-        if st.session_state.is_analyzing and not st.session_state.analysis_done:
-            st.subheader("🔍 Menganalisis Konten Video per Kalimat...")
+            if st.session_state.is_analyzing and not st.session_state.analysis_done:
+                st.subheader("🔍 Menganalisis Konten Video per Kalimat...")
 
         else:
             st.error("❌ URL tidak valid. Harap masukkan URL video YouTube yang benar.")
