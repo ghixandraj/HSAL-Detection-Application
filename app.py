@@ -122,12 +122,10 @@ def load_model_tokenizer():
         safetensors_path = "model_conventional_training.safetensors"         
         safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
 
-        """
         # model yang dilatih menggunakan MAML
-        model_safetensors_id = "1SfyGkTgRxjx3JEwZ79zJuz5wciOH6d6_"
-        safetensors_path = "final_model.safetensors"
-        safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
-        """
+        #model_safetensors_id = "1SfyGkTgRxjx3JEwZ79zJuz5wciOH6d6_"
+        #safetensors_path = "final_model.safetensors"
+        #safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
         
         if not os.path.exists(safetensors_path):
             try:
