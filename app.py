@@ -119,14 +119,14 @@ def load_model_tokenizer():
         bert = AutoModel.from_pretrained("indolem/indobertweet-base-uncased").to(device)
 
         # model yang dilatih menggunakan pelatihan standar
-        #model_safetensors_id = "1U7Z_M4OMosOCD-XEMN1YI19meS4HJ8e8"  
-        #safetensors_path = "model_conventional_training.safetensors"         
-        #safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
+        model_safetensors_id = "1U7Z_M4OMosOCD-XEMN1YI19meS4HJ8e8"  
+        safetensors_path = "model_conventional_training.safetensors"         
+        safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
 
         # model yang dilatih menggunakan MAML
-        model_safetensors_id = "1SfyGkTgRxjx3JEwZ79zJuz5wciOH6d6_"
-        safetensors_path = "final_model.safetensors"
-        safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
+        #model_safetensors_id = "1SfyGkTgRxjx3JEwZ79zJuz5wciOH6d6_"
+        #safetensors_path = "final_model.safetensors"
+        #safetensors_url = f"https://drive.google.com/uc?id={model_safetensors_id}"
         
         if not os.path.exists(safetensors_path):
             try:
