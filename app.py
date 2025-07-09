@@ -299,9 +299,11 @@ def main():
                 end_time = time.time()
                 elapsed_time = end_time - start_time
 
-                # Format durasi agar lebih ramah pengguna
-                minutes, seconds = divmod(elapsed_time, 60)
-                st.info(f"⏱️ Waktu proses analisis: {int(minutes)} menit {int(seconds)} detik")
+                minutes = int(elapsed_time // 60)
+                seconds = int(elapsed_time % 60)
+                milliseconds = int((elapsed_time - int(elapsed_time)) * 1000)
+
+                st.info(f"⏱️ Waktu proses analisis: {minutes} menit {seconds} detik {milliseconds} milidetik")
 
                 st.session_state.is_analyzing = False
                 st.session_state.analysis_done = True
