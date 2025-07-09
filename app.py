@@ -9,6 +9,7 @@ import requests
 from typing import List, Dict, Optional
 from transformers import AutoTokenizer, AutoModel
 from safetensors.torch import load_file
+import time
 
 st.set_page_config(
     page_title="Deteksi Hate Speech pada Video",
@@ -253,9 +254,11 @@ def main():
 
                 problematic_sentences_count = 0
                 problematic_sentences_details = []
-
+        
                 progress_text = "Analisis kalimat sedang berjalan. Mohon tunggu..."
                 my_bar = st.progress(0, text=progress_text)
+
+                start_time = time.time()
 
                 for i, sentence in enumerate(clean_sentences):
                     detected_labels, label_probs = predict_sentence(sentence, model, tokenizer, device)
@@ -292,6 +295,13 @@ def main():
                     my_bar.progress(progress_percentage, text=f"{progress_text} {int(progress_percentage * 100)}%")
 
                 my_bar.empty()
+
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+
+                # Format durasi agar lebih ramah pengguna
+                minutes, seconds = divmod(elapsed_time, 60)
+                st.info(f"⏱️ Waktu proses analisis: {int(minutes)} menit {int(seconds)} detik")
 
                 st.session_state.is_analyzing = False
                 st.session_state.analysis_done = True
