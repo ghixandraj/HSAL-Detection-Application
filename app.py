@@ -107,7 +107,11 @@ if "toggle_sidebar_rendered" not in st.session_state:
     st.session_state.toggle_sidebar_rendered = False
 
 if not st.session_state.toggle_sidebar_rendered:
-    st.markdown('<button class="toggle-btn" onclick="window.dispatchEvent(new Event(\'toggleSidebar\'))">⇆</button>', unsafe_allow_html=True)
+    st.markdown('''
+    <button class="toggle-btn" onclick="window.dispatchEvent(new Event('toggleSidebar'))">
+        &#9776;
+    </button>
+    ''', unsafe_allow_html=True)
     st.session_state.toggle_sidebar_rendered = True
 
 # Tambahkan komponen JS untuk toggle
