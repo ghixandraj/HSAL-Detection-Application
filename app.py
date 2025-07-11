@@ -19,11 +19,39 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+    /* Menyembunyikan tombol collapse sidebar bawaan Streamlit */
     button[title="Collapse sidebar"] {
-    display: none !important;
+        display: none !important;
     }
     
+    button[title="Expand sidebar"] {
+        display: none !important;
+    }
+            
     [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+    
+    /* Menyembunyikan tombol sidebar ketika di-hover */
+    [data-testid="stSidebar"]:hover button[title="Collapse sidebar"] {
+        display: none !important;
+    }
+    
+    [data-testid="stSidebar"]:hover button[title="Expand sidebar"] {
+        display: none !important;
+    }
+    
+    /* Menyembunyikan semua tombol yang berkaitan dengan sidebar control */
+    [data-testid="stSidebar"] button[kind="header"] {
+        display: none !important;
+    }
+    
+    [data-testid="stSidebar"] button[data-testid="baseButton-header"] {
+        display: none !important;
+    }
+    
+    /* Menyembunyikan elemen control sidebar lainnya */
+    [data-testid="stSidebar"] > div > div:first-child button {
         display: none !important;
     }
             
@@ -107,7 +135,7 @@ st.markdown("""
 <button id="sidebar-toggle" class="toggle-btn">>></button>
 """, unsafe_allow_html=True)
 
-# Script untuk toggle animasi sidebar (1 tombol saja)
+# Script untuk toggle animasi sidebar (1 tombol saja) + sembunyikan tombol bawaan
 components.html("""
 <script>
 const waitForSidebar = () => {
@@ -118,6 +146,39 @@ const waitForSidebar = () => {
         setTimeout(waitForSidebar, 100);
         return;
     }
+
+    // Sembunyikan semua tombol bawaan sidebar
+    const hideDefaultButtons = () => {
+        // Sembunyikan tombol collapse/expand
+        const collapseBtn = window.parent.document.querySelector('button[title="Collapse sidebar"]');
+        const expandBtn = window.parent.document.querySelector('button[title="Expand sidebar"]');
+        const collapsedControl = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+        
+        if (collapseBtn) collapseBtn.style.display = 'none';
+        if (expandBtn) expandBtn.style.display = 'none';
+        if (collapsedControl) collapsedControl.style.display = 'none';
+        
+        // Sembunyikan tombol header di sidebar
+        const headerButtons = sidebar.querySelectorAll('button[kind="header"], button[data-testid="baseButton-header"]');
+        headerButtons.forEach(btn => btn.style.display = 'none');
+        
+        // Sembunyikan tombol di bagian atas sidebar
+        const sidebarButtons = sidebar.querySelectorAll('button');
+        sidebarButtons.forEach(btn => {
+            if (btn.getAttribute('title') === 'Collapse sidebar' || 
+                btn.getAttribute('title') === 'Expand sidebar' ||
+                btn.getAttribute('kind') === 'header' ||
+                btn.getAttribute('data-testid') === 'baseButton-header') {
+                btn.style.display = 'none';
+            }
+        });
+    };
+
+    // Jalankan fungsi sembunyikan tombol
+    hideDefaultButtons();
+    
+    // Jalankan lagi setiap 500ms untuk memastikan tombol tersembunyi
+    setInterval(hideDefaultButtons, 500);
 
     let visible = true;
     toggleBtn.addEventListener("click", () => {
