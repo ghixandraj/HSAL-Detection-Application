@@ -47,6 +47,7 @@ st.markdown("""
         color: #eee;
     }
 
+    /* Toggle button */
     .toggle-btn {
         position: fixed;
         top: 20px;
@@ -71,8 +72,9 @@ st.markdown("""
         background-color: rgba(255,255,255,0.1);
     }
 
+    /* Sidebar animation */
     [data-testid="stSidebar"] {
-        transition: all 0.5s ease;
+        transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
     .sidebar-hidden {
@@ -81,55 +83,43 @@ st.markdown("""
         pointer-events: none;
     }
 
-    .sidebar-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #4A90E2;
-        margin: 20px 0 10px 0;
-        text-align: left;
-    }
-
-    .sidebar-content {
-        font-size: 0.95rem;
-        color: #fff;
-        text-align: left;
+    /* Prevent ghost button */
+    .ghost-toggle {
+        display: none !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Set initial state
-if "toggle_sidebar_state" not in st.session_state:
-    st.session_state.toggle_sidebar_state = True
-
-# Icon direction
-icon_char = "«" if st.session_state.toggle_sidebar_state else "»"
-
-# Toggle button
-st.markdown(f"""
-<button id="toggleButton" class="toggle-btn">{icon_char}</button>
+# Render only once — single static button
+st.markdown("""
+<button id="toggleButton" class="toggle-btn">«</button>
 """, unsafe_allow_html=True)
 
-# JavaScript for sidebar toggle
+# Inject JS — no icon duplication, clean toggle
 components.html("""
 <script>
-const toggleBtn = window.parent.document.getElementById('toggleButton');
+const toggleBtn = window.parent.document.getElementById("toggleButton");
 let sidebarVisible = true;
 
 setTimeout(() => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    sidebar.classList.add('sidebar-transition');
-}, 500);
+    if (sidebar) {
+        sidebar.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+    }
+}, 1000);
 
-toggleBtn.addEventListener('click', () => {
+toggleBtn.addEventListener("click", () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const btn = window.parent.document.getElementById('toggleButton');
+    if (!sidebar) return;
 
-    if (sidebar.classList.contains('sidebar-hidden')) {
-        sidebar.classList.remove('sidebar-hidden');
-        btn.innerText = '«';
+    sidebarVisible = !sidebarVisible;
+
+    if (sidebarVisible) {
+        sidebar.classList.remove("sidebar-hidden");
+        toggleBtn.innerText = "«";
     } else {
-        sidebar.classList.add('sidebar-hidden');
-        btn.innerText = '»';
+        sidebar.classList.add("sidebar-hidden");
+        toggleBtn.innerText = "»";
     }
 });
 </script>
@@ -143,7 +133,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar content
+# Sidebar
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
