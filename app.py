@@ -23,6 +23,10 @@ st.markdown("""
     display: none !important;
     }
             
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+            
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif !important;
         background-color: #111;
