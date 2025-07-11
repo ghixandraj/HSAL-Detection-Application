@@ -18,7 +18,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Tambahkan tema warna dan style
+# Tambahkan tema warna dan animasi sidebar
 st.markdown("""
     <style>
         .main-title {
@@ -41,7 +41,23 @@ st.markdown("""
         }
         .sidebar-content {
             font-size: 0.95rem;
-            color: #333;
+            color: #000;
+        }
+        .sidebar-toggle {
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        .sidebar-toggle:hover {
+            background-color: #357ABD;
+        }
+        .sidebar-hidden {
+            display: none;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -50,30 +66,38 @@ st.markdown("""
 st.markdown('<div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>', unsafe_allow_html=True)
 
-# Sidebar dengan fitur dan panduan
-st.sidebar.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
-st.sidebar.markdown("""
-<div class="sidebar-content">
-<ul>
-    <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
-    <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
-    <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
-    <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
-</ul>
-</div>
-""", unsafe_allow_html=True)
+# Tombol toggle sidebar
+if "show_sidebar" not in st.session_state:
+    st.session_state.show_sidebar = True
 
-st.sidebar.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
-st.sidebar.markdown("""
-<div class="sidebar-content">
-<ol>
-    <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
-    <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
-    <li>Klik tombol <b>"Analisis Video"</b> dan tunggu hasilnya.</li>
-</ol>
-<p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
-</div>
-""", unsafe_allow_html=True)
+if st.button("🔀 Tampilkan/Sembunyikan Panduan", use_container_width=True):
+    st.session_state.show_sidebar = not st.session_state.show_sidebar
+
+if st.session_state.show_sidebar:
+    with st.sidebar:
+        st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="sidebar-content">
+        <ul>
+            <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
+            <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
+            <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
+            <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="sidebar-content">
+        <ol>
+            <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
+            <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
+            <li>Klik tombol <b>\"Analisis Video\"</b> dan tunggu hasilnya.</li>
+        </ol>
+        <p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
+        </div>
+        """, unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="Hayu-IT",
@@ -257,18 +281,6 @@ def main():
         st.session_state.is_analyzing = False
     if "analysis_done" not in st.session_state:
         st.session_state.analysis_done = False
-
-    with st.expander("ℹ️ Cara Menggunakan"):
-        st.markdown(
-            """
-            1. **Paste URL video YouTube** yang ingin dianalisis.
-            2. **Pastikan video memiliki subtitle bahasa Indonesia**.
-            3. **Klik tombol 'Analisis Video'** dan tunggu prosesnya selesai.
-
-            **Catatan**:
-            Proses analisis membutuhkan waktu beberapa detik tergantung panjang video dan jumlah kalimat.
-            """
-        )
 
     youtube_url = st.text_input("🔗 Masukkan URL Video YouTube:")
 
