@@ -21,6 +21,10 @@ st.set_page_config(
 # Tambahkan tema warna dan animasi sidebar
 st.markdown("""
     <style>
+        body {
+            background-color: #111;
+            color: #f0f0f0;
+        }
         .main-title {
             font-size: 3rem;
             font-weight: bold;
@@ -31,7 +35,7 @@ st.markdown("""
         .subtitle {
             font-size: 1.3rem;
             text-align: center;
-            color: #555;
+            color: #aaa;
         }
         .sidebar-title {
             font-size: 1.5rem;
@@ -41,63 +45,79 @@ st.markdown("""
         }
         .sidebar-content {
             font-size: 0.95rem;
-            color: #000;
+            color: #fff;
         }
-        .sidebar-toggle {
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
             background-color: #4A90E2;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border-radius: 6px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 9999;
             cursor: pointer;
-            margin-bottom: 1rem;
+            transition: background-color 0.3s;
         }
-        .sidebar-toggle:hover {
+        .toggle-btn:hover {
             background-color: #357ABD;
-        }
-        .sidebar-hidden {
-            display: none;
         }
     </style>
 """, unsafe_allow_html=True)
+
+# Tombol toggle sidebar dengan ikon panah
+st.markdown('<button class="toggle-btn" onclick="window.dispatchEvent(new Event(\'toggleSidebar\'))">⇆</button>', unsafe_allow_html=True)
+
+# Simpan state sidebar
+if "show_sidebar" not in st.session_state:
+    st.session_state.show_sidebar = True
+
+# Tambahkan komponen JS untuk toggle
+st.components.v1.html("""
+<script>
+    const toggleSidebar = () => {
+        const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+        if (sidebar) {
+            sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+    window.addEventListener('toggleSidebar', toggleSidebar);
+</script>
+""", height=0)
 
 # Judul utama
 st.markdown('<div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>', unsafe_allow_html=True)
 
-# Tombol toggle sidebar
-if "show_sidebar" not in st.session_state:
-    st.session_state.show_sidebar = True
+# Konten sidebar
+with st.sidebar:
+    st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="sidebar-content">
+    <ul>
+        <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
+        <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
+        <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
+        <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
-if st.button("🔀 Tampilkan/Sembunyikan Panduan", use_container_width=True):
-    st.session_state.show_sidebar = not st.session_state.show_sidebar
-
-if st.session_state.show_sidebar:
-    with st.sidebar:
-        st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
-        st.markdown("""
-        <div class="sidebar-content">
-        <ul>
-            <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
-            <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
-            <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
-            <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
-        st.markdown("""
-        <div class="sidebar-content">
-        <ol>
-            <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
-            <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
-            <li>Klik tombol <b>\"Analisis Video\"</b> dan tunggu hasilnya.</li>
-        </ol>
-        <p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="sidebar-content">
+    <ol>
+        <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
+        <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
+        <li>Klik tombol <b>\"Analisis Video\"</b> dan tunggu hasilnya.</li>
+    </ol>
+    <p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="Hayu-IT",
