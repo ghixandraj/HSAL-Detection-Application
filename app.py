@@ -19,73 +19,69 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-html, body, [class*="css"] {
-    font-family: 'Nunito', sans-serif !important;
-    background-color: #111;
-    color: #f0f0f0;
-}
+    html, body, [class*="css"] {
+        font-family: 'Nunito', sans-serif !important;
+        background-color: #111;
+        color: #f0f0f0;
+    }
 
-/* HEADER STYLING */
-.header-box {
-    background: linear-gradient(135deg, #4A90E2, #FF6B6B);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-.main-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-.subtitle {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #eee;
-}
-@media screen and (max-width: 768px) {
-    .main-title { font-size: 1.7rem; }
-    .subtitle { font-size: 1rem; }
-    .header-box { padding: 1.2rem; }
-}
+    .header-box {
+        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-/* TOGGLE BUTTON */
-.toggle-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: transparent;
-    color: white;
-    font-size: 28px;
-    border: none;
-    cursor: pointer;
-    z-index: 10000;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-.toggle-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+    .main-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
 
-/* SIDEBAR ANIMASI */
-[data-testid="stSidebar"] {
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    transform: translateX(0);
-    opacity: 1;
-}
-[data-testid="stSidebar"].sidebar-hidden {
-    transform: translateX(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #eee;
+    }
+
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: transparent;
+        color: white;
+        font-size: 28px;
+        border: none;
+        cursor: pointer;
+        z-index: 10000;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-testid="stSidebar"] {
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    [data-testid="stSidebar"].sidebar-hidden {
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
 </style>
 """, unsafe_allow_html=True)
 
