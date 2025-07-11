@@ -20,116 +20,126 @@ st.set_page_config(
 
 # Tambahkan tema warna dan animasi sidebar
 st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        html, body, [class*="css"] {
-            max-width: 100%;
-            overflow-x: hidden;
-            font-family: 'Nunito', sans-serif !important;
-        }
-        * {
-            font-family: 'Nunito', sans-serif !important;
-        }
-        body {
-            background-color: #111;
-            color: #f0f0f0;
-        }
-        .header-box {
-            background: linear-gradient(135deg, #4A90E2, #FF6B6B);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+<style>
+    html, body, [class*="css"] {
+        font-family: 'Nunito', sans-serif !important;
+        background-color: #111;
+        color: #f0f0f0;
+    }
+
+    .header-box {
+        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #eee;
+    }
+
+    @media screen and (max-width: 768px) {
         .main-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 0.5rem;
+            font-size: 1.7rem;
         }
         .subtitle {
-            font-size: 1.2rem;
-            text-align: center;
-            color: #eee;
+            font-size: 1rem;
         }
-        @media screen and (max-width: 768px) {
-            .main-title {
-                font-size: 1.7rem;
-            }
-            .subtitle {
-                font-size: 1rem;
-            }
-            .header-box {
-                padding: 1.2rem;
-            }
+        .header-box {
+            padding: 1.2rem;
         }
-        .sidebar-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #4A90E2;
-            margin: 20px 0 10px 0;
-            text-align: left;
-        }
-        .sidebar-content {
-            font-size: 0.95rem;
-            color: #fff;
-            text-align: left;
-        }
-        .toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: transparent;
-            color: #4A90E2;
-            border: 2px solid #4A90E2;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 18px;
-            font-weight: bold;
-            z-index: 9999;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .toggle-btn:hover {
-            background-color: #4A90E2;
-            color: white;
-        }
-        .toggle-btn:focus {
-            outline: none;
-        }
-    </style>
+    }
+
+    .sidebar-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4A90E2;
+        margin: 20px 0 10px 0;
+        text-align: left;
+    }
+
+    .sidebar-content {
+        font-size: 0.95rem;
+        color: #fff;
+        text-align: left;
+    }
+
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #4A90E2;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        z-index: 9999;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .material-symbols-rounded {
+        font-family: 'Material Symbols Rounded';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        color: white;
+        user-select: none;
+    }
+</style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle sidebar dengan ikon panah ⮜
+# Atur state awal sidebar
 if "toggle_sidebar_state" not in st.session_state:
-    st.session_state.toggle_sidebar_state = True  # default terbuka
+    st.session_state.toggle_sidebar_state = True  # terbuka secara default
 
-initial_icon = "&laquo;&laquo;" if st.session_state.toggle_sidebar_state else "&raquo;&raquo;"
+# Tampilkan tombol toggle
+initial_icon = "keyboard_double_arrow_left" if st.session_state.toggle_sidebar_state else "keyboard_double_arrow_right"
 
-st.markdown(f'''
-    <button id="toggleButton" class="toggle-btn">{initial_icon}</button>
-''', unsafe_allow_html=True)
+st.markdown(f"""
+<button id="toggleButton" class="toggle-btn">
+    <span class="material-symbols-rounded">{initial_icon}</span>
+</button>
+""", unsafe_allow_html=True)
 
-# JavaScript untuk mengontrol toggle sidebar dan ikon panah
-st.components.v1.html("""
+# Script JavaScript untuk toggle sidebar dan ubah ikon panah
+components.html("""
 <script>
-    const toggleButton = window.parent.document.getElementById('toggleButton');
-    let sidebarVisible = true;
+const toggleButton = window.parent.document.getElementById('toggleButton');
+let sidebarVisible = true;
 
-    toggleButton.addEventListener('click', () => {
-        const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-        if (sidebar) {
-            sidebarVisible = !sidebarVisible;
-            sidebar.style.display = sidebarVisible ? 'block' : 'none';
-            toggleButton.innerHTML = sidebarVisible ? '&laquo;&laquo;' : '&raquo;&raquo;';
-        }
-    });
+toggleButton.addEventListener('click', () => {
+    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    if (sidebar) {
+        sidebarVisible = !sidebarVisible;
+        sidebar.style.display = sidebarVisible ? 'block' : 'none';
+
+        const icon = toggleButton.querySelector('.material-symbols-rounded');
+        icon.innerText = sidebarVisible ? 'keyboard_double_arrow_left' : 'keyboard_double_arrow_right';
+    }
+});
 </script>
 """, height=0)
 
-# Judul utama dalam box
+# Header aplikasi
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -137,7 +147,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Konten sidebar
+# Sidebar: Fitur dan Petunjuk
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
