@@ -371,13 +371,13 @@ with st.sidebar:
     st.markdown("""
     **Untuk Hasil Optimal:**
     - Hindari analisis video dengan transcript auto-generate
-    - ⏱Video pendek (< 15 menit) diproses lebih cepat
+    - Video pendek (< 15 menit) diproses lebih cepat
     
     **Interpretasi Hasil:**
-    🔴 **Merah**: Konten bermasalah terdeteksi
-    🟡 **Kuning**: Perlu perhatian khusus
-    🟢 **Hijau**: Konten aman
-    📊 **Probabilitas > 50%**: Prediksi valid
+    - 🔴 **Merah**: Konten bermasalah terdeteksi
+    - 🟡 **Kuning**: Perlu perhatian khusus
+    - 🟢 **Hijau**: Konten aman
+    - 📊 **Probabilitas > 50%**: Prediksi valid
     
     **Catatan Penting:**
     - Model dapat menghasilkan false positive/negative
@@ -386,14 +386,8 @@ with st.sidebar:
     """)
     
     # 📞 KONTAK & BANTUAN
-    st.markdown("## 📞 Kontak & Bantuan")
+    st.markdown("## 📞 Disclaimer")
     st.markdown("""
-    **Butuh Bantuan?**
-    💬 Laporkan bug atau masalah
-    📧 Saran perbaikan fitur
-    🔍 Pertanyaan teknis
-    
-    **Disclaimer:**
     - Aplikasi ini untuk penelitian dan edukasi
     - Hasil analisis bukan keputusan final
     - Gunakan dengan bijak dan bertanggung jawab
