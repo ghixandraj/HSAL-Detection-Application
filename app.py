@@ -10,6 +10,7 @@ from typing import List, Dict, Optional
 from transformers import AutoTokenizer, AutoModel
 from safetensors.torch import load_file
 import time
+import streamlit.components.v1 as components
 
 # ✅ Konfigurasi halaman
 st.set_page_config(
