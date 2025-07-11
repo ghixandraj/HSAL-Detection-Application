@@ -85,11 +85,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle ⮜ / ⮞
-st.markdown("""
-<button id="sidebar-toggle" class="toggle-btn">⮜</button>
-""", unsafe_allow_html=True)
-
 # JavaScript logic untuk toggle animasi sidebar
 components.html("""
 <script>
