@@ -113,11 +113,10 @@ if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True  # terbuka secara default
 
 # Tampilkan tombol toggle
-initial_icon = "keyboard_double_arrow_left" if st.session_state.toggle_sidebar_state else "keyboard_double_arrow_right"
-
 st.markdown(f"""
 <button id="toggleButton" class="toggle-btn">
-    <span class="material-symbols-rounded">{initial_icon}</span>
+    <span class="material-symbols-rounded icon-left" style="display: {'inline' if st.session_state.toggle_sidebar_state else 'none'};">keyboard_double_arrow_left</span>
+    <span class="material-symbols-rounded icon-right" style="display: {'none' if st.session_state.toggle_sidebar_state else 'inline'};">keyboard_double_arrow_right</span>
 </button>
 """, unsafe_allow_html=True)
 
@@ -129,12 +128,20 @@ let sidebarVisible = true;
 
 toggleButton.addEventListener('click', () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    const iconLeft = toggleButton.querySelector('.icon-left');
+    const iconRight = toggleButton.querySelector('.icon-right');
+
     if (sidebar) {
         sidebarVisible = !sidebarVisible;
         sidebar.style.display = sidebarVisible ? 'block' : 'none';
 
-        const icon = toggleButton.querySelector('.material-symbols-rounded');
-        icon.innerText = sidebarVisible ? 'keyboard_double_arrow_left' : 'keyboard_double_arrow_right';
+        if (sidebarVisible) {
+            iconLeft.style.display = 'inline';
+            iconRight.style.display = 'none';
+        } else {
+            iconLeft.style.display = 'none';
+            iconRight.style.display = 'inline';
+        }
     }
 });
 </script>
