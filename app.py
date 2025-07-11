@@ -19,6 +19,10 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+    section[data-testid="stSidebar"] > div:nth-child(1) {
+    display: none !important;
+    }
+            
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif !important;
         background-color: #111;
@@ -90,12 +94,7 @@ st.markdown("""
 
     [data-testid="stSidebar"].sidebar-hidden + div {
         margin-left: 0 !important;
-    }
-            
-    /* Hilangkan tombol >> yang muncul otomatis saat sidebar di-hover */
-    [data-testid="collapsedControl"] {
-        display: none !important;
-    }
+    }    
 </style>
 """, unsafe_allow_html=True)
 
