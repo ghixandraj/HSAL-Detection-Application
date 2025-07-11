@@ -25,6 +25,10 @@ st.markdown("""
         html, body, [class*="css"] {
             max-width: 100%;
             overflow-x: hidden;
+            font-family: 'Nunito', sans-serif !important;
+        }
+        * {
+            font-family: 'Nunito', sans-serif !important;
         }
         body {
             background-color: #111;
@@ -122,7 +126,7 @@ st.components.v1.html("""
 # Judul utama dalam box
 st.markdown("""
 <div class="header-box">
-    <div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
     <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
 </div>
 """, unsafe_allow_html=True)
@@ -135,7 +139,8 @@ with st.sidebar:
     <ul style="padding-left: 1rem;">
         <li>Ambil transkrip video YouTube berbahasa Indonesia.</li>
         <li>Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
-        <li>Menampilkan hasil analisis lengkap dengan label dan timestamp.</li>
+        <li>Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
+        <li>Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
     </ul>
     </div>
     """, unsafe_allow_html=True)
