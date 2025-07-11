@@ -22,6 +22,7 @@ st.set_page_config(
 # Tambahkan tema warna dan animasi sidebar
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif !important;
@@ -51,49 +52,6 @@ st.markdown("""
         color: #eee;
     }
 
-    .toggle-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background-color: transparent;
-        border: none;
-        font-size: 24px;
-        color: white;
-        cursor: pointer;
-        z-index: 9999;
-    }
-
-    .toggle-btn::before {
-        content: '«';
-    }
-
-    .collapsed::before {
-        content: '»';
-    }
-
-    .toggle-btn:hover {
-        color: #aaa;
-    }
-
-    .toggle-btn:focus,
-    .toggle-btn:active {
-        outline: none;
-        background-color: transparent;
-        color: #aaa;
-    }
-
-    .sidebar-transition {
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    .sidebar-hidden {
-        transform: translateX(-100%);
-        opacity: 0;
-        pointer-events: none;
-    }
-
     @media screen and (max-width: 768px) {
         .main-title {
             font-size: 1.7rem;
@@ -119,44 +77,66 @@ st.markdown("""
         color: #fff;
         text-align: left;
     }
+
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        z-index: 9999;
+        transition: color 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+        color: #aaa;
+    }
+
+    .toggle-btn:focus,
+    .toggle-btn:active {
+        outline: none;
+        background-color: transparent;
+        color: #aaa;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Toggle State
+# State toggle
 if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True
 
-# Tombol toggle
+# Toggle tombol 
 toggle_class = "" if st.session_state.toggle_sidebar_state else "collapsed"
 st.markdown(f"""
 <button id="toggleButton" class="toggle-btn {toggle_class}"></button>
 """, unsafe_allow_html=True)
 
-# JS untuk toggle dengan animasi
+# JavaScript toggle dengan class
 components.html("""
 <script>
 const toggleBtn = window.parent.document.getElementById('toggleButton');
 let sidebarVisible = true;
 
-setTimeout(() => {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebar.classList.add('sidebar-transition');
-    }
-}, 500);
-
 toggleBtn.addEventListener('click', () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    const sidebarContent = window.parent.document.querySelector('[data-testid="stSidebarContent"]');
     const sidebarContainer = sidebar?.parentElement;
 
-    if (sidebar && sidebarContainer) {
-        sidebarVisible = !sidebarVisible;
+    sidebarVisible = !sidebarVisible;
 
+    if (sidebar && sidebarContent && sidebarContainer) {
         if (sidebarVisible) {
-            sidebar.classList.remove('sidebar-hidden');
+            sidebar.style.display = 'block';
+            sidebarContent.style.display = 'block';
+            sidebarContainer.style.display = 'flex';
             toggleBtn.classList.remove('collapsed');
         } else {
-            sidebar.classList.add('sidebar-hidden');
+            sidebar.style.display = 'none';
+            sidebarContent.style.display = 'none';
+            sidebarContainer.style.display = 'none';
             toggleBtn.classList.add('collapsed');
         }
     }
@@ -172,7 +152,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar konten
+# Sidebar: Info
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
