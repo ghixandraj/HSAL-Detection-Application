@@ -329,6 +329,7 @@ with st.sidebar:
     - Diskriminasi agama, ras, gender
     - Bahasa kasar dan ofensif
     - Tingkat intensitas (ringan/sedang/berat)
+    - Positif atau Netral                
     """)
     
     # 📋 CARA MENGGUNAKAN
