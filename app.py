@@ -108,31 +108,43 @@ st.markdown("""
 if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True
 
-# Tombol toggle sidebar
+# Tombol toggle
 icon = "«" if st.session_state.toggle_sidebar_state else "»"
-
 st.markdown(f"""
 <button id="toggleButton" class="toggle-btn">{icon}</button>
 """, unsafe_allow_html=True)
 
-# JavaScript untuk toggle sidebar
+# JavaScript untuk toggle sidebar + bug fix
 components.html("""
 <script>
-const btn = window.parent.document.getElementById('toggleButton');
+const toggleBtn = window.parent.document.getElementById('toggleButton');
 let sidebarVisible = true;
 
-btn.addEventListener('click', () => {
+toggleBtn.addEventListener('click', () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebarVisible = !sidebarVisible;
-        sidebar.style.display = sidebarVisible ? 'block' : 'none';
-        btn.innerText = sidebarVisible ? '«' : '»';
+    const sidebarContent = window.parent.document.querySelector('[data-testid="stSidebarContent"]');
+    const sidebarContainer = sidebar?.parentElement;
+
+    sidebarVisible = !sidebarVisible;
+
+    if (sidebar && sidebarContent && sidebarContainer) {
+        if (sidebarVisible) {
+            sidebar.style.display = 'block';
+            sidebarContent.style.display = 'block';
+            sidebarContainer.style.display = 'flex';
+            toggleBtn.innerText = '«';
+        } else {
+            sidebar.style.display = 'none';
+            sidebarContent.style.display = 'none';
+            sidebarContainer.style.display = 'none';
+            toggleBtn.innerText = '»';
+        }
     }
 });
 </script>
 """, height=0)
 
-# Judul utama aplikasi
+# Judul Aplikasi
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -140,7 +152,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar Konten
+# Sidebar: Info
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
