@@ -15,7 +15,7 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
-# Tambahkan styling
+# CSS Styling
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -25,7 +25,7 @@ st.markdown("""
         color: #f0f0f0;
     }
 
-    /* Header Box */
+    /* Header box */
     .header-box {
         background: linear-gradient(135deg, #4A90E2, #FF6B6B);
         border-radius: 16px;
@@ -60,7 +60,7 @@ st.markdown("""
         border: none;
         cursor: pointer;
         z-index: 9999;
-        padding: 6px 10px;
+        padding: 4px 8px;
         border-radius: 6px;
         transition: background-color 0.3s ease;
     }
@@ -69,7 +69,7 @@ st.markdown("""
         background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Sidebar Animation */
+    /* Sidebar animation */
     [data-testid="stSidebar"] {
         transition: transform 0.4s ease, opacity 0.4s ease;
         transform: translateX(0);
@@ -94,12 +94,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle hanya tampilkan >>
+# Tombol toggle ⏩ tanpa icon tambahan
 st.markdown("""
 <button id="sidebar-toggle" class="toggle-btn">>></button>
 """, unsafe_allow_html=True)
 
-# JavaScript untuk toggle sidebar dan update isi tombol
+# Script untuk toggle animasi sidebar (1 tombol saja)
 components.html("""
 <script>
 const waitForSidebar = () => {
@@ -114,12 +114,7 @@ const waitForSidebar = () => {
     let visible = true;
     toggleBtn.addEventListener("click", () => {
         visible = !visible;
-
-        if (visible) {
-            sidebar.classList.remove("sidebar-hidden");
-        } else {
-            sidebar.classList.add("sidebar-hidden");
-        }
+        sidebar.classList.toggle("sidebar-hidden");
     });
 };
 waitForSidebar();
