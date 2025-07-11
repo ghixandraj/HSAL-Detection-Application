@@ -12,12 +12,12 @@ from safetensors.torch import load_file
 import time
 import streamlit.components.v1 as components
 
-# Konfigurasi halaman
+# ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
 # Tambahkan styling
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif !important;
@@ -51,28 +51,32 @@ st.markdown("""
         position: fixed;
         top: 20px;
         left: 20px;
-        background-color: transparent;
-        border: none;
-        font-size: 26px;
+        background: transparent;
         color: white;
+        font-size: 26px;
+        border: none;
         cursor: pointer;
         z-index: 9999;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
         transition: background-color 0.3s ease;
     }
 
     .toggle-btn:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
+        background-color: rgba(255,255,255,0.1);
     }
 
-    .sidebar-transition {
-        transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
-        transform: translateX(0);
-        opacity: 1;
+    [data-testid="stSidebar"] {
+        transition: all 0.5s ease;
     }
 
     .sidebar-hidden {
-        transform: translateX(-120%);
+        transform: translateX(-100%);
         opacity: 0;
         pointer-events: none;
     }
@@ -93,19 +97,19 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# State default sidebar
+# Set initial state
 if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True
 
-# Tampilkan tombol toggle
-toggle_class = "" if st.session_state.toggle_sidebar_state else "collapsed"
+# Icon direction
 icon_char = "«" if st.session_state.toggle_sidebar_state else "»"
 
+# Toggle button
 st.markdown(f"""
 <button id="toggleButton" class="toggle-btn">{icon_char}</button>
 """, unsafe_allow_html=True)
 
-# JavaScript untuk toggle sidebar
+# JavaScript for sidebar toggle
 components.html("""
 <script>
 const toggleBtn = window.parent.document.getElementById('toggleButton');
@@ -113,30 +117,25 @@ let sidebarVisible = true;
 
 setTimeout(() => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebar.classList.add('sidebar-transition');
-    }
+    sidebar.classList.add('sidebar-transition');
 }, 500);
 
 toggleBtn.addEventListener('click', () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    const btn = window.parent.document.getElementById('toggleButton');
 
-    if (sidebar) {
-        sidebarVisible = !sidebarVisible;
-
-        if (sidebarVisible) {
-            sidebar.classList.remove('sidebar-hidden');
-            toggleBtn.innerText = '«';
-        } else {
-            sidebar.classList.add('sidebar-hidden');
-            toggleBtn.innerText = '»';
-        }
+    if (sidebar.classList.contains('sidebar-hidden')) {
+        sidebar.classList.remove('sidebar-hidden');
+        btn.innerText = '«';
+    } else {
+        sidebar.classList.add('sidebar-hidden');
+        btn.innerText = '»';
     }
 });
 </script>
 """, height=0)
 
-# Judul Aplikasi
+# Header
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -144,7 +143,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar Konten
+# Sidebar content
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
