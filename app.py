@@ -13,87 +13,148 @@ import time
 import streamlit.components.v1 as components
 
 # ✅ Konfigurasi halaman
-st.set_page_config(
-    page_title="Hayu-IT: HSAL Analysis", 
-    page_icon="🧠", 
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
-# Load CSS from external file
-def load_css():
-    with open("styles.css", "r") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# CSS Styling
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    button[title="Collapse sidebar"] {
+    display: none !important;
+    }
+    
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+            
+    html, body, [class*="css"] {
+        font-family: 'Nunito', sans-serif !important;
+        background-color: #111;
+        color: #f0f0f0;
+    }
 
-# Load CSS
-load_css()
+    /* Header box */
+    .header-box {
+        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-# ✅ Header Section
-def render_header():
+    .main-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #eee;
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: transparent;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        z-index: 9999;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Sidebar animation */
+    [data-testid="stSidebar"] {
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        transform: translateX(0);
+        opacity: 1;
+        position: relative;
+        z-index: 1;
+    }
+
+    [data-testid="stSidebar"].sidebar-hidden {
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    [data-testid="stSidebar"] + div {
+        transition: all 0.4s ease;
+    }
+
+    [data-testid="stSidebar"].sidebar-hidden + div {
+        margin-left: 0 !important;
+    }    
+</style>
+""", unsafe_allow_html=True)
+
+# Tombol toggle ⏩ tanpa icon tambahan
+st.markdown("""
+<button id="sidebar-toggle" class="toggle-btn">>></button>
+""", unsafe_allow_html=True)
+
+# Script untuk toggle animasi sidebar (1 tombol saja)
+components.html("""
+<script>
+const waitForSidebar = () => {
+    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
+
+    if (!sidebar || !toggleBtn) {
+        setTimeout(waitForSidebar, 100);
+        return;
+    }
+
+    let visible = true;
+    toggleBtn.addEventListener("click", () => {
+        visible = !visible;
+        sidebar.classList.toggle("sidebar-hidden");
+    });
+};
+waitForSidebar();
+</script>
+""", height=0)
+
+# HEADER
+st.markdown("""
+<div class="header-box">
+    <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
+</div>
+""", unsafe_allow_html=True)
+
+# SIDEBAR
+with st.sidebar:
+    st.markdown("## 🔍 Fitur Utama")
     st.markdown("""
-    <div class="header-container">
-        <div class="header-content">
-            <h1 class="main-title">🧠 Hayu-IT: HSAL Analysis</h1>
-            <p class="subtitle">Deteksi Otomatis Ujaran Kebencian dan Bahasa Kasar dari Video YouTube Berbahasa Indonesia</p>
-            <div class="header-stats">
-                <div class="stat-item">
-                    <span class="stat-number">13</span>
-                    <span class="stat-label">Kategori Label</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">99.2%</span>
-                    <span class="stat-label">Akurasi Model</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">ID</span>
-                    <span class="stat-label">Bahasa Indonesia</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    - Ambil transkrip video YouTube berbahasa Indonesia.  
+    - Deteksi ujaran kebencian dan bahasa kasar secara otomatis.  
+    - Tampilkan hasil analisis lengkap dengan label dan timestamp.  
+    - Didukung oleh model IndoBERTweet + BiGRU + MAML.
+    """)
+    st.markdown("## 🧾 Cara Menggunakan")
+    st.markdown("""
+    1. Masukkan URL video YouTube.  
+    2. Pastikan video memiliki subtitle Bahasa Indonesia.  
+    3. Klik "Analisis Video" dan tunggu hasilnya.  
+    _Catatan: proses bisa memakan waktu tergantung durasi._
+    """)
 
-# ✅ Sidebar Content
-def render_sidebar():
-    with st.sidebar:
-        st.markdown("""
-        <div class="sidebar-header">
-            <h2>📋 Informasi Sistem</h2>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class="info-card">
-            <h3>🔍 Fitur Utama</h3>
-            <ul>
-                <li>Ekstraksi transkrip video YouTube berbahasa Indonesia</li>
-                <li>Deteksi ujaran kebencian dan bahasa kasar otomatis</li>
-                <li>Analisis sentimen dengan timestamp</li>
-                <li>Model IndoBERTweet + BiGRU + MAML</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class="info-card">
-            <h3>📖 Cara Penggunaan</h3>
-            <ol>
-                <li>Masukkan URL video YouTube</li>
-                <li>Pastikan video memiliki subtitle Bahasa Indonesia</li>
-                <li>Klik tombol "Analisis Video"</li>
-                <li>Tunggu proses selesai dan lihat hasilnya</li>
-            </ol>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class="info-card warning">
-            <h3>⚠️ Catatan Penting</h3>
-            <p>Waktu proses tergantung pada durasi video. Video dengan transkrip auto-generated mungkin mengandung kesalahan.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-# ✅ Arsitektur model (sama seperti sebelumnya)
+# ✅ Arsitektur model
 class IndoBERTweetBiGRU(nn.Module):
     def __init__(self, bert, hidden_size=512, num_classes=13):
         super().__init__()
@@ -120,7 +181,7 @@ class IndoBERTweetBiGRU(nn.Module):
 LABELS = [
     "HS", "Abusive", "HS_Individual", "HS_Group", "HS_Religion",
     "HS_Race", "HS_Physical", "HS_Gender", "HS_Other",
-    "HS_Weak", "HS_Moderate", "HS_Strong", "PS"
+    "HS_Weak", "HS_Moderate", "HS_Strong", "PS" # PS = Konten Positif
 ]
 
 LABEL_DESCRIPTIONS = {
@@ -139,7 +200,7 @@ LABEL_DESCRIPTIONS = {
     "PS": "Ujaran Positif"
 }
 
-# Fungsi-fungsi utility (sama seperti sebelumnya)
+# 🧼 Preprocessing
 def preprocessing(text):
     string = text.lower()
     string = re.sub(r"\n", "", string)
@@ -153,6 +214,7 @@ def preprocessing(text):
     string = re.sub(r'[^A-Za-z\s`"]', " ", string)
     return string
 
+# 🔎 Ambil ID dari URL YouTube
 def extract_video_id(url):
     patterns = [
         r"(?:v=|\/)([0-9A-Za-z_-]{11}).*",
@@ -166,6 +228,7 @@ def extract_video_id(url):
             return match.group(1)
     return None
 
+# 🌐 Ambil transcript dari SearchAPI.io
 def get_transcript_from_searchapi(video_id: str, api_key: str) -> Optional[Dict]:
     try:
         url = "https://www.searchapi.io/api/v1/search"
@@ -183,6 +246,7 @@ def get_transcript_from_searchapi(video_id: str, api_key: str) -> Optional[Dict]
         st.error(f"Gagal mengambil transcript: {str(e)}")
         return None
 
+# 📦 Download model dan tokenizer
 @st.cache_resource
 def load_model_tokenizer():
     try:
@@ -205,6 +269,7 @@ def load_model_tokenizer():
                 gdown.download(safetensors_url, safetensors_path, quiet=False)
             except Exception as e:
                 st.error(f"❌ Gagal download model SafeTensors: {str(e)}")
+                st.info("💡 Pastikan file dapat diakses publik dan ID benar.")
                 return None, None, None
 
         model = IndoBERTweetBiGRU(bert=bert, hidden_size=512, num_classes=13)
@@ -216,14 +281,21 @@ def load_model_tokenizer():
                 model.to(device)
             except Exception as e:
                 st.error(f"❌ Gagal memuat model dari SafeTensors: {str(e)}")
+                st.info("💡 Pastikan file SafeTensors tidak korup dan arsitektur model cocok.")
                 return None, None, None
+        else:
+            st.error("❌ File model SafeTensors tidak ditemukan. Pastikan telah diunduh.")
+            return None, None, None
 
         model.eval()
         return model, tokenizer, device
     except Exception as e:
         st.error(f"Error loading model/tokenizer: {str(e)}")
+        import traceback
+        st.exception(traceback.format_exc())
         return None, None, None
 
+# Fungsi untuk memprediksi satu kalimat
 def predict_sentence(text, model, tokenizer, device, threshold=0.5):
     cleaned_text = preprocessing(text)
     inputs = tokenizer(
@@ -242,146 +314,42 @@ def predict_sentence(text, model, tokenizer, device, threshold=0.5):
         predictions = (probs > threshold).int().numpy()[0]
 
     detected_labels = [LABELS[i] for i, val in enumerate(predictions) if val == 1]
+
+    # Detail probabilitas untuk setiap label
     label_probs = {LABELS[i]: float(probs[0][i]) for i in range(len(LABELS))}
 
     return detected_labels, label_probs
 
-def render_results(problematic_sentences_details, total_sentences, problematic_sentences_count):
-    """Render hasil analisis dengan styling yang clean"""
-    
-    # Summary Card
-    st.markdown("""
-    <div class="results-summary">
-        <h2>📊 Ringkasan Hasil Analisis</h2>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Metrics
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-value">{total_sentences}</div>
-            <div class="metric-label">Total Kalimat</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class="metric-card warning">
-            <div class="metric-value">{problematic_sentences_count}</div>
-            <div class="metric-label">Kalimat Bermasalah</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        percentage = (problematic_sentences_count / total_sentences) * 100 if total_sentences > 0 else 0
-        st.markdown(f"""
-        <div class="metric-card {'danger' if percentage > 10 else 'success'}">
-            <div class="metric-value">{percentage:.1f}%</div>
-            <div class="metric-label">Persentase</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Warning untuk konten bermasalah
-    if percentage > 10:
-        st.markdown("""
-        <div class="alert alert-danger">
-            <strong>⚠️ PERINGATAN:</strong> Lebih dari 10% konten video ini terdeteksi sebagai konten tidak positif dan tidak layak dikonsumsi secara umum.
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Detail kalimat bermasalah
-    if problematic_sentences_details:
-        st.markdown("""
-        <div class="section-header">
-            <h3>🚨 Kalimat Bermasalah Terdeteksi</h3>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        for idx, detail in enumerate(problematic_sentences_details, 1):
-            with st.expander(f"Kalimat {idx} - {detail['timestamp']}", expanded=False):
-                st.markdown(f"""
-                <div class="sentence-detail">
-                    <div class="sentence-text">"{detail['kalimat']}"</div>
-                    <div class="sentence-meta">
-                        <span class="timestamp">⏱️ {detail['timestamp']}</span>
-                        <span class="labels">🏷️ {', '.join(detail['label_terdeteksi'])}</span>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-                
-                # Probabilitas detail
-                st.markdown("**Detail Probabilitas:**")
-                prob_cols = st.columns(2)
-                for i, (label, prob) in enumerate(detail['probabilitas'].items()):
-                    with prob_cols[i % 2]:
-                        st.write(f"• **{label}**: {prob}")
-    else:
-        st.markdown("""
-        <div class="alert alert-success">
-            <strong>✅ Hasil Positif:</strong> Tidak terdeteksi adanya hate speech atau konten bermasalah dalam transkrip ini.
-        </div>
-        """, unsafe_allow_html=True)
 
 # 🎯 Main App
 def main():
-    # Render header
-    render_header()
-    
-    # Render sidebar
-    render_sidebar()
-    
-    # Main content area
-    st.markdown('<div class="main-content">', unsafe_allow_html=True)
-    
-    # SearchAPI key
+    # SearchAPI key disematkan langsung di sini
     api_key = "Quq35w6JgdtV1fJcnACFK4qF"
 
-    # Session state
     if "is_analyzing" not in st.session_state:
         st.session_state.is_analyzing = False
     if "analysis_done" not in st.session_state:
         st.session_state.analysis_done = False
 
-    # Input section
-    st.markdown("""
-    <div class="input-section">
-        <h2>🔗 Masukkan URL Video YouTube</h2>
-        <p>Pastikan video memiliki subtitle atau transkrip dalam Bahasa Indonesia</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    youtube_url = st.text_input("URL Video:", placeholder="https://www.youtube.com/watch?v=...")
+    youtube_url = st.text_input("🔗 Masukkan URL Video YouTube:")
 
     if youtube_url:
         video_id = extract_video_id(youtube_url)
         if video_id:
-            # Video preview
-            st.markdown("""
-            <div class="video-section">
-                <h3>📺 Preview Video</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
             st.video(f"https://www.youtube.com/watch?v={video_id}")
 
-            # Load model
-            with st.spinner("🔄 Memuat model dan tokenizer..."):
+            with st.spinner("📦 Loading model dan tokenizer..."):
                 model, tokenizer, device = load_model_tokenizer()
 
             if model is None or tokenizer is None or device is None:
                 st.error("❌ Gagal memuat model. Periksa koneksi dan file model.")
                 return
 
-            # Analysis button
-            if st.button("🚀 Mulai Analisis", type="primary", use_container_width=True):
+            if st.button("🚀 Analisis Video", use_container_width=True):
                 st.session_state.is_analyzing = True
                 st.session_state.analysis_done = False
 
-                # Get transcript
-                with st.spinner("📥 Mengambil transkrip video..."):
+                with st.spinner("📥 Mengambil transcript dari video..."):
                     transcript_data = get_transcript_from_searchapi(video_id, api_key)
 
                 if not transcript_data or "transcripts" not in transcript_data:
@@ -390,56 +358,54 @@ def main():
 
                 transcript_entries = transcript_data["transcripts"]
                 available_languages = transcript_data.get("available_languages", [])
-                is_not_auto_generated = any(lang["name"] == "Indonesian" for lang in available_languages)
+                is_not_auto_generated = any(lang["name"] == "Indonesian"for lang in available_languages)
 
                 if not is_not_auto_generated:
-                    st.warning("⚠️ Transkrip ini auto-generated dan mungkin mengandung kesalahan.")
+                    st.warning("⚠️ Transkrip ini merupakan Auto-Generated dan mungkin mengandung kesalahan.")
 
-                full_text = " ".join([entry['text'] for entry in transcript_entries])
-                st.success("✅ Transkrip berhasil diambil!")
+                full_text = " ".join([entry['text'] for entry in transcript_entries]) # Tidak menambahkan titik di setiap entry
+                st.success("✅ Transcript berhasil diambil! ")
 
-                # Transcript preview
-                with st.expander("📄 Preview Transkrip"):
+                with st.expander("📄 Cuplikan Transcript"):
                     st.text_area("", full_text[:1000] + ("..." if len(full_text) > 1000 else ""), height=200)
 
-                # Process sentences
                 sentences = re.split(r'(?<=[.!?])\s+|\n', full_text)
                 clean_sentences = [s.strip() for s in sentences if s.strip()]
 
                 if not clean_sentences:
-                    st.warning("Tidak ada kalimat yang dapat dianalisis.")
+                    st.warning("Tidak ada kalimat yang dapat dianalisis dari transkrip ini.")
                     return
 
-                # Analysis progress
                 problematic_sentences_count = 0
                 problematic_sentences_details = []
-                
-                progress_bar = st.progress(0)
-                status_text = st.empty()
-                
+        
+                progress_text = "Analisis kalimat sedang berjalan. Mohon tunggu..."
+                my_bar = st.progress(0, text=progress_text)
+
                 start_time = time.time()
 
                 for i, sentence in enumerate(clean_sentences):
-                    status_text.text(f"Menganalisis kalimat {i+1}/{len(clean_sentences)}")
-                    
                     detected_labels, label_probs = predict_sentence(sentence, model, tokenizer, device)
+
+                    # Logika untuk kalimat "bermasalah": setiap label selain 'PS'
                     is_problematic = any(label != "PS" for label in detected_labels)
 
                     if is_problematic:
                         problematic_sentences_count += 1
                         
-                        # Find timestamp
+                        # Temukan timestamp
                         matched_entry = next((entry for entry in transcript_entries if sentence.strip().startswith(entry['text'].strip()[:10])), None)
                         timestamp = matched_entry["start"] if matched_entry else None
                         timestamp_str = f"{int(timestamp // 60):02d}:{int(timestamp % 60):02d}" if timestamp is not None else "??:??"
 
-                        # Sort active labels
+                        # Urutkan hanya label aktif (prob > threshold dan bukan PS)
                         sorted_active = sorted(
                             [(LABEL_DESCRIPTIONS[label], float(prob)) for label, prob in label_probs.items() if prob > 0.5 and label != "PS"],
                             key=lambda x: x[1],
                             reverse=True
                         )
 
+                        # Simpan seluruh probabilitas (untuk dropdown), tapi aktif label saja untuk ringkasan
                         all_probs = {LABEL_DESCRIPTIONS[label]: f"{float(prob):.1%}" for label, prob in label_probs.items()}
 
                         problematic_sentences_details.append({
@@ -449,30 +415,58 @@ def main():
                             "probabilitas": all_probs
                         })
 
-                    progress_bar.progress((i + 1) / len(clean_sentences))
+                    progress_percentage = (i + 1) / len(clean_sentences)
+                    my_bar.progress(progress_percentage, text=f"{progress_text} {int(progress_percentage * 100)}%")
 
-                # Clear progress indicators
-                progress_bar.empty()
-                status_text.empty()
+                my_bar.empty()
 
-                # Calculate processing time
                 end_time = time.time()
                 elapsed_time = end_time - start_time
+
                 minutes = int(elapsed_time // 60)
                 seconds = int(elapsed_time % 60)
+                milliseconds = int((elapsed_time - int(elapsed_time)) * 1000)
 
-                st.info(f"⏱️ Waktu pemrosesan: {minutes} menit {seconds} detik")
-
-                # Render results
-                render_results(problematic_sentences_details, len(clean_sentences), problematic_sentences_count)
+                st.info(f"⏱️ Waktu proses analisis: {minutes} menit {seconds} detik {milliseconds} milidetik")
 
                 st.session_state.is_analyzing = False
                 st.session_state.analysis_done = True
 
+                st.subheader("📊 Ringkasan Hasil Deteksi:")
+
+                total_sentences = len(clean_sentences)
+                if total_sentences > 0:
+                    percentage_problematic = (problematic_sentences_count / total_sentences) * 100
+                    # Tambahan Warning jika lebih dari 50% kalimat tidak positif
+                    if percentage_problematic > 10.0:
+                        st.error("⚠️ **PERINGATAN**: Lebih dari 10% konten video ini terdeteksi sebagai **konten tidak positif** (ujaran kebencian/abusive) dan **tidak layak dikonsumsi** secara umum.")
+                    st.warning(f"Dari **{total_sentences} kalimat**, **{problematic_sentences_count} kalimat ({percentage_problematic:.1f}%)** terklasifikasi sebagai **konten bermasalah** (Ujaran Kebencian / Abusive).")
+                else:
+                    st.warning("Tidak ada kalimat untuk dianalisis.")
+
+                if problematic_sentences_details:
+                    st.info("🚨 Berikut adalah kalimat-kalimat yang terdeteksi bermasalah:")
+                    for idx, detail in enumerate(problematic_sentences_details, 1):
+                        st.markdown(f"---")
+                        st.markdown(f"**Kalimat {idx}** _(pada menit {detail['timestamp']})_: {detail['kalimat']}")
+                        # Pastikan hanya menampilkan label yang terdeteksi dan bukan PS
+                        display_labels = [label for label in detail['label_terdeteksi'] if label != "Konten Positif"]
+                        if display_labels:
+                            st.markdown(f"**Label Terdeteksi:** {', '.join(display_labels)}")
+                        else:
+                            st.markdown(f"**Label Terdeteksi:** (Tidak ada label spesifik yang terdeteksi selain 'Konten Positif')") # Fallback jika hanya PS yang terdeteksi tapi diabaikan
+
+                        with st.expander("Detail Probabilitas:"):
+                            for label_desc, prob in detail['probabilitas'].items():
+                                st.write(f"- **{label_desc}**: {prob}")
+                else:
+                    st.success("✅ Tidak terdeteksi adanya hate speech atau konten bermasalah dalam transkrip ini.")
+
+            if st.session_state.is_analyzing and not st.session_state.analysis_done:
+                st.subheader("🔍 Menganalisis Konten Video per Kalimat...")
+
         else:
-            st.error("❌ URL tidak valid. Masukkan URL YouTube yang benar.")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+            st.error("❌ URL tidak valid. Harap masukkan URL video YouTube yang benar.")
 
 if __name__ == "__main__":
     main()
