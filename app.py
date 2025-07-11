@@ -114,7 +114,7 @@ st.components.v1.html("""
 # Judul utama dalam box
 st.markdown("""
 <div class="header-box">
-    <div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
     <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
 </div>
 """, unsafe_allow_html=True)
@@ -144,12 +144,6 @@ with st.sidebar:
     <p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
     </div>
     """, unsafe_allow_html=True)
-
-st.set_page_config(
-    page_title="Hayu-IT",
-    page_icon="🎥",
-    layout="centered"
-)
 
 # ✅ Arsitektur model
 class IndoBERTweetBiGRU(nn.Module):
