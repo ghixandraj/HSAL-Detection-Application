@@ -25,6 +25,7 @@ st.markdown("""
         color: #f0f0f0;
     }
 
+    /* HEADER */
     .header-box {
         background: linear-gradient(135deg, #4A90E2, #FF6B6B);
         border-radius: 16px;
@@ -47,6 +48,7 @@ st.markdown("""
         color: #eee;
     }
 
+    /* TOGGLE BUTTON */
     .toggle-btn {
         position: fixed;
         top: 20px;
@@ -71,33 +73,41 @@ st.markdown("""
         background-color: rgba(255, 255, 255, 0.1);
     }
 
+    /* SIDEBAR ANIMASI */
     [data-testid="stSidebar"] {
-        transition: transform 0.4s ease, opacity 0.4s ease;
+        transition: transform 0.4s ease, margin-left 0.4s ease;
         transform: translateX(0);
-        opacity: 1;
     }
 
-    [data-testid="stSidebar"].sidebar-hidden {
-        transform: translateX(-100%);
-        opacity: 0;
-        pointer-events: none;
+    [data-testid="stSidebar"].hide-sidebar {
+        transform: translateX(-260px);
+    }
+
+    /* Konten utama biar nggak loncat-loncat */
+    [data-testid="stSidebar"] + div {
+        transition: margin-left 0.4s ease;
+    }
+
+    [data-testid="stSidebar"].hide-sidebar + div {
+        margin-left: 0 !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle ⮜ / ⮞
+# Tombol toggle
 st.markdown("""
 <button id="sidebar-toggle" class="toggle-btn">⮜</button>
 """, unsafe_allow_html=True)
 
-# JavaScript logic untuk toggle animasi sidebar
+# JavaScript untuk toggle sidebar
 components.html("""
 <script>
-const waitUntilReady = () => {
+const waitReady = () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
     const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
+
     if (!sidebar || !toggleBtn) {
-        setTimeout(waitUntilReady, 100);
+        setTimeout(waitReady, 100);
         return;
     }
 
@@ -105,15 +115,15 @@ const waitUntilReady = () => {
     toggleBtn.addEventListener("click", () => {
         visible = !visible;
         if (visible) {
-            sidebar.classList.remove("sidebar-hidden");
+            sidebar.classList.remove("hide-sidebar");
             toggleBtn.innerText = "⮜";
         } else {
-            sidebar.classList.add("sidebar-hidden");
+            sidebar.classList.add("hide-sidebar");
             toggleBtn.innerText = "⮞";
         }
     });
 };
-waitUntilReady();
+waitReady();
 </script>
 """, height=0)
 
@@ -125,7 +135,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# SIDEBAR (tetap tampil normal)
+# SIDEBAR
 with st.sidebar:
     st.markdown('## 🔍 Fitur Utama')
     st.markdown("""
