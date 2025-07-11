@@ -22,7 +22,6 @@ st.set_page_config(
 # Tambahkan tema warna dan animasi sidebar
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 
 <style>
     html, body, [class*="css"] {
@@ -80,78 +79,60 @@ st.markdown("""
     }
 
     .toggle-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #4A90E2;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    z-index: 9999;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        z-index: 9999;
+        transition: color 0.3s ease;
     }
 
     .toggle-btn:hover {
-        background-color: #3b6fb2;
+        color: #aaa;
     }
 
     .toggle-btn:focus,
     .toggle-btn:active {
-        background-color: #4A90E2 !important;
         outline: none;
-        box-shadow: none;
-    }
-
-    .material-symbols-rounded {
-        font-family: 'Material Symbols Rounded';
-        font-size: 22px;
-        color: white;
-        pointer-events: none;
-        user-select: none;
-        line-height: 1;
+        background-color: transparent;
+        color: #aaa;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Atur state awal sidebar
+# Set state awal
 if "toggle_sidebar_state" not in st.session_state:
-    st.session_state.toggle_sidebar_state = True  # terbuka secara default
+    st.session_state.toggle_sidebar_state = True
 
-# Tampilkan tombol toggle
+# Tombol toggle sidebar
+icon = "«" if st.session_state.toggle_sidebar_state else "»"
+
 st.markdown(f"""
-<button id="toggleButton" class="toggle-btn">
-    <span class="material-symbols-rounded icon-left" style="display: {'inline' if st.session_state.toggle_sidebar_state else 'none'};">keyboard_double_arrow_left</span>
-    <span class="material-symbols-rounded icon-right" style="display: {'none' if st.session_state.toggle_sidebar_state else 'inline'};">keyboard_double_arrow_right</span>
-</button>
+<button id="toggleButton" class="toggle-btn">{icon}</button>
 """, unsafe_allow_html=True)
 
-# Script JavaScript untuk toggle sidebar
+# JavaScript untuk toggle sidebar
 components.html("""
 <script>
-const toggleButton = window.parent.document.getElementById('toggleButton');
+const btn = window.parent.document.getElementById('toggleButton');
 let sidebarVisible = true;
 
-toggleButton.addEventListener('click', () => {
+btn.addEventListener('click', () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const iconLeft = toggleButton.querySelector('.icon-left');
-    const iconRight = toggleButton.querySelector('.icon-right');
-
     if (sidebar) {
         sidebarVisible = !sidebarVisible;
         sidebar.style.display = sidebarVisible ? 'block' : 'none';
-        iconLeft.style.display = sidebarVisible ? 'inline' : 'none';
-        iconRight.style.display = sidebarVisible ? 'none' : 'inline';
+        btn.innerText = sidebarVisible ? '«' : '»';
     }
 });
 </script>
 """, height=0)
 
-# Header aplikasi
+# Judul utama aplikasi
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -159,7 +140,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar: Fitur dan Petunjuk
+# Sidebar Konten
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
