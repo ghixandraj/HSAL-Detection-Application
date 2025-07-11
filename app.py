@@ -18,47 +18,62 @@ st.set_page_config(
     layout="wide"
 )
 
-# Header dengan gaya modern
+# Tambahkan tema warna dan style
 st.markdown("""
     <style>
         .main-title {
             font-size: 3rem;
             font-weight: bold;
-            color: #4a4a4a;
+            color: #FF6B6B;
             text-align: center;
             margin-bottom: 0.5rem;
         }
         .subtitle {
             font-size: 1.3rem;
             text-align: center;
-            color: #6e6e6e;
+            color: #555;
         }
-        .info-box {
-            background-color: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 5px solid #4a90e2;
-            margin-bottom: 1.5rem;
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4A90E2;
+            margin-top: 20px;
+        }
+        .sidebar-content {
+            font-size: 0.95rem;
+            color: #333;
         }
     </style>
 """, unsafe_allow_html=True)
 
+# Judul utama
 st.markdown('<div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>', unsafe_allow_html=True)
 
-# Informasi aplikasi
-with st.container():
-    st.markdown("""
-        <div class="info-box">
-        <h4>🔍 Fitur Utama:</h4>
-        <ul>
-            <li>🎥 Ambil transkrip dari video YouTube (bahasa Indonesia).</li>
-            <li>🤖 Deteksi ujaran kebencian dan bahasa kasar dalam setiap kalimat.</li>
-            <li>📊 Tampilkan label, probabilitas, dan timestamp terperinci.</li>
-            <li>🚀 Didukung model NLP canggih: IndoBERTweet + BiGRU dengan MAML.</li>
-        </ul>
-        </div>
-    """, unsafe_allow_html=True)
+# Sidebar dengan fitur dan panduan
+st.sidebar.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
+st.sidebar.markdown("""
+<div class="sidebar-content">
+<ul>
+    <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
+    <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
+    <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
+    <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
+st.sidebar.markdown("""
+<div class="sidebar-content">
+<ol>
+    <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
+    <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
+    <li>Klik tombol <b>"Analisis Video"</b> dan tunggu hasilnya.</li>
+</ol>
+<p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
+</div>
+""", unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="Hayu-IT",
