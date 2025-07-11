@@ -13,54 +13,52 @@ import time
 
 # ✅ Konfigurasi halaman
 st.set_page_config(
-    page_title="Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts",
+    page_title="Hayu-IT: HSAL Analysis",
     page_icon="🧠",
-    layout="centered"
+    layout="wide"
 )
 
-# ✅ Judul & Penjelasan Aplikasi
+# Header dengan gaya modern
 st.markdown("""
-<style>
-.highlight-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #4A90E2;
-    margin-bottom: 0.5rem;
-}
-.highlight-sub {
-    font-size: 18px;
-    color: #555;
-}
-.box-style {
-    background-color: #F9F9F9;
-    padding: 1rem;
-    border-radius: 12px;
-    border: 1px solid #DDD;
-    margin-top: 1rem;
-}
-</style>
+    <style>
+        .main-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4a4a4a;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            text-align: center;
+            color: #6e6e6e;
+        }
+        .info-box {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid #4a90e2;
+            margin-bottom: 1.5rem;
+        }
+    </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="highlight-title">🧠 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>', unsafe_allow_html=True)
-st.markdown('<div class="highlight-sub">Sistem deteksi otomatis untuk mengidentifikasi <b>Ujaran Kebencian</b> dan <b>Bahasa Kasar</b> pada video YouTube berbahasa Indonesia menggunakan teknologi NLP dan Deep Learning.</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>', unsafe_allow_html=True)
 
-st.markdown("""
-<div class="box-style">
-<h4>🔍 Apa yang dilakukan aplikasi ini?</h4>
-<ul>
-    <li>🔗 Mengambil <b>transkrip otomatis/subtitel</b> dari video YouTube.</li>
-    <li>🧠 Menganalisis setiap kalimat untuk mendeteksi <b>13 jenis label kebencian atau bahasa kasar</b>.</li>
-    <li>⚠️ Menampilkan kalimat yang terindikasi <i>bermasalah</i> lengkap dengan timestamp dan probabilitas deteksi.</li>
-    <li>📊 Memberikan ringkasan persentase kalimat bermasalah dan tingkat keparahannya.</li>
-</ul>
-<h4>⚙️ Teknologi yang Digunakan:</h4>
-<ul>
-    <li>🤖 <b>IndoBERTweet + BiGRU</b> sebagai arsitektur model klasifikasi</li>
-    <li>🌍 <b>SearchAPI.io</b> untuk mengambil subtitle otomatis video</li>
-    <li>🧪 <b>Model MAML</b> untuk adaptasi terhadap variasi ujaran kebencian</li>
-</ul>
-</div>
-""", unsafe_allow_html=True)
+# Informasi aplikasi
+with st.container():
+    st.markdown("""
+        <div class="info-box">
+        <h4>🔍 Fitur Utama:</h4>
+        <ul>
+            <li>🎥 Ambil transkrip dari video YouTube (bahasa Indonesia).</li>
+            <li>🤖 Deteksi ujaran kebencian dan bahasa kasar dalam setiap kalimat.</li>
+            <li>📊 Tampilkan label, probabilitas, dan timestamp terperinci.</li>
+            <li>🚀 Didukung model NLP canggih: IndoBERTweet + BiGRU dengan MAML.</li>
+        </ul>
+        </div>
+    """, unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="Hayu-IT",
