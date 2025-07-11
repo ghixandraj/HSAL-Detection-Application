@@ -104,17 +104,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Set state awal
+# State toggle
 if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True
 
-# Tombol toggle
-icon = "«" if st.session_state.toggle_sidebar_state else "»"
+# Toggle tombol 
+toggle_class = "" if st.session_state.toggle_sidebar_state else "collapsed"
 st.markdown(f"""
-<button id="toggleButton" class="toggle-btn">{icon}</button>
+<button id="toggleButton" class="toggle-btn {toggle_class}"></button>
 """, unsafe_allow_html=True)
 
-# JavaScript untuk toggle sidebar + bug fix
+# JavaScript toggle dengan class
 components.html("""
 <script>
 const toggleBtn = window.parent.document.getElementById('toggleButton');
@@ -132,12 +132,12 @@ toggleBtn.addEventListener('click', () => {
             sidebar.style.display = 'block';
             sidebarContent.style.display = 'block';
             sidebarContainer.style.display = 'flex';
-            toggleBtn.innerText = '«';
+            toggleBtn.classList.remove('collapsed');
         } else {
             sidebar.style.display = 'none';
             sidebarContent.style.display = 'none';
             sidebarContainer.style.display = 'none';
-            toggleBtn.innerText = '»';
+            toggleBtn.classList.add('collapsed');
         }
     }
 });
