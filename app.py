@@ -103,27 +103,29 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Tombol toggle sidebar dengan ikon panah ⮜
-if "toggle_sidebar_rendered" not in st.session_state:
-    st.session_state.toggle_sidebar_rendered = False
+if "toggle_sidebar_state" not in st.session_state:
+    st.session_state.toggle_sidebar_state = True  # default terbuka
 
-if not st.session_state.toggle_sidebar_rendered:
-    st.markdown('''
-    <button class="toggle-btn" onclick="window.dispatchEvent(new Event('toggleSidebar'))">
-        ⮜
-    </button>
-    ''', unsafe_allow_html=True)
-    st.session_state.toggle_sidebar_rendered = True
+initial_icon = "&laquo;&laquo;" if st.session_state.toggle_sidebar_state else "&raquo;&raquo;"
 
-# Tambahkan komponen JS untuk toggle
+st.markdown(f'''
+    <button id="toggleButton" class="toggle-btn">{initial_icon}</button>
+''', unsafe_allow_html=True)
+
+# JavaScript untuk mengontrol toggle sidebar dan ikon panah
 st.components.v1.html("""
 <script>
-    const toggleSidebar = () => {
+    const toggleButton = window.parent.document.getElementById('toggleButton');
+    let sidebarVisible = true;
+
+    toggleButton.addEventListener('click', () => {
         const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
         if (sidebar) {
-            sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+            sidebarVisible = !sidebarVisible;
+            sidebar.style.display = sidebarVisible ? 'block' : 'none';
+            toggleButton.innerHTML = sidebarVisible ? '&laquo;&laquo;' : '&raquo;&raquo;';
         }
-    }
-    window.addEventListener('toggleSidebar', toggleSidebar);
+    });
 </script>
 """, height=0)
 
