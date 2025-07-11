@@ -18,71 +18,72 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 # Tambahkan styling
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-    html, body, [class*="css"] {
-        font-family: 'Nunito', sans-serif !important;
-        background-color: #111;
-        color: #f0f0f0;
-    }
+html, body, [class*="css"] {
+    font-family: 'Nunito', sans-serif !important;
+    background-color: #111;
+    color: #f0f0f0;
+}
 
-    .header-box {
-        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
-        border-radius: 16px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+.header-box {
+    background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
 
-    .main-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #fff;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
+.main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
 
-    .subtitle {
-        font-size: 1.2rem;
-        text-align: center;
-        color: #eee;
-    }
+.subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #eee;
+}
 
-    .toggle-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background: transparent;
-        color: white;
-        font-size: 26px;
-        border: none;
-        cursor: pointer;
-        z-index: 9999;
-        padding: 0;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: background-color 0.3s ease;
-    }
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    color: white;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
 
-    .toggle-btn:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
+.toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-    [data-testid="stSidebar"] {
-        transform: translateX(0);
-        opacity: 1;
-        transition: transform 0.4s ease, opacity 0.4s ease;
-        will-change: transform, opacity;
-    }
+[data-testid="stSidebar"] {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    will-change: transform, opacity;
+}
 
-    .sidebar-hidden {
-        transform: translateX(-100%);
-        opacity: 0;
-        pointer-events: none;
-    }
+[data-testid="stSidebar"].hidden {
+    transform: translateX(-300px);
+    opacity: 0;
+    pointer-events: none;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -91,34 +92,34 @@ st.markdown("""
 <button id="toggleButton" class="toggle-btn">«</button>
 """, unsafe_allow_html=True)
 
-# Komponen JS: toggle sidebar dengan animasi halus
+# JavaScript smooth toggle
 components.html("""
 <script>
-const waitForSidebar = () => {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const toggleBtn = window.parent.document.getElementById("toggleButton");
-
-    if (!sidebar || !toggleBtn) {
-        setTimeout(waitForSidebar, 300);
-        return;
-    }
-
-    let sidebarVisible = true;
-
-    toggleBtn.addEventListener("click", () => {
-        sidebarVisible = !sidebarVisible;
-
-        if (!sidebarVisible) {
-            sidebar.classList.add("sidebar-hidden");
-            toggleBtn.innerText = "»";
-        } else {
-            sidebar.classList.remove("sidebar-hidden");
-            toggleBtn.innerText = "«";
+(function(){
+    const wait = (fn) => {
+        const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+        const btn = window.parent.document.getElementById("toggleButton");
+        if (!sidebar || !btn) {
+            setTimeout(() => wait(fn), 200);
+            return;
         }
-    });
-};
+        fn(sidebar, btn);
+    };
 
-waitForSidebar();
+    wait((sidebar, btn) => {
+        let visible = true;
+        btn.addEventListener("click", () => {
+            visible = !visible;
+            if (visible) {
+                sidebar.classList.remove("hidden");
+                btn.innerText = "«";
+            } else {
+                sidebar.classList.add("hidden");
+                btn.innerText = "»";
+            }
+        });
+    });
+})();
 </script>
 """, height=0)
 
@@ -130,7 +131,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar
+# Sidebar konten
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
