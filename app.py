@@ -19,7 +19,7 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-    section[data-testid="stSidebar"] div[data-testid="collapsedControl"] {
+    button[title="Collapse sidebar"] {
     display: none !important;
     }
             
