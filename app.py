@@ -97,23 +97,23 @@ st.markdown("""
     }
 
     .toggle-btn:hover {
-        background-color: #3b6fb2; /* sedikit lebih gelap saat hover */
+        background-color: #3b6fb2;
     }
 
     .toggle-btn:focus,
     .toggle-btn:active {
-        background-color: #4A90E2 !important; /* tetap seperti biasa saat klik */
-        box-shadow: none;
+        background-color: #4A90E2 !important;
         outline: none;
+        box-shadow: none;
     }
 
     .material-symbols-rounded {
         font-family: 'Material Symbols Rounded';
         font-size: 22px;
         color: white;
-        line-height: 1;
         pointer-events: none;
-        font-weight: normal;
+        user-select: none;
+        line-height: 1;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -144,14 +144,8 @@ toggleButton.addEventListener('click', () => {
     if (sidebar) {
         sidebarVisible = !sidebarVisible;
         sidebar.style.display = sidebarVisible ? 'block' : 'none';
-
-        if (sidebarVisible) {
-            iconLeft.style.display = 'inline';
-            iconRight.style.display = 'none';
-        } else {
-            iconLeft.style.display = 'none';
-            iconRight.style.display = 'inline';
-        }
+        iconLeft.style.display = sidebarVisible ? 'inline' : 'none';
+        iconRight.style.display = sidebarVisible ? 'none' : 'inline';
     }
 });
 </script>
