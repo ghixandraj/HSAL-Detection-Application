@@ -25,6 +25,7 @@ html, body, [class*="css"] {
     color: #f0f0f0;
 }
 
+/* HEADER STYLING */
 .header-box {
     background: linear-gradient(135deg, #4A90E2, #FF6B6B);
     border-radius: 16px;
@@ -32,7 +33,6 @@ html, body, [class*="css"] {
     margin-bottom: 2rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 .main-title {
     font-size: 2.5rem;
     font-weight: bold;
@@ -40,13 +40,18 @@ html, body, [class*="css"] {
     text-align: center;
     margin-bottom: 0.5rem;
 }
-
 .subtitle {
     font-size: 1.2rem;
     text-align: center;
     color: #eee;
 }
+@media screen and (max-width: 768px) {
+    .main-title { font-size: 1.7rem; }
+    .subtitle { font-size: 1rem; }
+    .header-box { padding: 1.2rem; }
+}
 
+/* TOGGLE BUTTON */
 .toggle-btn {
     position: fixed;
     top: 20px;
@@ -66,18 +71,16 @@ html, body, [class*="css"] {
     border-radius: 50%;
     transition: background-color 0.3s ease;
 }
-
 .toggle-btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Smooth transition */
+/* SIDEBAR ANIMASI */
 [data-testid="stSidebar"] {
     transition: transform 0.4s ease, opacity 0.4s ease;
     transform: translateX(0);
     opacity: 1;
 }
-
 [data-testid="stSidebar"].sidebar-hidden {
     transform: translateX(-100%);
     opacity: 0;
@@ -86,19 +89,19 @@ html, body, [class*="css"] {
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle
+# Tombol toggle ⮜ / ⮞
 st.markdown("""
 <button id="sidebar-toggle" class="toggle-btn">⮜</button>
 """, unsafe_allow_html=True)
 
-# Komponen JS untuk animasi toggle
+# JavaScript logic untuk toggle animasi sidebar
 components.html("""
 <script>
-const waitUntilLoaded = () => {
+const waitUntilReady = () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
     const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
     if (!sidebar || !toggleBtn) {
-        setTimeout(waitUntilLoaded, 100);
+        setTimeout(waitUntilReady, 100);
         return;
     }
 
@@ -114,11 +117,11 @@ const waitUntilLoaded = () => {
         }
     });
 };
-waitUntilLoaded();
+waitUntilReady();
 </script>
 """, height=0)
 
-# Judul Aplikasi
+# HEADER APLIKASI
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -126,7 +129,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Konten Sidebar
+# SIDEBAR (tetap tampil normal)
 with st.sidebar:
     st.markdown('## 🔍 Fitur Utama')
     st.markdown("""
