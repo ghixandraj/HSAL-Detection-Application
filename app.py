@@ -72,9 +72,10 @@ st.markdown("""
     }
 
     [data-testid="stSidebar"] {
-        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
         transform: translateX(0);
         opacity: 1;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        will-change: transform, opacity;
     }
 
     .sidebar-hidden {
@@ -90,27 +91,29 @@ st.markdown("""
 <button id="toggleButton" class="toggle-btn">«</button>
 """, unsafe_allow_html=True)
 
-# Komponen JS: toggle + animasi dua arah tanpa bug
+# Komponen JS: toggle sidebar dengan animasi halus
 components.html("""
 <script>
-let sidebarVisible = true;
-
 const waitForSidebar = () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
     const toggleBtn = window.parent.document.getElementById("toggleButton");
+
     if (!sidebar || !toggleBtn) {
         setTimeout(waitForSidebar, 300);
         return;
     }
 
+    let sidebarVisible = true;
+
     toggleBtn.addEventListener("click", () => {
         sidebarVisible = !sidebarVisible;
-        if (sidebarVisible) {
-            sidebar.classList.remove("sidebar-hidden");
-            toggleBtn.innerText = "«";
-        } else {
+
+        if (!sidebarVisible) {
             sidebar.classList.add("sidebar-hidden");
             toggleBtn.innerText = "»";
+        } else {
+            sidebar.classList.remove("sidebar-hidden");
+            toggleBtn.innerText = "«";
         }
     });
 };
