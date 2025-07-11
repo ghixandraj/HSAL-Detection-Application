@@ -359,7 +359,6 @@ with st.sidebar:
     - **Hidden Size**: 512 dimensi
     - **Max Sequence Length**: 192 token
     - **Threshold**: 0.5 untuk klasifikasi
-    - **Device**: CPU/GPU adaptive
     
     **Performa Model:**
     - Dilatih pada dataset Indonesia
@@ -386,8 +385,8 @@ with st.sidebar:
     - Transkrip auto-generated mungkin kurang akurat
     """)
     
-    # 📞 KONTAK & BANTUAN
-    st.markdown("## 📞 Disclaimer")
+    # ❗ Disclaimer
+    st.markdown("## ❗ Disclaimer")
     st.markdown("""
     - Aplikasi ini untuk penelitian dan edukasi
     - Hasil analisis bukan keputusan final
