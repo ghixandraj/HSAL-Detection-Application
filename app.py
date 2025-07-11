@@ -21,6 +21,10 @@ st.set_page_config(
 # Tambahkan tema warna dan animasi sidebar
 st.markdown("""
     <style>
+        html, body, [class*="css"] {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
         body {
             background-color: #111;
             color: #f0f0f0;
@@ -33,16 +37,27 @@ st.markdown("""
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .main-title {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #fff;
             text-align: center;
             margin-bottom: 0.5rem;
         }
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-align: center;
             color: #eee;
+        }
+        @media screen and (max-width: 768px) {
+            .main-title {
+                font-size: 1.7rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .header-box {
+                padding: 1.2rem;
+            }
         }
         .sidebar-title {
             font-size: 1.5rem;
