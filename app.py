@@ -61,6 +61,65 @@ st.markdown("""
         color: #f0f0f0;
     }
 
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-right: 2px solid #333 !important;
+    }
+
+    [data-testid="stSidebar"] .css-1d391kg {
+        padding-top: 1rem !important;
+    }
+
+    /* Sidebar Headers */
+    [data-testid="stSidebar"] h2 {
+        color: #4A90E2 !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+        margin-top: 1.5rem !important;
+        padding-bottom: 0.3rem !important;
+        border-bottom: 1px solid #444 !important;
+    }
+
+    /* Sidebar Text */
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] li {
+        color: #d0d0d0 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Sidebar Lists */
+    [data-testid="stSidebar"] ul {
+        padding-left: 1rem !important;
+    }
+
+    [data-testid="stSidebar"] li {
+        margin-bottom: 0.2rem !important;
+    }
+
+    /* Sidebar Strong Text */
+    [data-testid="stSidebar"] strong {
+        color: #fff !important;
+        font-weight: 600 !important;
+    }
+
+    /* Sidebar Code Text */
+    [data-testid="stSidebar"] code {
+        background-color: #333 !important;
+        color: #FF6B6B !important;
+        padding: 0.2rem 0.4rem !important;
+        border-radius: 3px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Sidebar Dividers */
+    [data-testid="stSidebar"] hr {
+        border: none !important;
+        border-top: 1px solid #444 !important;
+        margin: 1rem 0 !important;
+    }
+
     /* Header box */
     .header-box {
         background: linear-gradient(135deg, #4A90E2, #FF6B6B);
@@ -134,7 +193,37 @@ st.markdown("""
 
     [data-testid="stSidebar"].sidebar-hidden + div {
         margin-left: 0 !important;
-    }    
+    }
+
+    /* Scrollbar untuk sidebar */
+    [data-testid="stSidebar"] .css-1d391kg::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    [data-testid="stSidebar"] .css-1d391kg::-webkit-scrollbar-track {
+        background: #2d2d2d;
+        border-radius: 3px;
+    }
+
+    [data-testid="stSidebar"] .css-1d391kg::-webkit-scrollbar-thumb {
+        background: #4A90E2;
+        border-radius: 3px;
+    }
+
+    [data-testid="stSidebar"] .css-1d391kg::-webkit-scrollbar-thumb:hover {
+        background: #FF6B6B;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        [data-testid="stSidebar"] h2 {
+            font-size: 1rem !important;
+        }
+        
+        [data-testid="stSidebar"] p, [data-testid="stSidebar"] li {
+            font-size: 0.8rem !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -225,20 +314,129 @@ st.markdown("""
 
 # SIDEBAR
 with st.sidebar:
+    # Logo/Icon Header
+    st.markdown("""
+    <div style="text-align: center; padding: 1rem 0; border-bottom: 2px solid #333; margin-bottom: 1.5rem;">
+        <h2 style="color: #4A90E2; margin: 0;">🎥 Hayu-IT</h2>
+        <p style="color: #888; font-size: 0.9rem; margin: 0;">HSAL Analysis on Youtube Indonesian Transcripts</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # 🔍 FITUR UTAMA
     st.markdown("## 🔍 Fitur Utama")
     st.markdown("""
-    - Ambil transkrip video YouTube berbahasa Indonesia.  
-    - Deteksi ujaran kebencian dan bahasa kasar secara otomatis.  
-    - Tampilkan hasil analisis lengkap dengan label dan timestamp.  
-    - Didukung oleh model IndoBERTweet + BiGRU + MAML.
+    **Analisis Komprehensif:**
+    - ✅ Ekstraksi transkrip otomatis dari video YouTube
+    - ✅ Deteksi ujaran kebencian multi-kategori
+    - ✅ Identifikasi bahasa kasar dan ofensif
+    - ✅ Timestamping untuk setiap deteksi
+    - ✅ Laporan detail probabilitas
+    
+    **Kategori Deteksi:**
+    - 🎯 Ujaran kebencian individual & grup
+    - 🎯 Diskriminasi agama, ras, gender
+    - 🎯 Bahasa kasar dan ofensif
+    - 🎯 Tingkat intensitas (ringan/sedang/berat)
     """)
-    st.markdown("## 🧾 Cara Menggunakan")
+    
+    # 📋 CARA MENGGUNAKAN
+    st.markdown("## 📋 Cara Menggunakan")
     st.markdown("""
-    1. Masukkan URL video YouTube.  
-    2. Pastikan video memiliki subtitle Bahasa Indonesia.  
-    3. Klik "Analisis Video" dan tunggu hasilnya.  
-    _Catatan: proses bisa memakan waktu tergantung durasi._
+    **Langkah-langkah:**
+    1. 🔗 **Masukkan URL YouTube** yang valid
+    2. ✅ **Pastikan video memiliki subtitle** Bahasa Indonesia
+    3. 🚀 **Klik "Analisis Video"** dan tunggu prosesnya
+    4. 📊 **Lihat hasil analisis** dengan detail timestamp
+    5. 📄 **Baca laporan lengkap** untuk setiap kalimat bermasalah
+    
+    **Persyaratan:**
+    - Video harus memiliki subtitle/transkrip bahasa Indonesia
+    - Koneksi internet stabil untuk mengunduh model
+    - Durasi video optimal: < 30 menit (untuk performa terbaik)
     """)
+    
+    # 🤖 DETAIL MODEL
+    st.markdown("## 🤖 Detail Model AI")
+    st.markdown("""
+    **Arsitektur Model:**
+    - 🧠 **Base Model**: IndoBERTweet + BiGRU 
+    - 🎯 **Output**: 13 kategori klasifikasi
+    
+    **Spesifikasi Teknis:**
+    - **Hidden Size**: 512 dimensi
+    - **Max Sequence Length**: 192 token
+    - **Threshold**: 0.5 untuk klasifikasi
+    - **Device**: CPU/GPU adaptive
+    
+    **Performa Model:**
+    - ✅ Dilatih pada dataset Indonesia
+    - ✅ Multi-label classification
+    - ✅ Optimized untuk bahasa informal
+    """)
+    
+    # 💡 TIPS & PANDUAN
+    st.markdown("## 💡 Tips & Panduan")
+    st.markdown("""
+    **Untuk Hasil Optimal:**
+    - 📄 Hindari analisis video dengan transcript auto-generate
+    - ⏱️ Video pendek (< 15 menit) diproses lebih cepat
+    
+    **Interpretasi Hasil:**
+    - 🔴 **Merah**: Konten bermasalah terdeteksi
+    - 🟡 **Kuning**: Perlu perhatian khusus
+    - 🟢 **Hijau**: Konten aman
+    - 📊 **Probabilitas > 50%**: Prediksi valid
+    
+    **Catatan Penting:**
+    - Model dapat menghasilkan false positive/negative
+    - Hasil harus diinterpretasi oleh manusia
+    - Transkrip auto-generated mungkin kurang akurat
+    """)
+    
+    # ⚙️ INFORMASI TEKNIS
+    st.markdown("## ⚙️ Informasi Teknis")
+    st.markdown("""
+    **Label Klasifikasi:**
+    - `HS`: Hate Speech Umum
+    - `Abusive`: Bahasa Kasar/Ofensif
+    - `HS_Individual`: Kebencian Personal
+    - `HS_Group`: Kebencian Kelompok
+    - `HS_Religion`: Diskriminasi Agama
+    - `HS_Race`: Diskriminasi Ras/Etnis
+    - `HS_Physical`: Diskriminasi Fisik
+    - `HS_Gender`: Diskriminasi Gender
+    - `HS_Other`: Kebencian Kategori Lain
+    - `HS_Weak/Moderate/Strong`: Tingkat Intensitas
+    - `PS`: Positive Speech (Konten Positif)
+    
+    **API yang Digunakan:**
+    - SearchAPI.io untuk transcript extraction
+    - Google Drive untuk model hosting
+    - Transformers library untuk NLP processing
+    """)
+    
+    # 📞 KONTAK & BANTUAN
+    st.markdown("## 📞 Kontak & Bantuan")
+    st.markdown("""
+    **Butuh Bantuan?**
+    - 💬 Laporkan bug atau masalah
+    - 📧 Saran perbaikan fitur
+    - 🔍 Pertanyaan teknis
+    
+    **Disclaimer:**
+    - Aplikasi ini untuk penelitian dan edukasi
+    - Hasil analisis bukan keputusan final
+    - Gunakan dengan bijak dan bertanggung jawab
+    """)
+    
+    # Footer
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center; color: #666; font-size: 0.8rem;">
+        <p>🔬 Designed by Ghixandra Julyaneu Irawadi</p>
+        <p>v1.0 - Built with Streamlit</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ✅ Arsitektur model
 class IndoBERTweetBiGRU(nn.Module):
