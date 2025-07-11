@@ -19,7 +19,6 @@ st.set_page_config(
 )
 
 # Tambahkan tema warna dan animasi sidebar
-# Tambahkan tema warna dan animasi sidebar
 st.markdown("""
     <style>
         html, body, [class*="css"] {
@@ -64,19 +63,21 @@ st.markdown("""
             font-size: 1.5rem;
             font-weight: bold;
             color: #4A90E2;
-            margin-top: 20px;
+            margin: 20px 0 10px 0;
+            text-align: left;
         }
         .sidebar-content {
             font-size: 0.95rem;
             color: #fff;
+            text-align: left;
         }
         .toggle-btn {
             position: fixed;
             top: 20px;
             left: 20px;
-            background-color: #4A90E2;
-            color: white;
-            border: none;
+            background-color: transparent;
+            color: #4A90E2;
+            border: 2px solid #4A90E2;
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -84,16 +85,25 @@ st.markdown("""
             font-weight: bold;
             z-index: 9999;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
         .toggle-btn:hover {
-            background-color: #357ABD;
+            background-color: #4A90E2;
+            color: white;
         }
         .toggle-btn:focus {
             outline: none;
         }
     </style>
 """, unsafe_allow_html=True)
+
+# Tombol toggle sidebar dengan ikon panah (⇆), hanya muncul satu kali
+if "toggle_sidebar_rendered" not in st.session_state:
+    st.session_state.toggle_sidebar_rendered = False
+
+if not st.session_state.toggle_sidebar_rendered:
+    st.markdown('<button class="toggle-btn" onclick="window.dispatchEvent(new Event(\'toggleSidebar\'))">⇆</button>', unsafe_allow_html=True)
+    st.session_state.toggle_sidebar_rendered = True
 
 # Tambahkan komponen JS untuk toggle
 st.components.v1.html("""
@@ -111,7 +121,7 @@ st.components.v1.html("""
 # Judul utama dalam box
 st.markdown("""
 <div class="header-box">
-    <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
     <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
 </div>
 """, unsafe_allow_html=True)
@@ -121,8 +131,8 @@ with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="sidebar-content">
-    <ul>
-        <li>Ambil transkrip video YouTube berbahasa Indonesia.</li>
+    <ul style="padding-left: 1rem;">
+        <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
         <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
         <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
         <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
@@ -133,7 +143,7 @@ with st.sidebar:
     st.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="sidebar-content">
-    <ol>
+    <ol style="padding-left: 1rem;">
         <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
         <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
         <li>Klik tombol <b>\"Analisis Video\"</b> dan tunggu hasilnya.</li>
