@@ -18,7 +18,6 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 # Tambahkan styling
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
 html, body, [class*="css"] {
     font-family: 'Nunito', sans-serif !important;
@@ -54,10 +53,10 @@ html, body, [class*="css"] {
     left: 20px;
     background: transparent;
     color: white;
-    font-size: 26px;
+    font-size: 28px;
     border: none;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 10000;
     padding: 0;
     width: 40px;
     height: 40px;
@@ -72,15 +71,15 @@ html, body, [class*="css"] {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Smooth transition */
 [data-testid="stSidebar"] {
+    transition: transform 0.4s ease, opacity 0.4s ease;
     transform: translateX(0);
     opacity: 1;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    will-change: transform, opacity;
 }
 
-[data-testid="stSidebar"].hidden {
-    transform: translateX(-300px);
+[data-testid="stSidebar"].sidebar-hidden {
+    transform: translateX(-100%);
     opacity: 0;
     pointer-events: none;
 }
@@ -89,41 +88,37 @@ html, body, [class*="css"] {
 
 # Tombol toggle
 st.markdown("""
-<button id="toggleButton" class="toggle-btn">«</button>
+<button id="sidebar-toggle" class="toggle-btn">⮜</button>
 """, unsafe_allow_html=True)
 
-# JavaScript smooth toggle
+# Komponen JS untuk animasi toggle
 components.html("""
 <script>
-(function(){
-    const wait = (fn) => {
-        const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-        const btn = window.parent.document.getElementById("toggleButton");
-        if (!sidebar || !btn) {
-            setTimeout(() => wait(fn), 200);
-            return;
-        }
-        fn(sidebar, btn);
-    };
+const waitUntilLoaded = () => {
+    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
+    if (!sidebar || !toggleBtn) {
+        setTimeout(waitUntilLoaded, 100);
+        return;
+    }
 
-    wait((sidebar, btn) => {
-        let visible = true;
-        btn.addEventListener("click", () => {
-            visible = !visible;
-            if (visible) {
-                sidebar.classList.remove("hidden");
-                btn.innerText = "«";
-            } else {
-                sidebar.classList.add("hidden");
-                btn.innerText = "»";
-            }
-        });
+    let visible = true;
+    toggleBtn.addEventListener("click", () => {
+        visible = !visible;
+        if (visible) {
+            sidebar.classList.remove("sidebar-hidden");
+            toggleBtn.innerText = "⮜";
+        } else {
+            sidebar.classList.add("sidebar-hidden");
+            toggleBtn.innerText = "⮞";
+        }
     });
-})();
+};
+waitUntilLoaded();
 </script>
 """, height=0)
 
-# Header
+# Judul Aplikasi
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -131,31 +126,22 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar konten
+# Konten Sidebar
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
+    st.markdown('## 🔍 Fitur Utama')
     st.markdown("""
-    <div class="sidebar-content">
-    <ul style="padding-left: 1rem;">
-        <li>Ambil transkrip video YouTube berbahasa Indonesia.</li>
-        <li>Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
-        <li>Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
-        <li>Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="sidebar-title">🧾 Cara Menggunakan</div>', unsafe_allow_html=True)
+    - Ambil transkrip video YouTube berbahasa Indonesia.  
+    - Deteksi ujaran kebencian dan bahasa kasar secara otomatis.  
+    - Tampilkan hasil analisis lengkap dengan label dan timestamp.  
+    - Didukung oleh model IndoBERTweet + BiGRU + MAML.
+    """)
+    st.markdown('## 🧾 Cara Menggunakan')
     st.markdown("""
-    <div class="sidebar-content">
-    <ol style="padding-left: 1rem;">
-        <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
-        <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
-        <li>Klik tombol <b>"Analisis Video"</b> dan tunggu hasilnya.</li>
-    </ol>
-    <p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
-    </div>
-    """, unsafe_allow_html=True)
+    1. Masukkan URL video YouTube.  
+    2. Pastikan video memiliki subtitle Bahasa Indonesia.  
+    3. Klik "Analisis Video" dan tunggu hasilnya.  
+    _Catatan: proses bisa memakan waktu tergantung durasi._
+    """)
 
 # ✅ Arsitektur model
 class IndoBERTweetBiGRU(nn.Module):
