@@ -93,25 +93,27 @@ st.markdown("""
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: none;
+    transition: background-color 0.3s ease;
     }
 
     .toggle-btn:hover {
-        background-color: #3a78c2; /* mempergelap sedikit saat hover */
+        background-color: #3b6fb2; /* sedikit lebih gelap saat hover */
     }
 
+    .toggle-btn:focus,
     .toggle-btn:active {
-        background-color: #3a78c2; /* tetap sama dengan hover, tidak membesar */
-        transform: none; /* pastikan tidak scaling saat klik */
+        background-color: #4A90E2 !important; /* tetap seperti biasa saat klik */
+        box-shadow: none;
+        outline: none;
     }
 
     .material-symbols-rounded {
-        font-size: 24px; /* ukuran tetap */
+        font-family: 'Material Symbols Rounded';
+        font-size: 22px;
         color: white;
         line-height: 1;
-        user-select: none;
         pointer-events: none;
+        font-weight: normal;
     }
 </style>
 """, unsafe_allow_html=True)
