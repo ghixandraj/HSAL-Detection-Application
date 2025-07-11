@@ -15,10 +15,9 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
-
-# CSS Styling
+# CSS Styling dengan tema 8-bit retro
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
     /* Menyembunyikan tombol collapse sidebar bawaan Streamlit */
     button[title="Collapse sidebar"] {
@@ -55,68 +54,41 @@ st.markdown("""
     [data-testid="stSidebar"] > div > div:first-child button {
         display: none !important;
     }
-            
+
+    /* Background animasi 8-bit */
+    @keyframes pixelMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 32px 32px; }
+    }
+
+    @keyframes neonGlow {
+        0%, 100% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
+        50% { text-shadow: 0 0 2px #00ff00, 0 0 5px #00ff00, 0 0 8px #00ff00; }
+    }
+
+    @keyframes buttonBlink {
+        0%, 50% { background-color: #ff0040; }
+        51%, 100% { background-color: #ff4080; }
+    }
+
     html, body, [class*="css"] {
-        font-family: 'Nunito', sans-serif !important;
-        background-color: #111;
-        color: #f0f0f0;
+        font-family: 'Press Start 2P', monospace !important;
+        background: linear-gradient(45deg, #0a0a0a 25%, #1a1a1a 25%, #1a1a1a 50%, #0a0a0a 50%, #0a0a0a 75%, #1a1a1a 75%, #1a1a1a);
+        background-size: 32px 32px;
+        animation: pixelMove 2s linear infinite;
+        color: #00ff00;
+        overflow-x: hidden;
     }
 
-    /* Header box */
-    .header-box {
-        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
-        border-radius: 16px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .main-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #fff;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-        text-align: center;
-        color: #eee;
-    }
-
-    /* Toggle Button dengan animasi icon */
-    .toggle-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        cursor: pointer;
-        z-index: 9999;
-        padding: 8px 12px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .toggle-btn:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.5);
-        transform: scale(1.05);
-    }
-
-    .toggle-btn:active {
-        transform: scale(0.95);
-    }
-
-    /* Sidebar animation */
+    /* Sidebar styling 8-bit */
     [data-testid="stSidebar"] {
-        transition: transform 0.4s ease, opacity 0.4s ease;
+        background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%) !important;
+        border-right: 4px solid #00ff00 !important;
+        box-shadow: 
+            4px 0 0 #004400,
+            8px 0 0 #002200,
+            inset -4px 0 0 #00ff00 !important;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
         transform: translateX(0);
         opacity: 1;
         position: relative;
@@ -130,16 +102,320 @@ st.markdown("""
     }
 
     [data-testid="stSidebar"] + div {
-        transition: all 0.4s ease;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     [data-testid="stSidebar"].sidebar-hidden + div {
         margin-left: 0 !important;
-    }    
+    }
+
+    /* Sidebar content styling */
+    [data-testid="stSidebar"] .css-1d391kg {
+        background: transparent !important;
+    }
+
+    [data-testid="stSidebar"] h2 {
+        color: #ffff00 !important;
+        text-shadow: 2px 2px 0px #666600;
+        border-bottom: 2px solid #ffff00;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+        font-size: 14px !important;
+    }
+
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] li {
+        color: #00ff00 !important;
+        font-size: 10px !important;
+        line-height: 1.6 !important;
+    }
+
+    /* Header box dengan tema arcade */
+    .header-box {
+        background: linear-gradient(135deg, #ff0040, #ff4080, #8040ff, #4080ff);
+        border: 6px solid #ffffff;
+        border-radius: 0px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 
+            0 0 0 4px #ff0040,
+            0 0 0 8px #ffffff,
+            8px 8px 0 8px #000000;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .header-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.1) 2px,
+            rgba(255, 255, 255, 0.1) 4px
+        );
+        animation: pixelMove 1s linear infinite;
+    }
+
+    .main-title {
+        font-size: 1.8rem;
+        font-weight: normal;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        text-shadow: 
+            4px 4px 0px #000000,
+            2px 2px 0px #ff0040;
+        animation: neonGlow 2s ease-in-out infinite;
+        position: relative;
+        z-index: 1;
+    }
+
+    .subtitle {
+        font-size: 0.7rem;
+        text-align: center;
+        color: #ffff00;
+        text-shadow: 2px 2px 0px #000000;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Toggle Button dengan style arcade */
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: #ff0040;
+        color: #ffffff;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 12px;
+        font-weight: normal;
+        border: 4px solid #ffffff;
+        cursor: pointer;
+        z-index: 9999;
+        padding: 8px 12px;
+        border-radius: 0px;
+        transition: all 0.2s ease;
+        box-shadow: 
+            0 0 0 2px #ff0040,
+            4px 4px 0 2px #000000;
+        text-shadow: 1px 1px 0px #000000;
+        animation: buttonBlink 1s ease-in-out infinite;
+    }
+
+    .toggle-btn:hover {
+        background: #ff4080;
+        transform: translate(-2px, -2px);
+        box-shadow: 
+            0 0 0 2px #ff4080,
+            6px 6px 0 2px #000000;
+    }
+
+    .toggle-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 
+            0 0 0 2px #ff0040,
+            2px 2px 0 2px #000000;
+    }
+
+    /* Styling untuk input dan button */
+    .stTextInput input {
+        background: #000000 !important;
+        border: 3px solid #00ff00 !important;
+        border-radius: 0px !important;
+        color: #00ff00 !important;
+        font-family: 'Press Start 2P', monospace !important;
+        font-size: 12px !important;
+        padding: 12px !important;
+        box-shadow: inset 2px 2px 0px #004400 !important;
+    }
+
+    .stTextInput input:focus {
+        border-color: #ffff00 !important;
+        box-shadow: 
+            inset 2px 2px 0px #666600,
+            0 0 10px #ffff00 !important;
+    }
+
+    .stButton button {
+        background: linear-gradient(180deg, #00ff00, #008800) !important;
+        border: 4px solid #ffffff !important;
+        border-radius: 0px !important;
+        color: #000000 !important;
+        font-family: 'Press Start 2P', monospace !important;
+        font-size: 12px !important;
+        padding: 12px 24px !important;
+        text-shadow: 1px 1px 0px #ffffff !important;
+        box-shadow: 
+            0 0 0 2px #00ff00,
+            4px 4px 0 2px #000000 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .stButton button:hover {
+        background: linear-gradient(180deg, #40ff40, #00aa00) !important;
+        transform: translate(-2px, -2px) !important;
+        box-shadow: 
+            0 0 0 2px #40ff40,
+            6px 6px 0 2px #000000 !important;
+    }
+
+    .stButton button:active {
+        transform: translate(2px, 2px) !important;
+        box-shadow: 
+            0 0 0 2px #00ff00,
+            2px 2px 0 2px #000000 !important;
+    }
+
+    /* Progress bar 8-bit */
+    .stProgress > div > div {
+        background: #ff0040 !important;
+        border: 2px solid #ffffff !important;
+        border-radius: 0px !important;
+        height: 24px !important;
+        box-shadow: inset 0 0 0 2px #000000 !important;
+    }
+
+    .stProgress > div > div > div {
+        background: repeating-linear-gradient(
+            90deg,
+            #00ff00,
+            #00ff00 4px,
+            #40ff40 4px,
+            #40ff40 8px
+        ) !important;
+        border-radius: 0px !important;
+        animation: pixelMove 0.5s linear infinite !important;
+    }
+
+    /* Alert dan info boxes */
+    .stAlert {
+        border: 3px solid #ffff00 !important;
+        border-radius: 0px !important;
+        background: #1a1a00 !important;
+        color: #ffff00 !important;
+        font-family: 'Press Start 2P', monospace !important;
+        font-size: 10px !important;
+        box-shadow: 4px 4px 0px #000000 !important;
+    }
+
+    .stError {
+        border-color: #ff0040 !important;
+        background: #1a0008 !important;
+        color: #ff0040 !important;
+    }
+
+    .stSuccess {
+        border-color: #00ff00 !important;
+        background: #001a00 !important;
+        color: #00ff00 !important;
+    }
+
+    /* Video player styling */
+    .stVideo {
+        border: 4px solid #ffffff !important;
+        border-radius: 0px !important;
+        box-shadow: 
+            0 0 0 2px #000000,
+            8px 8px 0 2px #666666 !important;
+    }
+
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background: #000000 !important;
+        border: 2px solid #00ff00 !important;
+        border-radius: 0px !important;
+        color: #00ff00 !important;
+        font-family: 'Press Start 2P', monospace !important;
+        font-size: 10px !important;
+    }
+
+    .streamlit-expanderContent {
+        background: #0a0a0a !important;
+        border: 2px solid #004400 !important;
+        border-top: none !important;
+        border-radius: 0px !important;
+    }
+
+    /* Textarea styling */
+    .stTextArea textarea {
+        background: #000000 !important;
+        border: 3px solid #00ff00 !important;
+        border-radius: 0px !important;
+        color: #00ff00 !important;
+        font-family: 'Press Start 2P', monospace !important;
+        font-size: 8px !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Spinner 8-bit */
+    .stSpinner {
+        border: 4px solid #000000 !important;
+        border-top: 4px solid #00ff00 !important;
+        border-radius: 0px !important;
+        width: 32px !important;
+        height: 32px !important;
+        animation: spin 1s linear infinite !important;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Scrollbar 8-bit */
+    ::-webkit-scrollbar {
+        width: 16px;
+        background: #000000;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #000000;
+        border: 2px solid #004400;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #00ff00;
+        border: 2px solid #000000;
+        border-radius: 0px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #40ff40;
+    }
+
+    /* Markdown styling */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: #ffff00 !important;
+        text-shadow: 2px 2px 0px #000000 !important;
+        font-family: 'Press Start 2P', monospace !important;
+    }
+
+    .stMarkdown p, .stMarkdown li {
+        color: #00ff00 !important;
+        font-family: 'Press Start 2P', monospace !important;
+        font-size: 10px !important;
+        line-height: 1.6 !important;
+    }
+
+    .stMarkdown strong {
+        color: #ffff00 !important;
+        text-shadow: 1px 1px 0px #000000 !important;
+    }
+
+    .stMarkdown hr {
+        border: 2px solid #ff0040 !important;
+        border-radius: 0px !important;
+        margin: 16px 0 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle dengan icon dinamis
+# Tombol toggle dengan icon dinamis dan style 8-bit
 st.markdown("""
 <button id="sidebar-toggle" class="toggle-btn">&lt;&lt;</button>
 """, unsafe_allow_html=True)
@@ -158,7 +434,6 @@ const waitForSidebar = () => {
 
     // Sembunyikan semua tombol bawaan sidebar
     const hideDefaultButtons = () => {
-        // Sembunyikan tombol collapse/expand
         const collapseBtn = window.parent.document.querySelector('button[title="Collapse sidebar"]');
         const expandBtn = window.parent.document.querySelector('button[title="Expand sidebar"]');
         const collapsedControl = window.parent.document.querySelector('[data-testid="collapsedControl"]');
@@ -167,11 +442,9 @@ const waitForSidebar = () => {
         if (expandBtn) expandBtn.style.display = 'none';
         if (collapsedControl) collapsedControl.style.display = 'none';
         
-        // Sembunyikan tombol header di sidebar
         const headerButtons = sidebar.querySelectorAll('button[kind="header"], button[data-testid="baseButton-header"]');
         headerButtons.forEach(btn => btn.style.display = 'none');
         
-        // Sembunyikan tombol di bagian atas sidebar
         const sidebarButtons = sidebar.querySelectorAll('button');
         sidebarButtons.forEach(btn => {
             if (btn.getAttribute('title') === 'Collapse sidebar' || 
@@ -183,26 +456,34 @@ const waitForSidebar = () => {
         });
     };
 
-    // Jalankan fungsi sembunyikan tombol
     hideDefaultButtons();
-    
-    // Jalankan lagi setiap 500ms untuk memastikan tombol tersembunyi
     setInterval(hideDefaultButtons, 500);
 
-    // State sidebar (true = visible, false = hidden)
+    // State sidebar dengan sound effect simulation
     let sidebarVisible = true;
     
-    // Fungsi untuk update icon berdasarkan state sidebar
     const updateToggleIcon = () => {
         if (sidebarVisible) {
-            toggleBtn.innerHTML = '&lt;&lt;'; // << ketika sidebar terlihat
+            toggleBtn.innerHTML = '&lt;&lt;';
+            toggleBtn.style.animation = 'buttonBlink 1s ease-in-out infinite';
         } else {
-            toggleBtn.innerHTML = '&gt;&gt;'; // >> ketika sidebar tersembunyi
+            toggleBtn.innerHTML = '&gt;&gt;';
+            toggleBtn.style.animation = 'buttonBlink 0.5s ease-in-out infinite';
         }
     };
 
-    // Event listener untuk toggle
+    // Arcade-style button click effect
     toggleBtn.addEventListener("click", () => {
+        // Visual feedback
+        toggleBtn.style.transform = 'translate(2px, 2px)';
+        toggleBtn.style.boxShadow = '0 0 0 2px #ff0040, 2px 2px 0 2px #000000';
+        
+        setTimeout(() => {
+            toggleBtn.style.transform = '';
+            toggleBtn.style.boxShadow = '';
+        }, 100);
+        
+        // Toggle sidebar
         sidebarVisible = !sidebarVisible;
         sidebar.classList.toggle("sidebar-hidden");
         updateToggleIcon();
