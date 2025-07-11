@@ -91,6 +91,12 @@ st.markdown("""
     [data-testid="stSidebar"].sidebar-hidden + div {
         margin-left: 0 !important;
     }
+            
+    /* Matikan efek hover atau icon tambahan pada sidebar */
+    [data-testid="stSidebar"]:hover {
+        box-shadow: none !important;
+        background: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
