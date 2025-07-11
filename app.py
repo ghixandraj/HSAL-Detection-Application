@@ -55,17 +55,13 @@ st.markdown("""
         left: 20px;
         background: transparent;
         color: white;
-        font-size: 28px;
+        font-size: 18px;
+        font-weight: bold;
         border: none;
         cursor: pointer;
         z-index: 9999;
-        padding: 0;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
+        padding: 6px 10px;
+        border-radius: 6px;
         transition: background-color 0.3s ease;
     }
 
@@ -75,7 +71,7 @@ st.markdown("""
 
     /* Sidebar Animation */
     [data-testid="stSidebar"] {
-        transition: margin-left 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
+        transition: transform 0.4s ease, opacity 0.4s ease;
         transform: translateX(0);
         opacity: 1;
         position: relative;
@@ -88,7 +84,6 @@ st.markdown("""
         pointer-events: none;
     }
 
-    /* Konten utama biar ga ke geser */
     [data-testid="stSidebar"] + div {
         transition: all 0.4s ease;
     }
@@ -99,12 +94,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle
+# Tombol toggle hanya tampilkan >>
 st.markdown("""
-<button id="sidebar-toggle" class="toggle-btn">⮜</button>
+<button id="sidebar-toggle" class="toggle-btn">>></button>
 """, unsafe_allow_html=True)
 
-# JavaScript untuk animasi toggle
+# JavaScript untuk toggle sidebar dan update isi tombol
 components.html("""
 <script>
 const waitForSidebar = () => {
@@ -122,10 +117,8 @@ const waitForSidebar = () => {
 
         if (visible) {
             sidebar.classList.remove("sidebar-hidden");
-            toggleBtn.innerText = "⮜";
         } else {
             sidebar.classList.add("sidebar-hidden");
-            toggleBtn.innerText = "⮞";
         }
     });
 };
