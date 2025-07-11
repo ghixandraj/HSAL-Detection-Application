@@ -19,6 +19,7 @@ st.set_page_config(
 )
 
 # Tambahkan tema warna dan animasi sidebar
+# Tambahkan tema warna dan animasi sidebar
 st.markdown("""
     <style>
         html, body, [class*="css"] {
@@ -88,15 +89,11 @@ st.markdown("""
         .toggle-btn:hover {
             background-color: #357ABD;
         }
+        .toggle-btn:focus {
+            outline: none;
+        }
     </style>
 """, unsafe_allow_html=True)
-
-# Tombol toggle sidebar dengan ikon panah
-st.markdown('<button class="toggle-btn" onclick="window.dispatchEvent(new Event(\'toggleSidebar\'))">⇆</button>', unsafe_allow_html=True)
-
-# Simpan state sidebar
-if "show_sidebar" not in st.session_state:
-    st.session_state.show_sidebar = True
 
 # Tambahkan komponen JS untuk toggle
 st.components.v1.html("""
@@ -125,7 +122,7 @@ with st.sidebar:
     st.markdown("""
     <div class="sidebar-content">
     <ul>
-        <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
+        <li>Ambil transkrip video YouTube berbahasa Indonesia.</li>
         <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
         <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
         <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
