@@ -47,7 +47,6 @@ st.markdown("""
         color: #eee;
     }
 
-    /* Toggle button */
     .toggle-btn {
         position: fixed;
         top: 20px;
@@ -72,9 +71,10 @@ st.markdown("""
         background-color: rgba(255,255,255,0.1);
     }
 
-    /* Sidebar animation */
     [data-testid="stSidebar"] {
-        transition: transform 0.4s ease, opacity 0.4s ease;
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        transform: translateX(0);
+        opacity: 1;
     }
 
     .sidebar-hidden {
@@ -85,26 +85,26 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Toggle Button (static, satu kali render)
+# Tombol toggle
 st.markdown("""
 <button id="toggleButton" class="toggle-btn">«</button>
 """, unsafe_allow_html=True)
 
-# JS untuk toggle + animasi halus dua arah
+# Komponen JS: toggle + animasi dua arah tanpa bug
 components.html("""
 <script>
-const toggleBtn = window.parent.document.getElementById("toggleButton");
 let sidebarVisible = true;
 
-function setupSidebarAnimation() {
+const waitForSidebar = () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    if (!sidebar) return;
-
-    sidebar.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+    const toggleBtn = window.parent.document.getElementById("toggleButton");
+    if (!sidebar || !toggleBtn) {
+        setTimeout(waitForSidebar, 300);
+        return;
+    }
 
     toggleBtn.addEventListener("click", () => {
         sidebarVisible = !sidebarVisible;
-
         if (sidebarVisible) {
             sidebar.classList.remove("sidebar-hidden");
             toggleBtn.innerText = "«";
@@ -113,9 +113,9 @@ function setupSidebarAnimation() {
             toggleBtn.innerText = "»";
         }
     });
-}
+};
 
-setTimeout(setupSidebarAnimation, 1000);
+waitForSidebar();
 </script>
 """, height=0)
 
