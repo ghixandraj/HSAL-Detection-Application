@@ -25,7 +25,7 @@ st.markdown("""
         color: #f0f0f0;
     }
 
-    /* HEADER */
+    /* Header Box */
     .header-box {
         background: linear-gradient(135deg, #4A90E2, #FF6B6B);
         border-radius: 16px;
@@ -48,7 +48,7 @@ st.markdown("""
         color: #eee;
     }
 
-    /* TOGGLE BUTTON */
+    /* Toggle Button */
     .toggle-btn {
         position: fixed;
         top: 20px;
@@ -58,7 +58,7 @@ st.markdown("""
         font-size: 28px;
         border: none;
         cursor: pointer;
-        z-index: 10000;
+        z-index: 9999;
         padding: 0;
         width: 40px;
         height: 40px;
@@ -73,22 +73,27 @@ st.markdown("""
         background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* SIDEBAR ANIMASI */
+    /* Sidebar Animation */
     [data-testid="stSidebar"] {
-        transition: transform 0.4s ease, margin-left 0.4s ease;
+        transition: margin-left 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
         transform: translateX(0);
+        opacity: 1;
+        position: relative;
+        z-index: 1;
     }
 
-    [data-testid="stSidebar"].hide-sidebar {
-        transform: translateX(-260px);
+    [data-testid="stSidebar"].sidebar-hidden {
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
     }
 
-    /* Konten utama biar nggak loncat-loncat */
+    /* Konten utama biar ga ke geser */
     [data-testid="stSidebar"] + div {
-        transition: margin-left 0.4s ease;
+        transition: all 0.4s ease;
     }
 
-    [data-testid="stSidebar"].hide-sidebar + div {
+    [data-testid="stSidebar"].sidebar-hidden + div {
         margin-left: 0 !important;
     }
 </style>
@@ -99,35 +104,36 @@ st.markdown("""
 <button id="sidebar-toggle" class="toggle-btn">⮜</button>
 """, unsafe_allow_html=True)
 
-# JavaScript untuk toggle sidebar
+# JavaScript untuk animasi toggle
 components.html("""
 <script>
-const waitReady = () => {
+const waitForSidebar = () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
     const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
 
     if (!sidebar || !toggleBtn) {
-        setTimeout(waitReady, 100);
+        setTimeout(waitForSidebar, 100);
         return;
     }
 
     let visible = true;
     toggleBtn.addEventListener("click", () => {
         visible = !visible;
+
         if (visible) {
-            sidebar.classList.remove("hide-sidebar");
+            sidebar.classList.remove("sidebar-hidden");
             toggleBtn.innerText = "⮜";
         } else {
-            sidebar.classList.add("hide-sidebar");
+            sidebar.classList.add("sidebar-hidden");
             toggleBtn.innerText = "⮞";
         }
     });
 };
-waitReady();
+waitForSidebar();
 </script>
 """, height=0)
 
-# HEADER APLIKASI
+# HEADER
 st.markdown("""
 <div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
@@ -137,14 +143,14 @@ st.markdown("""
 
 # SIDEBAR
 with st.sidebar:
-    st.markdown('## 🔍 Fitur Utama')
+    st.markdown("## 🔍 Fitur Utama")
     st.markdown("""
     - Ambil transkrip video YouTube berbahasa Indonesia.  
     - Deteksi ujaran kebencian dan bahasa kasar secara otomatis.  
     - Tampilkan hasil analisis lengkap dengan label dan timestamp.  
     - Didukung oleh model IndoBERTweet + BiGRU + MAML.
     """)
-    st.markdown('## 🧾 Cara Menggunakan')
+    st.markdown("## 🧾 Cara Menggunakan")
     st.markdown("""
     1. Masukkan URL video YouTube.  
     2. Pastikan video memiliki subtitle Bahasa Indonesia.  
