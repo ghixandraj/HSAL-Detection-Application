@@ -92,10 +92,9 @@ st.markdown("""
         margin-left: 0 !important;
     }
             
-    /* Matikan efek hover atau icon tambahan pada sidebar */
-    [data-testid="stSidebar"]:hover {
-        box-shadow: none !important;
-        background: none !important;
+    /* Hilangkan tombol >> yang muncul otomatis saat sidebar di-hover */
+    [data-testid="collapsedControl"] {
+        display: none !important;
     }
 </style>
 """, unsafe_allow_html=True)
