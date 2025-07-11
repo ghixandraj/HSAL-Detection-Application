@@ -25,17 +25,24 @@ st.markdown("""
             background-color: #111;
             color: #f0f0f0;
         }
+        .header-box {
+            background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
         .main-title {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: bold;
-            color: #FF6B6B;
+            color: #fff;
             text-align: center;
             margin-bottom: 0.5rem;
         }
         .subtitle {
             font-size: 1.3rem;
             text-align: center;
-            color: #aaa;
+            color: #eee;
         }
         .sidebar-title {
             font-size: 1.5rem;
@@ -89,9 +96,13 @@ st.components.v1.html("""
 </script>
 """, height=0)
 
-# Judul utama
-st.markdown('<div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>', unsafe_allow_html=True)
+# Judul utama dalam box
+st.markdown("""
+<div class="header-box">
+    <div class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
+</div>
+""", unsafe_allow_html=True)
 
 # Konten sidebar
 with st.sidebar:
