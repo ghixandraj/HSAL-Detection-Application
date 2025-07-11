@@ -82,46 +82,40 @@ st.markdown("""
         opacity: 0;
         pointer-events: none;
     }
-
-    /* Prevent ghost button */
-    .ghost-toggle {
-        display: none !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# Render only once — single static button
+# Toggle Button (static, satu kali render)
 st.markdown("""
 <button id="toggleButton" class="toggle-btn">«</button>
 """, unsafe_allow_html=True)
 
-# Inject JS — no icon duplication, clean toggle
+# JS untuk toggle + animasi halus dua arah
 components.html("""
 <script>
 const toggleBtn = window.parent.document.getElementById("toggleButton");
 let sidebarVisible = true;
 
-setTimeout(() => {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebar.style.transition = "transform 0.4s ease, opacity 0.4s ease";
-    }
-}, 1000);
-
-toggleBtn.addEventListener("click", () => {
+function setupSidebarAnimation() {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
     if (!sidebar) return;
 
-    sidebarVisible = !sidebarVisible;
+    sidebar.style.transition = "transform 0.4s ease, opacity 0.4s ease";
 
-    if (sidebarVisible) {
-        sidebar.classList.remove("sidebar-hidden");
-        toggleBtn.innerText = "«";
-    } else {
-        sidebar.classList.add("sidebar-hidden");
-        toggleBtn.innerText = "»";
-    }
-});
+    toggleBtn.addEventListener("click", () => {
+        sidebarVisible = !sidebarVisible;
+
+        if (sidebarVisible) {
+            sidebar.classList.remove("sidebar-hidden");
+            toggleBtn.innerText = "«";
+        } else {
+            sidebar.classList.add("sidebar-hidden");
+            toggleBtn.innerText = "»";
+        }
+    });
+}
+
+setTimeout(setupSidebarAnimation, 1000);
 </script>
 """, height=0)
 
