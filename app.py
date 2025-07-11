@@ -112,16 +112,13 @@ st.markdown("""
 if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True  # terbuka secara default
 
-# Tampilkan tombol toggle
-initial_icon = "keyboard_double_arrow_left" if st.session_state.toggle_sidebar_state else "keyboard_double_arrow_right"
-
 st.markdown(f"""
 <button id="toggleButton" class="toggle-btn">
     <span class="material-symbols-rounded">{initial_icon}</span>
 </button>
 """, unsafe_allow_html=True)
 
-# Script JavaScript untuk toggle sidebar dan ubah ikon panah
+# Script JavaScript untuk toggle sidebar
 components.html("""
 <script>
 const toggleButton = window.parent.document.getElementById('toggleButton');
