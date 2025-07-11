@@ -12,17 +12,12 @@ from safetensors.torch import load_file
 import time
 import streamlit.components.v1 as components
 
-# ✅ Konfigurasi halaman
-st.set_page_config(
-    page_title="Hayu-IT: HSAL Analysis",
-    page_icon="🧠",
-    layout="wide"
-)
+# Konfigurasi halaman
+st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
-# Tambahkan tema warna dan animasi sidebar
+# Tambahkan styling
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif !important;
@@ -52,16 +47,34 @@ st.markdown("""
         color: #eee;
     }
 
-    @media screen and (max-width: 768px) {
-        .main-title {
-            font-size: 1.7rem;
-        }
-        .subtitle {
-            font-size: 1rem;
-        }
-        .header-box {
-            padding: 1.2rem;
-        }
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: transparent;
+        border: none;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+        z-index: 9999;
+        transition: background-color 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    .sidebar-transition {
+        transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .sidebar-hidden {
+        transform: translateX(-120%);
+        opacity: 0;
+        pointer-events: none;
     }
 
     .sidebar-title {
@@ -77,67 +90,46 @@ st.markdown("""
         color: #fff;
         text-align: left;
     }
-
-    .toggle-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background-color: transparent;
-        border: none;
-        font-size: 24px;
-        color: white;
-        cursor: pointer;
-        z-index: 9999;
-        transition: color 0.3s ease;
-    }
-
-    .toggle-btn:hover {
-        color: #aaa;
-    }
-
-    .toggle-btn:focus,
-    .toggle-btn:active {
-        outline: none;
-        background-color: transparent;
-        color: #aaa;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# State toggle
+# State default sidebar
 if "toggle_sidebar_state" not in st.session_state:
     st.session_state.toggle_sidebar_state = True
 
-# Toggle tombol 
+# Tampilkan tombol toggle
 toggle_class = "" if st.session_state.toggle_sidebar_state else "collapsed"
+icon_char = "«" if st.session_state.toggle_sidebar_state else "»"
+
 st.markdown(f"""
-<button id="toggleButton" class="toggle-btn {toggle_class}"></button>
+<button id="toggleButton" class="toggle-btn">{icon_char}</button>
 """, unsafe_allow_html=True)
 
-# JavaScript toggle dengan class
+# JavaScript untuk toggle sidebar
 components.html("""
 <script>
 const toggleBtn = window.parent.document.getElementById('toggleButton');
 let sidebarVisible = true;
 
+setTimeout(() => {
+    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    if (sidebar) {
+        sidebar.classList.add('sidebar-transition');
+    }
+}, 500);
+
 toggleBtn.addEventListener('click', () => {
     const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const sidebarContent = window.parent.document.querySelector('[data-testid="stSidebarContent"]');
-    const sidebarContainer = sidebar?.parentElement;
 
-    sidebarVisible = !sidebarVisible;
+    if (sidebar) {
+        sidebarVisible = !sidebarVisible;
 
-    if (sidebar && sidebarContent && sidebarContainer) {
         if (sidebarVisible) {
-            sidebar.style.display = 'block';
-            sidebarContent.style.display = 'block';
-            sidebarContainer.style.display = 'flex';
-            toggleBtn.classList.remove('collapsed');
+            sidebar.classList.remove('sidebar-hidden');
+            toggleBtn.innerText = '«';
         } else {
-            sidebar.style.display = 'none';
-            sidebarContent.style.display = 'none';
-            sidebarContainer.style.display = 'none';
-            toggleBtn.classList.add('collapsed');
+            sidebar.classList.add('sidebar-hidden');
+            toggleBtn.innerText = '»';
         }
     }
 });
@@ -152,7 +144,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar: Info
+# Sidebar Konten
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🔍 Fitur Utama</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -172,7 +164,7 @@ with st.sidebar:
     <ol style="padding-left: 1rem;">
         <li>Salin dan tempelkan URL video YouTube ke kolom input.</li>
         <li>Pastikan video memiliki subtitle Bahasa Indonesia.</li>
-        <li>Klik tombol <b>\"Analisis Video\"</b> dan tunggu hasilnya.</li>
+        <li>Klik tombol <b>"Analisis Video"</b> dan tunggu hasilnya.</li>
     </ol>
     <p><i>Catatan: proses analisis bisa memakan waktu tergantung durasi video.</i></p>
     </div>
