@@ -15,6 +15,7 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
+
 # CSS Styling
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -84,25 +85,33 @@ st.markdown("""
         color: #eee;
     }
 
-    /* Toggle Button */
+    /* Toggle Button dengan animasi icon */
     .toggle-btn {
         position: fixed;
         top: 20px;
         left: 20px;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.1);
         color: white;
         font-size: 18px;
         font-weight: bold;
-        border: none;
+        border: 2px solid rgba(255, 255, 255, 0.3);
         cursor: pointer;
         z-index: 9999;
-        padding: 4px 8px;
-        border-radius: 6px;
-        transition: background-color 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .toggle-btn:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: scale(1.05);
+    }
+
+    .toggle-btn:active {
+        transform: scale(0.95);
     }
 
     /* Sidebar animation */
@@ -130,12 +139,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Tombol toggle ⏩ tanpa icon tambahan
+# Tombol toggle dengan icon dinamis
 st.markdown("""
-<button id="sidebar-toggle" class="toggle-btn">>></button>
+<button id="sidebar-toggle" class="toggle-btn">&lt;&lt;</button>
 """, unsafe_allow_html=True)
 
-# Script untuk toggle animasi sidebar (1 tombol saja) + sembunyikan tombol bawaan
+# Script untuk toggle animasi sidebar dengan perubahan icon
 components.html("""
 <script>
 const waitForSidebar = () => {
@@ -180,12 +189,29 @@ const waitForSidebar = () => {
     // Jalankan lagi setiap 500ms untuk memastikan tombol tersembunyi
     setInterval(hideDefaultButtons, 500);
 
-    let visible = true;
+    // State sidebar (true = visible, false = hidden)
+    let sidebarVisible = true;
+    
+    // Fungsi untuk update icon berdasarkan state sidebar
+    const updateToggleIcon = () => {
+        if (sidebarVisible) {
+            toggleBtn.innerHTML = '&lt;&lt;'; // << ketika sidebar terlihat
+        } else {
+            toggleBtn.innerHTML = '&gt;&gt;'; // >> ketika sidebar tersembunyi
+        }
+    };
+
+    // Event listener untuk toggle
     toggleBtn.addEventListener("click", () => {
-        visible = !visible;
+        sidebarVisible = !sidebarVisible;
         sidebar.classList.toggle("sidebar-hidden");
+        updateToggleIcon();
     });
+
+    // Set icon awal
+    updateToggleIcon();
 };
+
 waitForSidebar();
 </script>
 """, height=0)
