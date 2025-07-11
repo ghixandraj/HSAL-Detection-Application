@@ -15,7 +15,7 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
-# CSS Styling dengan tema 8-bit retro
+# CSS Styling dengan tema 8-bit Pac-Man
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
@@ -55,44 +55,79 @@ st.markdown("""
         display: none !important;
     }
 
-    /* Background animasi 8-bit */
-    @keyframes pixelMove {
+    /* Animasi Pac-Man */
+    @keyframes pacmanMove {
         0% { background-position: 0 0; }
-        100% { background-position: 32px 32px; }
+        100% { background-position: 40px 40px; }
     }
 
-    @keyframes neonGlow {
-        0%, 100% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
-        50% { text-shadow: 0 0 2px #00ff00, 0 0 5px #00ff00, 0 0 8px #00ff00; }
+    @keyframes pacmanGlow {
+        0%, 100% { 
+            text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffff00, 0 0 20px #ffff00;
+            transform: scale(1);
+        }
+        50% { 
+            text-shadow: 0 0 8px #ffff00, 0 0 15px #ffff00, 0 0 25px #ffff00, 0 0 30px #ffff00;
+            transform: scale(1.02);
+        }
     }
 
-    @keyframes buttonBlink {
-        0%, 50% { background-color: #ff0040; }
-        51%, 100% { background-color: #ff4080; }
+    @keyframes ghostFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
     }
 
+    @keyframes powerPellet {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    @keyframes dotMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 20px 20px; }
+    }
+
+    /* Background dengan pola maze Pac-Man */
     html, body, [class*="css"] {
         font-family: 'Press Start 2P', monospace !important;
-        background: linear-gradient(45deg, #0a0a0a 25%, #1a1a1a 25%, #1a1a1a 50%, #0a0a0a 50%, #0a0a0a 75%, #1a1a1a 75%, #1a1a1a);
-        background-size: 32px 32px;
-        animation: pixelMove 2s linear infinite;
-        color: #00ff00;
+        background: 
+            radial-gradient(circle at 10px 10px, #ffff00 2px, transparent 2px),
+            radial-gradient(circle at 30px 30px, #ffff00 1px, transparent 1px),
+            linear-gradient(90deg, #000080 2px, transparent 2px),
+            linear-gradient(180deg, #000080 2px, transparent 2px),
+            #000022;
+        background-size: 20px 20px, 40px 40px, 100px 100px, 100px 100px;
+        animation: dotMove 4s linear infinite;
+        color: #ffff00;
         overflow-x: hidden;
     }
 
-    /* Sidebar styling 8-bit */
+    /* Sidebar dengan tema ghost */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%) !important;
-        border-right: 4px solid #00ff00 !important;
+        background: 
+            radial-gradient(circle at 50% 30%, rgba(255, 100, 150, 0.1) 30%, transparent 30%),
+            linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+        border-right: 4px solid #ffff00 !important;
         box-shadow: 
-            4px 0 0 #004400,
-            8px 0 0 #002200,
-            inset -4px 0 0 #00ff00 !important;
+            4px 0 0 #ff6b6b,
+            8px 0 0 #4ecdc4,
+            12px 0 0 #45b7d1,
+            inset -4px 0 0 #ffff00 !important;
         transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
         transform: translateX(0);
         opacity: 1;
         position: relative;
         z-index: 1;
+    }
+
+    [data-testid="stSidebar"]::before {
+        content: '👻';
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        animation: ghostFloat 2s ease-in-out infinite;
+        opacity: 0.7;
     }
 
     [data-testid="stSidebar"].sidebar-hidden {
@@ -116,30 +151,45 @@ st.markdown("""
 
     [data-testid="stSidebar"] h2 {
         color: #ffff00 !important;
-        text-shadow: 2px 2px 0px #666600;
-        border-bottom: 2px solid #ffff00;
+        text-shadow: 2px 2px 0px #000080, 0 0 10px #ffff00;
+        border-bottom: 3px solid #ffff00;
         padding-bottom: 8px;
         margin-bottom: 16px;
         font-size: 14px !important;
+        position: relative;
+    }
+
+    [data-testid="stSidebar"] h2::after {
+        content: '🍒';
+        position: absolute;
+        right: 0;
+        animation: powerPellet 2s ease-in-out infinite;
     }
 
     [data-testid="stSidebar"] p, [data-testid="stSidebar"] li {
-        color: #00ff00 !important;
+        color: #ffffff !important;
         font-size: 10px !important;
-        line-height: 1.6 !important;
+        line-height: 1.8 !important;
+        text-shadow: 1px 1px 0px #000080;
     }
 
-    /* Header box dengan tema arcade */
+    /* Header box dengan tema Pac-Man */
     .header-box {
-        background: linear-gradient(135deg, #ff0040, #ff4080, #8040ff, #4080ff);
-        border: 6px solid #ffffff;
-        border-radius: 0px;
-        padding: 2rem;
+        background: 
+            radial-gradient(circle at 20% 50%, #ffff00 30px, transparent 30px),
+            radial-gradient(circle at 80% 50%, #ff6b6b 20px, transparent 20px),
+            radial-gradient(circle at 60% 30%, #4ecdc4 15px, transparent 15px),
+            radial-gradient(circle at 40% 70%, #45b7d1 15px, transparent 15px),
+            linear-gradient(135deg, #000080, #000022, #000080);
+        border: 6px solid #ffff00;
+        border-radius: 20px;
+        padding: 2.5rem;
         margin-bottom: 2rem;
         box-shadow: 
-            0 0 0 4px #ff0040,
-            0 0 0 8px #ffffff,
-            8px 8px 0 8px #000000;
+            0 0 0 4px #000080,
+            0 0 0 8px #ffff00,
+            0 0 20px rgba(255, 255, 0, 0.5),
+            inset 0 0 20px rgba(255, 255, 0, 0.1);
         position: relative;
         overflow: hidden;
     }
@@ -151,26 +201,34 @@ st.markdown("""
         left: -50%;
         width: 200%;
         height: 200%;
-        background: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.1) 2px,
-            rgba(255, 255, 255, 0.1) 4px
-        );
-        animation: pixelMove 1s linear infinite;
+        background: 
+            radial-gradient(circle at 25% 25%, rgba(255, 255, 0, 0.1) 2px, transparent 2px),
+            radial-gradient(circle at 75% 75%, rgba(255, 255, 0, 0.1) 2px, transparent 2px);
+        background-size: 30px 30px;
+        animation: pacmanMove 3s linear infinite;
+    }
+
+    .header-box::after {
+        content: '🟡';
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        animation: pacmanGlow 2s ease-in-out infinite;
     }
 
     .main-title {
         font-size: 1.8rem;
         font-weight: normal;
-        color: #ffffff;
+        color: #ffff00;
         text-align: center;
         margin-bottom: 0.5rem;
         text-shadow: 
-            4px 4px 0px #000000,
-            2px 2px 0px #ff0040;
-        animation: neonGlow 2s ease-in-out infinite;
+            4px 4px 0px #000080,
+            2px 2px 0px #ff6b6b,
+            0 0 20px #ffff00;
+        animation: pacmanGlow 3s ease-in-out infinite;
         position: relative;
         z-index: 1;
     }
@@ -178,188 +236,308 @@ st.markdown("""
     .subtitle {
         font-size: 0.7rem;
         text-align: center;
-        color: #ffff00;
-        text-shadow: 2px 2px 0px #000000;
+        color: #ffffff;
+        text-shadow: 2px 2px 0px #000080, 0 0 10px #4ecdc4;
         position: relative;
         z-index: 1;
+        margin-top: 1rem;
     }
 
-    /* Toggle Button dengan style arcade */
+    /* Toggle Button dengan style Pac-Man */
     .toggle-btn {
         position: fixed;
         top: 20px;
         left: 20px;
-        background: #ff0040;
-        color: #ffffff;
+        background: radial-gradient(circle at 30% 30%, #ffff00, #ffcc00);
+        color: #000080;
         font-family: 'Press Start 2P', monospace;
         font-size: 12px;
-        font-weight: normal;
-        border: 4px solid #ffffff;
+        font-weight: bold;
+        border: 4px solid #000080;
         cursor: pointer;
         z-index: 9999;
-        padding: 8px 12px;
-        border-radius: 0px;
-        transition: all 0.2s ease;
+        padding: 10px 15px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
         box-shadow: 
-            0 0 0 2px #ff0040,
-            4px 4px 0 2px #000000;
-        text-shadow: 1px 1px 0px #000000;
-        animation: buttonBlink 1s ease-in-out infinite;
+            0 0 0 2px #ffff00,
+            0 0 10px rgba(255, 255, 0, 0.5),
+            4px 4px 0 2px #000080;
+        text-shadow: 1px 1px 0px #ffcc00;
+        animation: powerPellet 2s ease-in-out infinite;
     }
 
     .toggle-btn:hover {
-        background: #ff4080;
-        transform: translate(-2px, -2px);
+        background: radial-gradient(circle at 30% 30%, #ffff44, #ffdd00);
+        transform: scale(1.1);
         box-shadow: 
-            0 0 0 2px #ff4080,
-            6px 6px 0 2px #000000;
+            0 0 0 2px #ffff00,
+            0 0 20px rgba(255, 255, 0, 0.8),
+            6px 6px 0 2px #000080;
     }
 
     .toggle-btn:active {
-        transform: translate(2px, 2px);
+        transform: scale(0.95);
         box-shadow: 
-            0 0 0 2px #ff0040,
-            2px 2px 0 2px #000000;
+            0 0 0 2px #ffff00,
+            0 0 5px rgba(255, 255, 0, 0.3),
+            2px 2px 0 2px #000080;
     }
 
-    /* Styling untuk input dan button */
+    /* Styling untuk input dengan tema Pac-Man */
     .stTextInput input {
-        background: #000000 !important;
-        border: 3px solid #00ff00 !important;
-        border-radius: 0px !important;
-        color: #00ff00 !important;
+        background: linear-gradient(45deg, #000080, #000022) !important;
+        border: 3px solid #ffff00 !important;
+        border-radius: 15px !important;
+        color: #ffff00 !important;
         font-family: 'Press Start 2P', monospace !important;
         font-size: 12px !important;
-        padding: 12px !important;
-        box-shadow: inset 2px 2px 0px #004400 !important;
+        padding: 15px !important;
+        box-shadow: 
+            inset 2px 2px 0px #4ecdc4,
+            0 0 10px rgba(255, 255, 0, 0.3) !important;
     }
 
     .stTextInput input:focus {
         border-color: #ffff00 !important;
         box-shadow: 
-            inset 2px 2px 0px #666600,
-            0 0 10px #ffff00 !important;
+            inset 2px 2px 0px #4ecdc4,
+            0 0 20px rgba(255, 255, 0, 0.6) !important;
     }
 
+    /* Button dengan tema power pellet */
     .stButton button {
-        background: linear-gradient(180deg, #00ff00, #008800) !important;
-        border: 4px solid #ffffff !important;
-        border-radius: 0px !important;
-        color: #000000 !important;
+        background: radial-gradient(circle at 50% 50%, #ffff00, #ffcc00, #ff6b6b) !important;
+        border: 4px solid #000080 !important;
+        border-radius: 25px !important;
+        color: #000080 !important;
         font-family: 'Press Start 2P', monospace !important;
         font-size: 12px !important;
-        padding: 12px 24px !important;
-        text-shadow: 1px 1px 0px #ffffff !important;
+        padding: 15px 30px !important;
+        font-weight: bold !important;
+        text-shadow: 1px 1px 0px #ffff00 !important;
         box-shadow: 
-            0 0 0 2px #00ff00,
-            4px 4px 0 2px #000000 !important;
-        transition: all 0.2s ease !important;
+            0 0 0 2px #ffff00,
+            0 0 15px rgba(255, 255, 0, 0.5),
+            4px 4px 0 2px #000080 !important;
+        transition: all 0.3s ease !important;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stButton button::before {
+        content: '🍒';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        animation: powerPellet 1.5s ease-in-out infinite;
     }
 
     .stButton button:hover {
-        background: linear-gradient(180deg, #40ff40, #00aa00) !important;
-        transform: translate(-2px, -2px) !important;
+        background: radial-gradient(circle at 50% 50%, #ffff44, #ffdd00, #ff8b8b) !important;
+        transform: scale(1.05) !important;
         box-shadow: 
-            0 0 0 2px #40ff40,
-            6px 6px 0 2px #000000 !important;
+            0 0 0 2px #ffff00,
+            0 0 25px rgba(255, 255, 0, 0.8),
+            6px 6px 0 2px #000080 !important;
     }
 
     .stButton button:active {
-        transform: translate(2px, 2px) !important;
+        transform: scale(0.95) !important;
         box-shadow: 
-            0 0 0 2px #00ff00,
-            2px 2px 0 2px #000000 !important;
+            0 0 0 2px #ffff00,
+            0 0 10px rgba(255, 255, 0, 0.3),
+            2px 2px 0 2px #000080 !important;
     }
 
-    /* Progress bar 8-bit */
+    /* Progress bar dengan tema Pac-Man */
     .stProgress > div > div {
-        background: #ff0040 !important;
-        border: 2px solid #ffffff !important;
-        border-radius: 0px !important;
-        height: 24px !important;
-        box-shadow: inset 0 0 0 2px #000000 !important;
+        background: linear-gradient(90deg, #000080, #000022) !important;
+        border: 3px solid #ffff00 !important;
+        border-radius: 15px !important;
+        height: 30px !important;
+        box-shadow: 
+            inset 0 0 0 2px #4ecdc4,
+            0 0 10px rgba(255, 255, 0, 0.3) !important;
     }
 
     .stProgress > div > div > div {
-        background: repeating-linear-gradient(
-            90deg,
-            #00ff00,
-            #00ff00 4px,
-            #40ff40 4px,
-            #40ff40 8px
-        ) !important;
-        border-radius: 0px !important;
-        animation: pixelMove 0.5s linear infinite !important;
+        background: 
+            radial-gradient(circle at 10px 15px, #ffff00 3px, transparent 3px),
+            radial-gradient(circle at 30px 15px, #ffff00 3px, transparent 3px),
+            radial-gradient(circle at 50px 15px, #ffff00 3px, transparent 3px),
+            linear-gradient(90deg, #4ecdc4, #45b7d1) !important;
+        border-radius: 12px !important;
+        background-size: 40px 30px, 100% 100%;
+        animation: pacmanMove 1s linear infinite !important;
+        position: relative;
     }
 
-    /* Alert dan info boxes */
+    .stProgress > div > div > div::after {
+        content: '🟡';
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        animation: pacmanGlow 1s ease-in-out infinite;
+    }
+
+    /* Alert dan info boxes dengan tema ghost */
     .stAlert {
-        border: 3px solid #ffff00 !important;
-        border-radius: 0px !important;
-        background: #1a1a00 !important;
-        color: #ffff00 !important;
+        border: 3px solid #4ecdc4 !important;
+        border-radius: 15px !important;
+        background: linear-gradient(135deg, #000080, #000022) !important;
+        color: #ffffff !important;
         font-family: 'Press Start 2P', monospace !important;
         font-size: 10px !important;
-        box-shadow: 4px 4px 0px #000000 !important;
+        box-shadow: 
+            0 0 15px rgba(78, 205, 196, 0.3),
+            4px 4px 0px #000080 !important;
+        position: relative;
+    }
+
+    .stAlert::before {
+        content: '👻';
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 16px;
+        animation: ghostFloat 2s ease-in-out infinite;
     }
 
     .stError {
-        border-color: #ff0040 !important;
-        background: #1a0008 !important;
-        color: #ff0040 !important;
+        border-color: #ff6b6b !important;
+        background: linear-gradient(135deg, #4a0000, #220000) !important;
+        color: #ff6b6b !important;
+        box-shadow: 
+            0 0 15px rgba(255, 107, 107, 0.3),
+            4px 4px 0px #220000 !important;
+    }
+
+    .stError::before {
+        content: '💀';
     }
 
     .stSuccess {
-        border-color: #00ff00 !important;
-        background: #001a00 !important;
-        color: #00ff00 !important;
-    }
-
-    /* Video player styling */
-    .stVideo {
-        border: 4px solid #ffffff !important;
-        border-radius: 0px !important;
+        border-color: #4ecdc4 !important;
+        background: linear-gradient(135deg, #004a4a, #002222) !important;
+        color: #4ecdc4 !important;
         box-shadow: 
-            0 0 0 2px #000000,
-            8px 8px 0 2px #666666 !important;
+            0 0 15px rgba(78, 205, 196, 0.3),
+            4px 4px 0px #002222 !important;
     }
 
-    /* Expander styling */
+    .stSuccess::before {
+        content: '🍒';
+    }
+
+    .stWarning {
+        border-color: #ffff00 !important;
+        background: linear-gradient(135deg, #4a4a00, #222200) !important;
+        color: #ffff00 !important;
+        box-shadow: 
+            0 0 15px rgba(255, 255, 0, 0.3),
+            4px 4px 0px #222200 !important;
+    }
+
+    .stWarning::before {
+        content: '⚠️';
+    }
+
+    /* Video player dengan frame arcade */
+    .stVideo {
+        border: 6px solid #ffff00 !important;
+        border-radius: 20px !important;
+        box-shadow: 
+            0 0 0 4px #000080,
+            0 0 20px rgba(255, 255, 0, 0.5),
+            8px 8px 0 4px #000080 !important;
+        position: relative;
+    }
+
+    .stVideo::before {
+        content: '🕹️';
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #000080;
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        z-index: 1;
+    }
+
+    /* Expander dengan tema maze */
     .streamlit-expanderHeader {
-        background: #000000 !important;
-        border: 2px solid #00ff00 !important;
-        border-radius: 0px !important;
-        color: #00ff00 !important;
+        background: linear-gradient(90deg, #000080, #000022) !important;
+        border: 3px solid #ffff00 !important;
+        border-radius: 15px !important;
+        color: #ffff00 !important;
         font-family: 'Press Start 2P', monospace !important;
         font-size: 10px !important;
+        padding: 15px !important;
+        position: relative;
+    }
+
+    .streamlit-expanderHeader::before {
+        content: '🍎';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        animation: powerPellet 2s ease-in-out infinite;
     }
 
     .streamlit-expanderContent {
-        background: #0a0a0a !important;
-        border: 2px solid #004400 !important;
+        background: linear-gradient(135deg, #000022, #000080) !important;
+        border: 3px solid #4ecdc4 !important;
         border-top: none !important;
-        border-radius: 0px !important;
+        border-radius: 0 0 15px 15px !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
     }
 
-    /* Textarea styling */
+    /* Textarea dengan tema maze */
     .stTextArea textarea {
-        background: #000000 !important;
-        border: 3px solid #00ff00 !important;
-        border-radius: 0px !important;
-        color: #00ff00 !important;
+        background: linear-gradient(45deg, #000080, #000022) !important;
+        border: 3px solid #4ecdc4 !important;
+        border-radius: 15px !important;
+        color: #ffffff !important;
         font-family: 'Press Start 2P', monospace !important;
         font-size: 8px !important;
-        line-height: 1.4 !important;
+        line-height: 1.6 !important;
+        padding: 15px !important;
+        box-shadow: 
+            inset 2px 2px 0px #45b7d1,
+            0 0 10px rgba(78, 205, 196, 0.3) !important;
     }
 
-    /* Spinner 8-bit */
+    /* Spinner dengan tema power pellet */
     .stSpinner {
-        border: 4px solid #000000 !important;
-        border-top: 4px solid #00ff00 !important;
-        border-radius: 0px !important;
-        width: 32px !important;
-        height: 32px !important;
+        border: 4px solid #000080 !important;
+        border-top: 4px solid #ffff00 !important;
+        border-radius: 50% !important;
+        width: 40px !important;
+        height: 40px !important;
         animation: spin 1s linear infinite !important;
+        position: relative;
+    }
+
+    .stSpinner::after {
+        content: '🟡';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        animation: pacmanGlow 1s ease-in-out infinite;
     }
 
     @keyframes spin {
@@ -367,135 +545,104 @@ st.markdown("""
         100% { transform: rotate(360deg); }
     }
 
-    /* Scrollbar 8-bit */
+    /* Scrollbar dengan tema Pac-Man */
     ::-webkit-scrollbar {
-        width: 16px;
-        background: #000000;
+        width: 20px;
+        background: #000080;
     }
 
     ::-webkit-scrollbar-track {
-        background: #000000;
-        border: 2px solid #004400;
+        background: #000022;
+        border: 2px solid #ffff00;
+        border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #00ff00;
-        border: 2px solid #000000;
-        border-radius: 0px;
+        background: linear-gradient(180deg, #ffff00, #ffcc00);
+        border: 2px solid #000080;
+        border-radius: 10px;
+        position: relative;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #40ff40;
+        background: linear-gradient(180deg, #ffff44, #ffdd00);
     }
 
-    /* Markdown styling */
+    /* Markdown styling dengan tema Pac-Man */
     .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
         color: #ffff00 !important;
-        text-shadow: 2px 2px 0px #000000 !important;
+        text-shadow: 
+            2px 2px 0px #000080,
+            0 0 10px #ffff00 !important;
         font-family: 'Press Start 2P', monospace !important;
+        position: relative;
+    }
+
+    .stMarkdown h1::after, .stMarkdown h2::after, .stMarkdown h3::after {
+        content: '🍒';
+        margin-left: 10px;
+        animation: powerPellet 2s ease-in-out infinite;
     }
 
     .stMarkdown p, .stMarkdown li {
-        color: #00ff00 !important;
+        color: #ffffff !important;
         font-family: 'Press Start 2P', monospace !important;
         font-size: 10px !important;
-        line-height: 1.6 !important;
+        line-height: 1.8 !important;
+        text-shadow: 1px 1px 0px #000080 !important;
     }
 
     .stMarkdown strong {
         color: #ffff00 !important;
-        text-shadow: 1px 1px 0px #000000 !important;
+        text-shadow: 
+            1px 1px 0px #000080,
+            0 0 5px #ffff00 !important;
     }
 
     .stMarkdown hr {
-        border: 2px solid #ff0040 !important;
-        border-radius: 0px !important;
-        margin: 16px 0 !important;
+        border: 3px solid #4ecdc4 !important;
+        border-radius: 3px !important;
+        margin: 20px 0 !important;
+        box-shadow: 0 0 10px rgba(78, 205, 196, 0.3) !important;
+    }
+
+    /* Efek partikel dots */
+    .stApp::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 5% 5%, rgba(255, 255, 0, 0.1) 1px, transparent 1px),
+            radial-gradient(circle at 95% 5%, rgba(255, 107, 107, 0.1) 1px, transparent 1px),
+            radial-gradient(circle at 5% 95%, rgba(78, 205, 196, 0.1) 1px, transparent 1px),
+            radial-gradient(circle at 95% 95%, rgba(69, 183, 209, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: dotMove 5s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 1.2rem;
+        }
+        
+        .subtitle {
+            font-size: 0.6rem;
+        }
+        
+        .toggle-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 10px;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
-
-# Tombol toggle dengan icon dinamis dan style 8-bit
-st.markdown("""
-<button id="sidebar-toggle" class="toggle-btn">&lt;&lt;</button>
-""", unsafe_allow_html=True)
-
-# Script untuk toggle animasi sidebar dengan perubahan icon
-components.html("""
-<script>
-const waitForSidebar = () => {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
-
-    if (!sidebar || !toggleBtn) {
-        setTimeout(waitForSidebar, 100);
-        return;
-    }
-
-    // Sembunyikan semua tombol bawaan sidebar
-    const hideDefaultButtons = () => {
-        const collapseBtn = window.parent.document.querySelector('button[title="Collapse sidebar"]');
-        const expandBtn = window.parent.document.querySelector('button[title="Expand sidebar"]');
-        const collapsedControl = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-        
-        if (collapseBtn) collapseBtn.style.display = 'none';
-        if (expandBtn) expandBtn.style.display = 'none';
-        if (collapsedControl) collapsedControl.style.display = 'none';
-        
-        const headerButtons = sidebar.querySelectorAll('button[kind="header"], button[data-testid="baseButton-header"]');
-        headerButtons.forEach(btn => btn.style.display = 'none');
-        
-        const sidebarButtons = sidebar.querySelectorAll('button');
-        sidebarButtons.forEach(btn => {
-            if (btn.getAttribute('title') === 'Collapse sidebar' || 
-                btn.getAttribute('title') === 'Expand sidebar' ||
-                btn.getAttribute('kind') === 'header' ||
-                btn.getAttribute('data-testid') === 'baseButton-header') {
-                btn.style.display = 'none';
-            }
-        });
-    };
-
-    hideDefaultButtons();
-    setInterval(hideDefaultButtons, 500);
-
-    // State sidebar dengan sound effect simulation
-    let sidebarVisible = true;
-    
-    const updateToggleIcon = () => {
-        if (sidebarVisible) {
-            toggleBtn.innerHTML = '&lt;&lt;';
-            toggleBtn.style.animation = 'buttonBlink 1s ease-in-out infinite';
-        } else {
-            toggleBtn.innerHTML = '&gt;&gt;';
-            toggleBtn.style.animation = 'buttonBlink 0.5s ease-in-out infinite';
-        }
-    };
-
-    // Arcade-style button click effect
-    toggleBtn.addEventListener("click", () => {
-        // Visual feedback
-        toggleBtn.style.transform = 'translate(2px, 2px)';
-        toggleBtn.style.boxShadow = '0 0 0 2px #ff0040, 2px 2px 0 2px #000000';
-        
-        setTimeout(() => {
-            toggleBtn.style.transform = '';
-            toggleBtn.style.boxShadow = '';
-        }, 100);
-        
-        // Toggle sidebar
-        sidebarVisible = !sidebarVisible;
-        sidebar.classList.toggle("sidebar-hidden");
-        updateToggleIcon();
-    });
-
-    // Set icon awal
-    updateToggleIcon();
-};
-
-waitForSidebar();
-</script>
-""", height=0)
 
 # HEADER
 st.markdown("""
