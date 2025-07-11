@@ -132,10 +132,9 @@ with st.sidebar:
     st.markdown("""
     <div class="sidebar-content">
     <ul style="padding-left: 1rem;">
-        <li>🎥 Ambil transkrip video YouTube berbahasa Indonesia.</li>
-        <li>🤖 Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
-        <li>📊 Tampilkan hasil analisis lengkap dengan label dan timestamp.</li>
-        <li>🚀 Didukung oleh model IndoBERTweet + BiGRU + MAML.</li>
+        <li>Ambil transkrip video YouTube berbahasa Indonesia.</li>
+        <li>Deteksi ujaran kebencian dan bahasa kasar secara otomatis.</li>
+        <li>Menampilkan hasil analisis lengkap dengan label dan timestamp.</li>
     </ul>
     </div>
     """, unsafe_allow_html=True)
