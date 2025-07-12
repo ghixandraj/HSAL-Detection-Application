@@ -338,7 +338,7 @@ html, body, [class*="css"] {
     color: #cccccc;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    margin-top: -0.1; /* Hilangkan margin atas */
+    margin-top: -10; /* Hilangkan margin atas */
     line-height: 1.3; /* Mengatur tinggi baris subtitle */
 }
 
