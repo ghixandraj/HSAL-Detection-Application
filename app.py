@@ -61,7 +61,7 @@ st.markdown("""
                     <p class="card-content">Individual dan Grup</p>
                 </div>
                 <div class="info-card">
-                    <div class="card-icon">🗂️</div>
+                    <div class="card-icon">🔲</div>
                     <h3 class="card-title">Kategori</h3>
                     <p class="card-subtitle">Jenis Diskriminasi</p>
                     <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
