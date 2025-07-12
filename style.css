@@ -329,7 +329,7 @@ html, body, [class*="css"] {
     font-size: 1.5rem;
     font-weight: 900;
     color: #ffffff;
-    margin-bottom: -25px; /* Mengurangi jarak dengan subjudul */
+    margin-bottom: -50px; /* Mengurangi jarak dengan subjudul */
 }
 
 .card-subtitle {
