@@ -229,11 +229,37 @@ html, body, [class*="css"] {
     background-clip: text;
 }
 
-.category-text .highlight-1 { background: linear-gradient(90deg, #39EDEA 31.26%, #686ACF 46.26%); }
-.category-text .highlight-2 { background: linear-gradient(90deg, #39EDEA 58.12%, #686ACF 67.66%); }
-.category-text .highlight-3 { background: linear-gradient(90deg, #39EDEA 69.20%, #686ACF 79.62%); }
-.category-text .highlight-4 { background: linear-gradient(90deg, #39EDEA 84.04%, #686ACF 97.36%); }
+.category-text .highlight-1 { 
+    background: linear-gradient(90deg, #39EDEA 31.26%, #686ACF 46.26%); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
 
+.category-text .highlight-2 { 
+    background: linear-gradient(90deg, #39EDEA 58.12%, #686ACF 67.66%); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.category-text .highlight-3 { 
+    background: linear-gradient(90deg, #39EDEA 69.20%, #686ACF 79.62%); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.category-text .highlight-4 { 
+    background: linear-gradient(90deg, #39EDEA 84.04%, #686ACF 97.36%); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
 
 /* --- INFO CARDS --- */
 .cards-container {
