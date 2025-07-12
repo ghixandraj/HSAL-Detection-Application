@@ -305,7 +305,7 @@ html, body, [class*="css"] {
     bottom: 0;
     background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
     border-radius: 25px; /* disesuaikan dengan border-radius utama */
-    z-index: 1;
+    z-index: -1;
 }
 
 .info-card:hover {
