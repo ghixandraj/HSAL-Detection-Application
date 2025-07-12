@@ -315,8 +315,8 @@ html, body, [class*="css"] {
 
 .card-icon {
     display: flex;
-    width: 36px;
-    height: 36px;
+    width: 60px;
+    height: 60px;
     justify-content: center;
     align-items: center;
     border-radius: 100px;
