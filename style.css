@@ -25,11 +25,27 @@ html, body, [class*="css"] {
     gap: 20px;
     align-self: stretch;
     border-radius: 25px;
-    border: 1px solid transparent; /* ubah jadi transparent */
-    border-image: linear-gradient(to bottom, #FFF, #000) 1; /* tambahkan ini */
+    border: none; /* hapus border */
     background: rgba(0, 0, 0, 0.20);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     margin-bottom: 4rem;
+    position: relative; /* tambahkan ini */
+}
+
+.header-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, #FFF, #000);
+    border-radius: 25px;
+    padding: 1px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
 }
 
 .top-pill {
