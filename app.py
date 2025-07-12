@@ -67,7 +67,7 @@ st.markdown("""
                     </defs>
                 </svg>
             </div>
-            <h3 class="card-title">Target</h3>
+            <p class="card-title">Target</p>
             <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
             <p class="card-content">Individual dan Grup</p>
         </div>
