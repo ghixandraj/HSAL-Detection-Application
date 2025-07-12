@@ -1,191 +1,167 @@
 /* --- Global & Font --- */
 html, body, [class*="css"] {
-    font-family: 'Nunito', sans-serif !important;
-    background-color: #111;
-    color: #f0f0f0;
+    font-family: 'Inter', sans-serif !important;
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
 }
 
-/* --- Sidebar Styling --- */
-[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-    border-right: 2px solid #333 !important;
+/* --- Main Container & Layout --- */
+.main-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 1rem;
 }
 
-[data-testid="stSidebar"] h2 {
-    color: #4A90E2 !important;
-    font-size: 1.1rem !important;
-    font-weight: 600 !important;
-    margin-top: 1.5rem !important;
-    padding-bottom: 0.3rem !important;
-    border-bottom: 1px solid #444 !important;
+/* --- Top Pill --- */
+.top-pill {
+    display: inline-block;
+    background-color: #2a2a2a;
+    color: #b0b0b0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0 auto 1.5rem auto;
+    display: table;
 }
 
-/* --- Styling tombol sidebar BAWAAN Streamlit --- */
-[data-testid="stSidebarNav"] button {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
-    font-size: 18px !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    cursor: pointer;
-    z-index: 9999;
-    padding: 8px 12px !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    backdrop-filter: blur(10px);
+/* --- Main Header --- */
+.main-header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
-
-[data-testid="stSidebarNav"] button:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    transform: scale(1.05) !important;
-    border: 2px solid rgba(255, 255, 255, 0.5) !important;
-}
-
-/* Sembunyikan ikon SVG default di dalam tombol */
-[data-testid="stSidebarNav"] button svg {
-    display: none;
-}
-
-/* Tambahkan konten '<<' atau '>>' ke tombol */
-[data-testid="stSidebarNav"] button::after {
-    content: '<<'; /* Teks saat sidebar terlihat */
-    font-weight: bold;
-}
-
-/* Ganti konten saat sidebar disembunyikan (collapsed) */
-[data-testid="stSidebar"][aria-collapsed="true"] + header [data-testid="stSidebarNav"] button::after {
-    content: '>>'; /* Teks saat sidebar tersembunyi */
-}
-
-/* --- Header box --- */
-.header-box {
-    background: linear-gradient(135deg, #4A90E2, #FF6B6B);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
 .main-title {
     font-size: 2.5rem;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
     margin-bottom: 0.5rem;
 }
-
+.main-title span {
+    color: #A076F9; /* Warna ungu */
+}
 .subtitle {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #eee;
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    max-width: 700px;
+    margin: auto;
 }
 
-/* --- Info Section (Diperbarui) --- */
-.info-section {
-    background-color: #1a1a1a;
+/* --- Feature Section --- */
+.feature-section {
+    background-color: #1e1e1e;
     border: 1px solid #333;
     border-radius: 16px;
     padding: 2rem;
-    margin-top: 2rem;
     margin-bottom: 2rem;
 }
-
-.info-section-title {
+.section-title-pill {
+    background-color: #2a2a2a;
+    color: #b0b0b0;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: -48px auto 1.5rem auto;
+    display: table;
+    border: 1px solid #333;
+}
+.category-title {
+    text-align: center;
     font-size: 1.8rem;
-    font-weight: 700;
-    color: #f0f0f0;
+    font-weight: 600;
+    color: #ffffff;
     margin-bottom: 1rem;
-    text-align: center;
 }
-
-.info-section-title span { /* Untuk ikon */
-    color: #4A90E2;
-    margin-right: 0.5rem;
-}
-
-.info-section-text {
+.category-text {
     text-align: center;
-    color: #d0d0d0;
-    margin-bottom: 2.5rem; /* Spasi lebih banyak */
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    color: #a0a0a0;
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
     line-height: 1.6;
 }
-
-.info-section-text strong {
-    color: #FF8C6B; /* Warna oranye-merah yang lebih cerah */
+.category-text strong {
+    color: #ffffff;
     font-weight: 600;
 }
+.category-text .highlight {
+    color: #76F9DD; /* Warna cyan */
+}
 
+/* --- Info Cards --- */
 .cards-container {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
 }
-
 .info-card {
-    background: linear-gradient(180deg, #2d2d2d, #202020);
+    background-color: #A076F9; /* Warna ungu */
+    background-image: linear-gradient(145deg, #A076F9 0%, #6927d3 100%);
     border-radius: 12px;
     padding: 1.5rem;
     flex: 1;
     min-width: 250px;
     max-width: 300px;
-    text-align: center;
-    border-top: 4px solid;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(to right, #4A90E2, #FF6B6B);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    border: 1px solid #b392ff;
+    transition: transform 0.3s ease;
 }
-
 .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
-
-.info-card-title {
-    font-size: 2.2rem; /* Diperbesar */
-    font-weight: 700; /* Ditebalkan */
-    color: #4A90E2;
-    margin-bottom: 0.25rem;
-}
-
-.info-card-subtitle {
-    font-size: 1rem; /* Disesuaikan */
-    font-weight: 600;
-    color: #f0f0f0;
+.card-icon {
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
-
-.info-card-content {
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+.card-subtitle {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e0cfff;
+    margin-bottom: 1rem;
+}
+.card-content {
     font-size: 1rem;
-    color: #d0d0d0;
+    color: #ffffff;
+    font-weight: 500;
 }
 
-/* --- Video Responsif --- */
-.stVideo {
-    max-width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
+/* --- Input Field --- */
+.stTextInput label {
+    color: #a0a0a0 !important;
+    font-weight: 500 !important;
+}
+.stTextInput input {
+    background-color: #2a2a2a !important;
+    border: 1px solid #444 !important;
+    border-radius: 8px !important;
 }
 
-/* --- Penyesuaian untuk layar kecil --- */
+/* --- Sidebar Styling --- */
+[data-testid="stSidebar"] {
+    background-color: #181818 !important;
+    border-right: 1px solid #333 !important;
+}
+[data-testid="stSidebar"] h2 {
+    color: #A076F9 !important;
+}
+
+/* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
     .main-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
-    .subtitle {
-        font-size: 1rem;
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
     }
-    .header-box {
-        padding: 1.5rem;
-    }
-    .main > div {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+    .info-card {
+        width: 100%;
+        max-width: 90%;
     }
 }

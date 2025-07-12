@@ -35,31 +35,45 @@ st.markdown('<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@40
 
 # HEADER & INFO SECTION
 st.markdown("""
-<div class="header-box">
-    <div class="main-title">🎥 Hayu-IT: HSAL Analysis</div>
-    <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
-</div>
+<div class="main-container">
+    <div class="top-pill">Aplikasi Deteksi Ujaran Kebencian dan Bahasa Kasar</div>
+    
+    <div class="main-header">
+        <h1 class="main-title">
+            Hayu-IT: <span>HSAL Analysis on Youtube Indonesian Transcripts</span>
+        </h1>
+        <p class="subtitle">
+            Deteksi otomatis ujaran kebencian dan bahasa kasar dari transkrip video YouTube berbahasa Indonesia
+        </p>
+    </div>
 
-<div class="info-section">
-    <h2 class="info-section-title"><span>🔍</span> Kategori Deteksi</h2>
-    <p class="info-section-text">
-        Pendeteksian ini dilakukan terhadap <strong>13 kategori</strong> berbeda. Ada kategori <strong>ujaran positif</strong>, <strong>bahasa kasar</strong>, dan <strong>ujaran kebencian</strong> dengan berbagai sub-kategori.
-    </p>
-    <div class="cards-container">
-        <div class="info-card">
-            <h3 class="info-card-title">Target</h3>
-            <p class="info-card-subtitle">Sasaran Ujaran</p>
-            <p class="info-card-content">Individual dan Grup</p>
-        </div>
-        <div class="info-card">
-            <h3 class="info-card-title">Kategori</h3>
-            <p class="info-card-subtitle">Jenis Diskriminasi</p>
-            <p class="info-card-content">Agama, Ras, Fisik, Gender, dan Lain-lain</p>
-        </div>
-        <div class="info-card">
-            <h3 class="info-card-title">Intensitas</h3>
-            <p class="info-card-subtitle">Tingkat Keparahan</p>
-            <p class="info-card-content">Ringan/Sedang/Berat</p>
+    <div class="feature-section">
+        <div class="section-title-pill">Fitur Utama</div>
+        <div class="category-box">
+            <h2 class="category-title">Kategori Deteksi</h2>
+            <p class="category-text">
+                Pendeteksian ini dilakukan terhadap <strong>13 kategori</strong> berbeda. Ada kategori <span class="highlight">ujaran positif</span>, <span class="highlight">bahasa kasar</span>, dan <span class="highlight">ujaran kebencian</span> dengan berbagai sub-kategori.
+            </p>
+            <div class="cards-container">
+                <div class="info-card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Target</h3>
+                    <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
+                    <p class="card-content">Individual dan Grup</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🗂️</div>
+                    <h3 class="card-title">Kategori</h3>
+                    <p class="card-subtitle">Jenis Diskriminasi</p>
+                    <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Intensitas</h3>
+                    <p class="card-subtitle">Tingkat Keparahan</p>
+                    <p class="card-content">Ringan, Sedang, dan Berat</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
