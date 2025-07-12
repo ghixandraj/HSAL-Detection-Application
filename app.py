@@ -141,32 +141,93 @@ st.markdown("""
 
 # SIDEBAR
 with st.sidebar:
-    st.markdown("## 🔍 Fitur Utama")
-    st.markdown("""
-    **Analisis Komprehensif:**
-    - Ekstraksi transkrip otomatis dari video YouTube
-    - Deteksi ujaran kebencian multi-kategori
-    - Identifikasi bahasa kasar dan ofensif
-    """)
-    st.markdown("## 🤖 Detail Model AI")
-    st.markdown("""
-    **Arsitektur Model:**
-    - **Base Model**: IndoBERTweet + BiGRU
-    - **Output**: 13 kategori klasifikasi
-    """)
-    st.markdown("## ❗ Disclaimer")
-    st.markdown("""
-    - Aplikasi ini untuk penelitian dan edukasi
-    - Hasil analisis bukan keputusan final
-    - Gunakan dengan bijak dan bertanggung jawab
-    """)
-    st.markdown("---")
-    st.markdown("""
-    <div style="text-align: center; color: #666; font-size: 0.8rem;">
-        <p>🔬 Designed by Ghixandra Julyaneu Irawadi</p>
-        <p>v1.0 - Built with Streamlit</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # 🔍 FITUR UTAMA
+    st.markdown("## 🔍 Fitur Utama")
+    st.markdown("""
+    **Analisis Komprehensif:**
+    - Ekstraksi transkrip otomatis dari video YouTube
+    - Deteksi ujaran kebencian multi-kategori
+    - Identifikasi bahasa kasar dan ofensif
+    - Timestamping untuk setiap deteksi
+    - Laporan detail probabilitas
+
+    **Kategori Deteksi:**
+    - Ujaran kebencian individual & grup
+    - Diskriminasi agama, ras, gender
+    - Bahasa kasar dan ofensif
+    - Tingkat intensitas (ringan/sedang/berat)
+    - Positif atau Netral                
+    """)
+
+    # 📋 CARA MENGGUNAKAN
+    st.markdown("## 📋 Cara Menggunakan")
+    st.markdown("""
+    **Langkah-langkah:**
+    1. **Masukkan URL YouTube** yang valid
+    2. **Pastikan video memiliki subtitle** Bahasa Indonesia
+    3. **Klik "Analisis Video"** dan tunggu prosesnya
+    4. **Lihat hasil analisis** dengan detail timestamp
+    5. **Baca laporan lengkap** untuk setiap kalimat bermasalah
+
+    **Persyaratan:**
+    - Video harus memiliki subtitle/transkrip bahasa Indonesia
+    - Koneksi internet stabil untuk mengunduh model
+    - Durasi video optimal: < 30 menit (untuk performa terbaik)
+    """)
+
+    # 🤖 DETAIL MODEL
+    st.markdown("## 🤖 Detail Model AI")
+    st.markdown("""
+    **Arsitektur Model:**
+    - **Base Model**: IndoBERTweet + BiGRU
+    - **Output**: 13 kategori klasifikasi
+                
+    **Spesifikasi Teknis:**
+    - **Hidden Size**: 512 dimensi
+    - **Max Sequence Length**: 192 token
+    - **Threshold**: 0.5 untuk klasifikasi
+                
+    **Performa Model:**
+    - Dilatih pada dataset Indonesia
+    - Multi-label classification
+    - Optimized untuk bahasa informal
+    """)
+
+    # 💡 TIPS & PANDUAN
+    st.markdown("## 💡 Tips & Panduan")
+    st.markdown("""
+    **Untuk Hasil Optimal:**
+    - Hindari analisis video dengan transcript auto-generate
+    - Video pendek (< 15 menit) diproses lebih cepat
+
+    **Interpretasi Hasil:**
+    - 🔴 **Merah**: Konten bermasalah terdeteksi
+    - 🟡 **Kuning**: Perlu perhatian khusus
+    - 🟢 **Hijau**: Konten aman
+    - 📊 **Probabilitas > 50%**: Prediksi valid
+
+    **Catatan Penting:**
+    - Model dapat menghasilkan false positive/negative
+    - Hasil harus diinterpretasi oleh manusia
+    - Transkrip auto-generated mungkin kurang akurat
+    """)
+
+    # ❗ Disclaimer
+    st.markdown("## ❗ Disclaimer")
+    st.markdown("""
+    - Aplikasi ini untuk penelitian dan edukasi
+    - Hasil analisis bukan keputusan final
+    - Gunakan dengan bijak dan bertanggung jawab
+    """)
+
+    # Footer
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center; color: #666; font-size: 0.8rem;">
+        <p>🔬 Designed by Ghixandra Julyaneu Irawadi</p>
+        <p>v1.0 - Built with Streamlit</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ✅ Arsitektur model
 class IndoBERTweetBiGRU(nn.Module):
