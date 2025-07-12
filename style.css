@@ -135,14 +135,32 @@ html, body, [class*="css"] {
     align-items: center;
     gap: 10px;
     border-radius: 100px;
-    border: 1px solid #FFF;
+    border: none; /* hapus border */
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     backdrop-filter: blur(5px);
     color: #FFF;
     font-weight: 500;
     margin: 0;
-    z-index: 1; /* Ditambahkan agar tidak tertutup elemen lain */
+    z-index: 1;
+    position: relative; /* tambahkan ini */
+}
+
+.section-title-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, #FFF, #000);
+    border-radius: 100px;
+    padding: 1px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    z-index: -1; /* pastikan pseudo-element berada di belakang konten */
 }
 
 .category-box {
@@ -187,7 +205,7 @@ html, body, [class*="css"] {
 .category-text .highlight-4 { background: linear-gradient(90deg, #39EDEA 84.04%, #686ACF 97.36%); }
 
 
-/* --- PERUBAHAN INFO CARDS --- */
+/* --- INFO CARDS --- */
 .cards-container {
     display: flex;
     justify-content: center;
