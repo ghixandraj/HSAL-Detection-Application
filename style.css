@@ -297,15 +297,13 @@ html, body, [class*="css"] {
     flex-direction: column;
     align-items: left;
     gap: 5px;
-    flex: 1 0 0;
+    flex: 1;
     align-self: stretch;
     border-radius: 25px; /* diperbesar dari 15px ke 25px */
     border: none;
     background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
     box-shadow: 0px 4px 5.7px 0px rgba(0, 0, 0, 0.50);
     text-align: left;
-    min-width: 280px;
-    max-width: 320px;
     transition: all 0.2s ease-in-out;
     position: relative;
 }
@@ -402,7 +400,6 @@ html, body, [class*="css"] {
         align-items: center;
     }
     .info-card {
-        max-width: 100%;
-        width: 90%;
+        flex: 1;
     }
 }
