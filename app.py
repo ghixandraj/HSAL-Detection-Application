@@ -15,134 +15,124 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🎬", layout="wide")
 
-# --- CSS Tema Aurora Glass ---
+# CSS Styling
 st.markdown("""
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-    /* --- Latar Belakang Aurora --- */
-    @keyframes gradient-animation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
     html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif !important;
-        background: linear-gradient(-45deg, #1e0033, #3c004a, #2d0b49, #0f002d);
-        background-size: 400% 400%;
-        animation: gradient-animation 15s ease infinite;
-        color: #EAEAF2 !important;
+        font-family: 'Nunito', sans-serif !important;
+        background-color: #111;
+        color: #f0f0f0;
     }
 
-    /* --- Sidebar Kaca Buram --- */
+    /* Sidebar Styling */
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.05) !important;
-        backdrop-filter: blur(20px) !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-right: 2px solid #333 !important;
     }
+
     [data-testid="stSidebar"] h2 {
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        border-bottom-color: rgba(255, 255, 255, 0.2) !important;
-    }
-    [data-testid="stSidebar"] strong {
-        color: #A78BFA !important; /* Ungu Lavender */
-    }
-
-    /* --- Tombol Sidebar (Tidak diubah, sudah bagus) --- */
-    [data-testid="stSidebarNav"] button {
-        /* CSS untuk tombol sidebar tetap sama */
-    }
-
-    /* --- Header Utama --- */
-    .main-header {
-        text-align: center;
-        padding: 2rem 1rem;
-        margin-bottom: 2rem;
-    }
-    .main-header .title {
-        font-size: 3.5rem;
-        font-weight: 700;
-        color: #FFFFFF;
-        letter-spacing: -2px;
-    }
-    .main-header .subtitle {
-        font-size: 1.25rem;
-        color: #C0C0D4;
-        margin-top: -10px;
-    }
-
-    /* --- Tombol Aksi Utama --- */
-    .stButton > button {
+        color: #4A90E2 !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
-        background: linear-gradient(90deg, #8E2DE2, #4A00E0);
-        color: #FFFFFF !important;
-        border: none !important;
-        border-radius: 10px !important;
-        padding: 15px 30px !important;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-    .stButton > button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(142, 45, 226, 0.4);
+        margin-top: 1.5rem !important;
+        padding-bottom: 0.3rem !important;
+        border-bottom: 1px solid #444 !important;
     }
 
-    /* --- Input URL --- */
-    .stTextInput label {
-        color: #FFFFFF !important;
-        font-weight: 600;
+    /* Styling tombol sidebar BAWAAN Streamlit */
+    [data-testid="stSidebarNav"] button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        font-size: 18px !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        cursor: pointer;
+        z-index: 9999;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        backdrop-filter: blur(10px);
     }
-    .stTextInput input {
-        border-radius: 10px !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        color: #FFFFFF !important;
+    
+    [data-testid="stSidebarNav"] button:hover {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        transform: scale(1.05) !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
     }
-
-    /* --- Kartu Hasil Analisis --- */
-    .result-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 1.5rem;
-        margin-top: 1rem;
-    }
-    .result-card .timestamp {
-        font-weight: 600;
-        color: #A78BFA;
-    }
-    .result-card .label {
-        background-color: #A78BFA;
-        color: #111;
-        padding: 2px 8px;
-        border-radius: 5px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-right: 5px;
+    
+    /* Sembunyikan ikon SVG default di dalam tombol */
+    [data-testid="stSidebarNav"] button svg {
+        display: none;
     }
 
-    /* --- Notifikasi Kustom --- */
-    [data-testid="stAlert"] {
-        border-radius: 10px !important;
-        border-width: 0px !important;
-        border-left: 4px solid !important;
-        background-color: rgba(0,0,0,0.2) !important;
+    /* Tambahkan konten '<<' atau '>>' ke tombol */
+    [data-testid="stSidebarNav"] button::after {
+        content: '<<'; /* Teks saat sidebar terlihat */
+        font-weight: bold;
     }
-    [data-testid="stAlert"][data-status="error"] { border-left-color: #F43F5E !important; }
-    [data-testid="stAlert"][data-status="warning"] { border-left-color: #FBBF24 !important; }
-    [data-testid="stAlert"][data-status="success"] { border-left-color: #34D399 !important; }
 
+    /* Ganti konten saat sidebar disembunyikan (collapsed) */
+    [data-testid="stSidebar"][aria-collapsed="true"] + header [data-testid="stSidebarNav"] button::after {
+        content: '>>'; /* Teks saat sidebar tersembunyi */
+    }
+
+    /* Header box */
+    .header-box {
+        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #eee;
+    }
+
+    /* Video Responsif */
+    .stVideo {
+        max-width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    /* Penyesuaian untuk layar kecil */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 1.8rem;
+        }
+        .subtitle {
+            font-size: 1rem;
+        }
+        .header-box {
+            padding: 1.5rem;
+        }
+        /* Memberi lebih banyak ruang untuk konten di seluler */
+        .main > div {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
 
-# --- HEADER ---
+# HEADER
 st.markdown("""
-<div class="main-header">
+<div class="header-box">
     <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
     <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
 </div>
