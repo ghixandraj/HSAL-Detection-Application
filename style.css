@@ -194,7 +194,7 @@ html, body, [class*="css"] {
 .category-title {
     align-self: stretch;
     text-align: center;
-    font-size: 36px;
+    font-size: 40px;
     font-weight: 800;
     line-height: normal;
     background: linear-gradient(270deg, #7B39C6 46.48%, #39EDEA 74.27%, #FFF 99.99%);
