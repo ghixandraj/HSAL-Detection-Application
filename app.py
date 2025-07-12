@@ -46,7 +46,7 @@ st.markdown("""
 
 # --- Feature Section ---
 st.markdown('<div class="feature-section">', unsafe_allow_html=True)
-st.markdown('<div class="section-title-pill">Fitur Utama</div>', unsafe_allow_html=True)
+st.markdown('<div class="top-pill">Fitur Utama</div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="category-box">
     <h2 class="category-title">Kategori Deteksi</h2>
