@@ -33,14 +33,37 @@ load_css("style.css")
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 
 
-# HEADER
+# HEADER & INFO SECTION
 st.markdown("""
 <div class="header-box">
-    <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="main-title">🎥 Hayu-IT: HSAL Analysis</div>
     <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
 </div>
-""", unsafe_allow_html=True)
 
+<div class="info-section">
+    <h2 class="info-section-title"><span>🔍</span> Kategori Deteksi</h2>
+    <p class="info-section-text">
+        Pendeteksian ini dilakukan terhadap <strong>13 kategori</strong> berbeda. Ada kategori <strong>ujaran positif</strong>, <strong>bahasa kasar</strong>, dan <strong>ujaran kebencian</strong> dengan berbagai sub-kategori.
+    </p>
+    <div class="cards-container">
+        <div class="info-card">
+            <h3 class="info-card-title">Target</h3>
+            <p class="info-card-subtitle">Sasaran Ujaran</p>
+            <p class="info-card-content">Individual dan Grup</p>
+        </div>
+        <div class="info-card">
+            <h3 class="info-card-title">Kategori</h3>
+            <p class="info-card-subtitle">Jenis Diskriminasi</p>
+            <p class="info-card-content">Agama, Ras, Fisik, Gender, dan Lain-lain</p>
+        </div>
+        <div class="info-card">
+            <h3 class="info-card-title">Intensitas</h3>
+            <p class="info-card-subtitle">Tingkat Keparahan</p>
+            <p class="info-card-content">Ringan/Sedang/Berat</p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # SIDEBAR
 with st.sidebar:
