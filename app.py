@@ -47,7 +47,6 @@ st.markdown("""
 # --- Feature Section ---
 st.markdown("""
 <div class="feature-section">
-    <div class="section-title-pill">Fitur Utama</div>
     <div class="category-box">
         <h2 class="category-title">Kategori Deteksi</h2>
         <p class="category-text">
