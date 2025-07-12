@@ -39,9 +39,7 @@ st.markdown('<div class="main-container">', unsafe_allow_html=True)
 st.markdown("""
 <div class="top-pill">Aplikasi Deteksi Ujaran Kebencian dan Bahasa Kasar</div>
 <div class="main-header">
-    <h1 class="main-title">
-        Hayu-IT: <span>HSAL Analysis on Youtube Indonesian Transcripts</span>
-    </h1>
+    <h1 class="main-title">Hayu-IT: <span>HSAL Analysis on Youtube Indonesian Transcripts</span></h1>
     <p class="subtitle">
         Deteksi otomatis ujaran kebencian dan bahasa kasar dari transkrip video YouTube berbahasa Indonesia
     </p>
