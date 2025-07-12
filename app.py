@@ -170,12 +170,6 @@ with st.sidebar:
     - Hindari analisis video dengan transcript auto-generate
     - Video pendek (< 15 menit) diproses lebih cepat
 
-    **Interpretasi Hasil:**
-    - 🔴 **Merah**: Konten bermasalah terdeteksi
-    - 🟡 **Kuning**: Perlu perhatian khusus
-    - 🟢 **Hijau**: Konten aman
-    - 📊 **Probabilitas > 50%**: Prediksi valid
-
     **Catatan Penting:**
     - Model dapat menghasilkan false positive/negative
     - Hasil harus diinterpretasi oleh manusia
