@@ -32,6 +32,7 @@ html, body, [class*="css"] {
     position: relative; /* tambahkan ini */
 }
 
+/*
 .header-box::before {
     content: '';
     position: absolute;
@@ -47,6 +48,7 @@ html, body, [class*="css"] {
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
 }
+*/
 
 .top-pill {
     display: flex;
@@ -68,6 +70,7 @@ html, body, [class*="css"] {
     text-align: center;
 }
 
+/*
 .top-pill::before {
     content: '';
     position: absolute;
@@ -83,6 +86,7 @@ html, body, [class*="css"] {
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
 }
+*/
 
 .main-title {
     width: 100%; /* fill container */
@@ -131,6 +135,7 @@ html, body, [class*="css"] {
     width: 100%;
 }
 
+/*
 .feature-section::before {
     content: '';
     position: absolute;
@@ -146,6 +151,7 @@ html, body, [class*="css"] {
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
 }
+*/
 
 .feature-section > * {
     position: relative;
@@ -170,6 +176,7 @@ html, body, [class*="css"] {
     position: relative; /* tambahkan ini */
 }
 
+/*
 .section-title-pill::before {
     content: '';
     position: absolute;
@@ -186,6 +193,7 @@ html, body, [class*="css"] {
     mask-composite: exclude;
     z-index: -1; /* pastikan pseudo-element berada di belakang konten */
 }
+*/
 
 .category-box {
     text-align: center;
