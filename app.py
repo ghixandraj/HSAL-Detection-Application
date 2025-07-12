@@ -15,132 +15,129 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout="wide")
 
-# --- CSS Tema Pac-Man ---
+# CSS Styling
 st.markdown("""
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-    /* Global Font & Background */
     html, body, [class*="css"] {
-        font-family: 'Press Start 2P', cursive !important;
-        background-color: #000022 !important; /* Latar maze biru tua */
-        color: #FFFFFF !important;
+        font-family: 'Nunito', sans-serif !important;
+        background-color: #111;
+        color: #f0f0f0;
     }
 
-    /* --- Sidebar --- */
+    /* Sidebar Styling */
     [data-testid="stSidebar"] {
-        background: transparent !important;
-        border-right: 4px solid #345DFF; /* Dinding maze biru */
+        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-right: 2px solid #333 !important;
     }
+
     [data-testid="stSidebar"] h2 {
-        color: #FFFF00 !important; /* Kuning Pac-Man */
-        text-shadow: 2px 2px #FF0000; /* Bayangan merah Blinky */
+        color: #4A90E2 !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        margin-top: 1.5rem !important;
+        padding-bottom: 0.3rem !important;
+        border-bottom: 1px solid #444 !important;
     }
 
-    /* --- Header Kustom --- */
-    .pacman-header {
-        border: 4px solid #345DFF;
-        border-radius: 0px;
+    /* Styling tombol sidebar BAWAAN Streamlit */
+    [data-testid="stSidebarNav"] button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        font-size: 18px !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        cursor: pointer;
+        z-index: 9999;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        backdrop-filter: blur(10px);
+    }
+    
+    [data-testid="stSidebarNav"] button:hover {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        transform: scale(1.05) !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    }
+    
+    /* Sembunyikan ikon SVG default di dalam tombol */
+    [data-testid="stSidebarNav"] button svg {
+        display: none;
+    }
+
+    /* Tambahkan konten '<<' atau '>>' ke tombol */
+    [data-testid="stSidebarNav"] button::after {
+        content: '<<'; /* Teks saat sidebar terlihat */
+        font-weight: bold;
+    }
+
+    /* Ganti konten saat sidebar disembunyikan (collapsed) */
+    [data-testid="stSidebar"][aria-collapsed="true"] + header [data-testid="stSidebarNav"] button::after {
+        content: '>>'; /* Teks saat sidebar tersembunyi */
+    }
+
+    /* Header box */
+    .header-box {
+        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
+        border-radius: 16px;
         padding: 2rem;
-        text-align: center;
         margin-bottom: 2rem;
-        background: linear-gradient(145deg, rgba(255, 0, 0, 0.2), rgba(0, 0, 255, 0.2));
-    }
-    .pacman-header .main-title {
-        font-size: 2.2rem;
-        color: #FFFF00;
-        text-shadow: 3px 3px #000000;
-    }
-    .pacman-header .subtitle {
-        font-size: 1rem;
-        color: #FFFFFF;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* --- Tombol --- */
-    .stButton > button {
-        color: #FFFFFF !important;
-        background-color: #345DFF !important; /* Biru dinding maze */
-        border: 2px solid #FFFFFF !important;
-        border-radius: 0px !important;
-        padding: 12px 20px !important;
-        font-family: 'Press Start 2P', cursive !important;
-        transition: all 0.2s ease-in-out;
-    }
-    .stButton > button:hover {
-        transform: scale(1.05);
-        background-color: #FFB800 !important; /* Kuning power-up */
-        box-shadow: 0 0 15px #FFFF00;
-        color: #000000 !important;
-        border-color: #000000 !important;
+    .main-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0.5rem;
     }
 
-    /* --- Text Input --- */
-    .stTextInput label {
-        color: #FFFFFF !important;
-    }
-    .stTextInput input {
-        border-radius: 0px !important;
-        border: 3px solid #FFFF00 !important;
-        background-color: #000000 !important;
-        color: #FFFFFF !important;
-        font-family: 'Press Start 2P', cursive !important;
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #eee;
     }
 
-    /* --- Notifikasi (Hantu) --- */
-    [data-baseweb="alert"] {
-        border-radius: 0px !important;
-        font-family: 'Press Start 2P', cursive !important;
-        border-width: 4px !important;
-    }
-    /* ERROR = Blinky (Merah) */
-    [data-testid="stAlert"][data-status="error"] {
-        background-color: rgba(255, 0, 0, 0.2) !important;
-        border-color: #FF0000 !important;
-    }
-    /* WARNING = Clyde (Oranye) */
-    [data-testid="stAlert"][data-status="warning"] {
-        background-color: rgba(255, 184, 82, 0.2) !important;
-        border-color: #FFB852 !important;
-    }
-    /* INFO = Inky (Cyan) */
-    [data-testid="stAlert"][data-status="info"] {
-        background-color: rgba(0, 255, 255, 0.2) !important;
-        border-color: #00FFFF !important;
-    }
-    /* SUCCESS = Hantu Biru (Bisa dimakan) */
-    [data-testid="stAlert"][data-status="success"] {
-        background-color: rgba(52, 93, 255, 0.2) !important;
-        border-color: #345DFF !important;
-    }
-
-    /* --- Progress Bar --- */
-    [data-testid="stProgressBar"] > div {
-        background-color: #FFFF00 !important; /* Kuning Pac-Man */
-        height: 20px !important;
-    }
-    [data-testid="stProgressBar"] {
-        background-color: #345DFF !important;
-        border: 2px solid white;
-        border-radius: 0;
-    }
-
-    /* --- Video Player --- */
+    /* Video Responsif */
     .stVideo {
-        border: 4px solid #FFFF00;
+        max-width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    /* Penyesuaian untuk layar kecil */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 1.8rem;
+        }
+        .subtitle {
+            font-size: 1rem;
+        }
+        .header-box {
+            padding: 1.5rem;
+        }
+        /* Memberi lebih banyak ruang untuk konten di seluler */
+        .main > div {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
 
-# --- HEADER PAC-MAN ---
+
+# HEADER
 st.markdown("""
-<div class="pacman-header">
-    <div class="main-title">HAYU-IT: HSAL ANALYSIS</div>
-    <div class="subtitle">PAC-MAN EDITION</div>
-    <p style="font-size:1.5rem; margin-top:1rem;">🟡 &#x2022; &#x2022; &#x2022; 👻</p>
+<div class="header-box">
+    <div class="main-title">🎥 Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</div>
+    <div class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari video YouTube berbahasa Indonesia</div>
 </div>
 """, unsafe_allow_html=True)
+
 
 # SIDEBAR
 with st.sidebar:
