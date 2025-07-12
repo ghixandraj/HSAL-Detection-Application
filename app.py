@@ -67,7 +67,7 @@ st.markdown("""
                     </defs>
                 </svg>
             </div>
-            <p class="card-title">Target</p>
+            <h3 class="card-title">Target</h3>
             <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
             <p class="card-content">Individual dan Grup</p>
         </div>
@@ -88,7 +88,7 @@ st.markdown("""
                     </defs>
                 </svg>
             </div>
-            <p class="card-title">Kategori</p>
+            <h3 class="card-title">Kategori</h3>
             <p class="card-subtitle">Jenis Diskriminasi</p>
             <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
         </div>
@@ -109,7 +109,7 @@ st.markdown("""
                     </defs>
                 </svg>
             </div>
-            <p class="card-title">Intensitas</p>
+            <h3 class="card-title">Intensitas</h3>
             <p class="card-subtitle">Tingkat Keparahan</p>
             <p class="card-content">Ringan, Sedang, dan Berat</p>
         </div>
