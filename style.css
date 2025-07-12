@@ -225,13 +225,31 @@ html, body, [class*="css"] {
     flex: 1 0 0;
     align-self: stretch;
     border-radius: 15px;
-    border: 1px solid #FFF;
+    border: none; /* hapus border */
     background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
     box-shadow: 0px 4px 5.7px 0px rgba(0, 0, 0, 0.50);
     text-align: center;
     min-width: 280px;
     max-width: 320px;
     transition: all 0.2s ease-in-out;
+    position: relative; /* tambahkan ini */
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, #FFF, #000);
+    border-radius: 15px;
+    padding: 1px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    z-index: -1; /* pastikan pseudo-element berada di belakang konten */
 }
 
 .info-card:hover {
