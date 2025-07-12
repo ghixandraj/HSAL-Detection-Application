@@ -284,6 +284,7 @@ html, body, [class*="css"] {
     position: relative;
 }
 
+/*
 .info-card::before {
     content: '';
     position: absolute;
@@ -292,7 +293,7 @@ html, body, [class*="css"] {
     right: -1px;
     bottom: -1px;
     background: linear-gradient(to bottom, #FFF, #000);
-    border-radius: 26px; /* disesuaikan dengan border-radius utama + 1px */
+    border-radius: 26px; 
     z-index: -1;
 }
 
@@ -304,9 +305,10 @@ html, body, [class*="css"] {
     right: 0;
     bottom: 0;
     background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
-    border-radius: 15px; /* disesuaikan dengan border-radius utama */
+    border-radius: 15px; 
     z-index: -1;
 }
+*/
 
 .info-card:hover {
     transform: scale(1.03);
