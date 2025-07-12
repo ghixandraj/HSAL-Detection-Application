@@ -87,7 +87,7 @@ html, body, [class*="css"] {
     color: #76F9DD; /* Warna cyan */
 }
 
-/* --- Info Cards (Diperbarui agar sesuai gambar) --- */
+/* --- Info Cards (Diperbarui sesuai gambar kedua) --- */
 .cards-container {
     display: flex;
     justify-content: center;
@@ -95,14 +95,15 @@ html, body, [class*="css"] {
     flex-wrap: wrap;
 }
 .info-card {
-    background-color: #2a2a2a; /* Latar belakang gelap */
+    background-color: #A076F9; /* Warna dasar ungu */
+    background-image: linear-gradient(145deg, #A076F9 0%, #6927d3 100%); /* Gradien ungu */
     border-radius: 12px;
     padding: 1.5rem;
     flex: 1;
     min-width: 250px;
     max-width: 300px;
     text-align: left;
-    border: 1px solid #3c3c3c;
+    border: 1px solid #b392ff;
     transition: transform 0.3s ease;
 }
 .info-card:hover {
@@ -115,22 +116,23 @@ html, body, [class*="css"] {
 .card-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ffffff; /* Judul putih */
+    color: #ffffff;
     margin-bottom: 0.25rem;
 }
 .card-subtitle {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #a0a0a0; /* Sub-judul abu-abu terang */
+    color: #e0cfff; /* Warna ungu terang untuk subtitle */
     margin-bottom: 1rem;
 }
 .card-content {
     font-size: 1rem;
-    color: #A076F9; /* Teks konten berwarna ungu */
+    color: #ffffff; /* Konten berwarna putih */
     font-weight: 500;
 }
 
-/* --- Input Field (Diperbarui) --- */
+
+/* --- Input Field --- */
 .input-label {
     color: #a0a0a0;
     font-weight: 500;
@@ -138,7 +140,6 @@ html, body, [class*="css"] {
     margin-bottom: 8px !important;
 }
 
-/* Target ke input box yang sebenarnya */
 div[data-testid="stTextInput"] input {
     background-color: #2a2a2a !important;
     border: 1px solid #444 !important;
