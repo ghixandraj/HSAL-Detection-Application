@@ -274,23 +274,6 @@ html, body, [class*="css"] {
     margin: 0 auto; /* Center container */
 }
 
-.feature-section {
-    display: flex;
-    padding: 25px;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    flex: 1 0 0;
-    align-self: stretch;
-    border-radius: 15px;
-    border: 1px solid #FFF;
-    background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
-    box-shadow: 0px 4px 5.7px 0px rgba(0, 0, 0, 0.50);
-    margin-bottom: 3rem;
-    overflow: visible;
-    position: relative;
-}
-
 .info-card {
     display: flex;
     padding: 25px;
