@@ -346,6 +346,13 @@ html, body, [class*="css"] {
     line-height: 1.2;
 }
 
+.card-content {
+    font-size: 1rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
     .main-title {
