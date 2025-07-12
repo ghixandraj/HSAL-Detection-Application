@@ -262,7 +262,7 @@ html, body, [class*="css"] {
     display: flex;
     padding: 25px;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     gap: 15px;
     flex: 1 0 0;
     align-self: stretch;
