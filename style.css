@@ -263,7 +263,7 @@ html, body, [class*="css"] {
     padding: 25px;
     flex-direction: column;
     align-items: left;
-    gap: 0px;
+    gap: 5px;
     flex: 1 0 0;
     align-self: stretch;
     border-radius: 15px;
@@ -326,7 +326,7 @@ html, body, [class*="css"] {
 }
 
 .card-title {
-    font-size: 1.5rem;
+    font-size: 32pt;
     font-weight: 900;
     color: #ffffff;
     margin-bottom: 0.01rem; 

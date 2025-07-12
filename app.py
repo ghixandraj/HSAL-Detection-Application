@@ -88,7 +88,7 @@ st.markdown("""
                     </defs>
                 </svg>
             </div>
-            <h3 class="card-title">Kategori</h3>
+            <p class="card-title">Kategori</p>
             <p class="card-subtitle">Jenis Diskriminasi</p>
             <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
         </div>
@@ -109,7 +109,7 @@ st.markdown("""
                     </defs>
                 </svg>
             </div>
-            <h3 class="card-title">Intensitas</h3>
+            <p class="card-title">Intensitas</p>
             <p class="card-subtitle">Tingkat Keparahan</p>
             <p class="card-content">Ringan, Sedang, dan Berat</p>
         </div>
