@@ -320,7 +320,6 @@ html, body, [class*="css"] {
     justify-content: center;
     align-items: center;
     border-radius: 100px;
-    border: 1px solid #FFF;
     background: linear-gradient(180deg, #414141 0%, #212121 100%);
     margin: 0;
 }
