@@ -60,40 +60,31 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- Info Cards (Menggunakan st.columns) ---
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.markdown("""
-    <div class="info-card">
-        <div class="card-icon">🎯</div>
-        <h3 class="card-title">Target</h3>
-        <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
-        <p class="card-content">Individual dan Grup</p>
-    </div>
-    """, unsafe_allow_html=True)
-with col2:
-    st.markdown("""
-    <div class="info-card">
-        <div class="card-icon">🔲</div>
-        <h3 class="card-title">Kategori</h3>
-        <p class="card-subtitle">Jenis Diskriminasi</p>
-        <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
-    </div>
-    """, unsafe_allow_html=True)
-with col3:
-    st.markdown("""
-    <div class="info-card">
-        <div class="card-icon">📊</div>
-        <h3 class="card-title">Intensitas</h3>
-        <p class="card-subtitle">Tingkat Keparahan</p>
-        <p class="card-content">Ringan, Sedang, dan Berat</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Menutup div 'feature-section'
+# --- Info Cards (Fixed structure) ---
+st.markdown('<div class="cards-container">', unsafe_allow_html=True)
+st.markdown("""
+<div class="info-card">
+    <div class="card-icon">🎯</div>
+    <h3 class="card-title">Target</h3>
+    <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
+    <p class="card-content">Individual dan Grup</p>
+</div>
+<div class="info-card">
+    <div class="card-icon">🔲</div>
+    <h3 class="card-title">Kategori</h3>
+    <p class="card-subtitle">Jenis Diskriminasi</p>
+    <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
+</div>
+<div class="info-card">
+    <div class="card-icon">📊</div>
+    <h3 class="card-title">Intensitas</h3>
+    <p class="card-subtitle">Tingkat Keparahan</p>
+    <p class="card-content">Ringan, Sedang, dan Berat</p>
+</div>
+""", unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Menutup div 'main-container'
+# Menutup div 'feature-section'
 st.markdown('</div>', unsafe_allow_html=True)
 
 # SIDEBAR
