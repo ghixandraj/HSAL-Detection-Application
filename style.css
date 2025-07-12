@@ -304,7 +304,7 @@ html, body, [class*="css"] {
     right: 0;
     bottom: 0;
     background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
-    border-radius: 25px; /* disesuaikan dengan border-radius utama */
+    border-radius: 15px; /* disesuaikan dengan border-radius utama */
     z-index: -1;
 }
 
