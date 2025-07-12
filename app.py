@@ -30,10 +30,9 @@ def load_css(file_name):
 load_css("style.css")
 
 # Tambahkan link Google Font secara terpisah
-st.markdown('<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">', unsafe_allow_html=True)
+st.markdown('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 
-
-# HEADER & INFO SECTION
+# Header
 st.markdown("""
 <div class="main-container">
     <div class="top-pill">Aplikasi Deteksi Ujaran Kebencian dan Bahasa Kasar</div>
