@@ -25,7 +25,8 @@ html, body, [class*="css"] {
     gap: 20px;
     align-self: stretch;
     border-radius: 25px;
-    border: 1px solid #FFF;
+    border: 1px solid transparent; /* ubah jadi transparent */
+    border-image: linear-gradient(to bottom, #FFF, #000) 1; /* tambahkan ini */
     background: rgba(0, 0, 0, 0.20);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     margin-bottom: 4rem;
