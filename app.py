@@ -19,11 +19,6 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🧠", layout
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-    /* Menyembunyikan tombol sidebar bawaan Streamlit */
-    button[title="Collapse sidebar"], button[title="Expand sidebar"], [data-testid="collapsedControl"] {
-        display: none !important;
-    }
-
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif !important;
         background-color: #111;
@@ -34,17 +29,6 @@ st.markdown("""
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
         border-right: 2px solid #333 !important;
-        transition: transform 0.4s ease, opacity 0.4s ease;
-        transform: translateX(0);
-        opacity: 1;
-        position: relative;
-        z-index: 1;
-    }
-
-    [data-testid="stSidebar"].sidebar-hidden {
-        transform: translateX(-100%);
-        opacity: 0;
-        pointer-events: none;
     }
 
     [data-testid="stSidebar"] h2 {
@@ -54,6 +38,45 @@ st.markdown("""
         margin-top: 1.5rem !important;
         padding-bottom: 0.3rem !important;
         border-bottom: 1px solid #444 !important;
+    }
+
+    /* Styling tombol sidebar BAWAAN Streamlit */
+    [data-testid="stSidebarNav"] button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        font-size: 18px !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        cursor: pointer;
+        z-index: 9999;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        backdrop-filter: blur(10px);
+    }
+    
+    [data-testid="stSidebarNav"] button:hover {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        transform: scale(1.05) !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    }
+    
+    /* Sembunyikan ikon SVG default di dalam tombol */
+    [data-testid="stSidebarNav"] button svg {
+        display: none;
+    }
+
+    /* Tambahkan konten '<<' atau '>>' ke tombol */
+    [data-testid="stSidebarNav"] button::after {
+        content: '<<'; /* Teks saat sidebar terlihat */
+        font-weight: bold;
+    }
+
+    /* Ganti konten saat sidebar disembunyikan (collapsed) */
+    [data-testid="stSidebar"][aria-collapsed="true"] + header [data-testid="stSidebarNav"] button::after {
+        content: '>>'; /* Teks saat sidebar tersembunyi */
     }
 
     /* Header box */
@@ -79,28 +102,6 @@ st.markdown("""
         color: #eee;
     }
 
-    /* Toggle Button */
-    .toggle-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        font-size: 18px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        cursor: pointer;
-        z-index: 9999;
-        padding: 8px 12px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-    }
-
-    .toggle-btn:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        transform: scale(1.05);
-    }
-
     /* Video Responsif */
     .stVideo {
         max-width: 100%;
@@ -113,21 +114,12 @@ st.markdown("""
         .main-title {
             font-size: 1.8rem;
         }
-
         .subtitle {
             font-size: 1rem;
         }
-
         .header-box {
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
         }
-
-        .toggle-btn {
-            top: 10px;
-            left: 10px;
-        }
-
         /* Memberi lebih banyak ruang untuk konten di seluler */
         .main > div {
             padding-left: 1rem !important;
@@ -137,37 +129,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- Toggle Button & Script ---
-st.markdown('<button id="sidebar-toggle" class="toggle-btn"><<</button>', unsafe_allow_html=True)
-components.html("""
-<script>
-const waitForSidebar = () => {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const toggleBtn = window.parent.document.getElementById("sidebar-toggle");
-
-    if (!sidebar || !toggleBtn) {
-        setTimeout(waitForSidebar, 100);
-        return;
-    }
-
-    let sidebarVisible = true;
-
-    const updateToggleIcon = () => {
-        toggleBtn.innerHTML = sidebarVisible ? '<<' : '>>';
-    };
-
-    toggleBtn.addEventListener("click", () => {
-        sidebarVisible = !sidebarVisible;
-        sidebar.classList.toggle("sidebar-hidden");
-        updateToggleIcon();
-    });
-
-    updateToggleIcon();
-};
-
-waitForSidebar();
-</script>
-""", height=0)
 
 # HEADER
 st.markdown("""
@@ -177,37 +138,28 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# SIDEBAR (Sama seperti sebelumnya, tidak perlu diubah)
+
+# SIDEBAR
 with st.sidebar:
-    # 🔍 FITUR UTAMA
     st.markdown("## 🔍 Fitur Utama")
     st.markdown("""
     **Analisis Komprehensif:**
     - Ekstraksi transkrip otomatis dari video YouTube
     - Deteksi ujaran kebencian multi-kategori
     - Identifikasi bahasa kasar dan ofensif
-    - Timestamping untuk setiap deteksi
-    - Laporan detail probabilitas
-    
-    **Kategori Deteksi:**
-    - Ujaran kebencian individual & grup
-    - Diskriminasi agama, ras, gender
-    - Bahasa kasar dan ofensif
-    - Tingkat intensitas (ringan/sedang/berat)
-    - Positif atau Netral
     """)
-    
-    # ... (Sisa konten sidebar Anda di sini) ...
-
-    # ❗ Disclaimer
+    st.markdown("## 🤖 Detail Model AI")
+    st.markdown("""
+    **Arsitektur Model:**
+    - **Base Model**: IndoBERTweet + BiGRU
+    - **Output**: 13 kategori klasifikasi
+    """)
     st.markdown("## ❗ Disclaimer")
     st.markdown("""
     - Aplikasi ini untuk penelitian dan edukasi
     - Hasil analisis bukan keputusan final
     - Gunakan dengan bijak dan bertanggung jawab
     """)
-    
-    # Footer
     st.markdown("---")
     st.markdown("""
     <div style="text-align: center; color: #666; font-size: 0.8rem;">
