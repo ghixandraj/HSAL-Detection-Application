@@ -138,12 +138,12 @@ html, body, [class*="css"] {
     bottom: 0;
     background: linear-gradient(to bottom, #FFF, #000);
     border-radius: 15px;
-    padding: 0.5px;
+    padding: 1px; /* Ubah dari 0.5px menjadi 1px */
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
-    z-index: -1; /* ubah jadi -1 seperti pada header */
+    z-index: -1;
 }
 
 .section-title-pill {
