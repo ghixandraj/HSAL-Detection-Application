@@ -89,13 +89,6 @@ with st.sidebar:
     - Identifikasi bahasa kasar dan ofensif
     - Timestamping untuk setiap deteksi
     - Laporan detail probabilitas
-
-    **Kategori Deteksi:**
-    - Ujaran kebencian individual & grup
-    - Diskriminasi agama, ras, gender
-    - Bahasa kasar dan ofensif
-    - Tingkat intensitas (ringan/sedang/berat)
-    - Positif atau Netral 
     """)
 
     # 📋 CARA MENGGUNAKAN
