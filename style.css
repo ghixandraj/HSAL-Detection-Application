@@ -111,68 +111,81 @@ html, body, [class*="css"] {
     margin: 0;
     max-width: none;
 }
-/* --- AKHIR STYLES HEADER BARU --- */
-
 
 /* --- Feature Section --- */
 .feature-section {
-    background: #101010; /* Latar belakang gelap solid */
-    border-radius: 20px;
-    padding: 3rem 2rem;
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    align-self: stretch;
+    border-radius: 15px;
+    border: 0.5px solid #FFF;
+    background: rgba(0, 0, 0, 0.20);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin-bottom: 3rem;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Border halus */
-}
-
-/* Menghapus pseudo-element yang tidak perlu */
-.feature-section::before {
-    display: none;
+    overflow: visible;
 }
 
 .section-title-pill {
-    background-color: #2a2a2a;
-    color: #cccccc;
-    padding: 10px 24px;
-    border-radius: 12px;
-    font-size: 0.9rem;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 100px;
+    border: 1px solid #FFF;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur(5px);
+    color: #FFF;
     font-weight: 500;
-    margin: -70px auto 2rem auto; /* Disesuaikan agar pas */
-    display: table;
-    border: 1px solid #444;
-    position: relative;
-    z-index: 1;
+    margin: 0;
+    z-index: 1; /* Ditambahkan agar tidak tertutup elemen lain */
 }
 
 .category-box {
     text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 1;
+    margin: 0;
 }
 
 .category-title {
-    font-size: 2.5rem;
+    align-self: stretch;
+    text-align: center;
+    font-size: 32px;
     font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #00d4ff, #a076f9);
+    line-height: normal;
+    background: linear-gradient(270deg, #7B39C6 46.48%, #39EDEA 74.27%, #FFF 99.99%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.category-text {
+    align-self: stretch;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.category-text span {
+    font-weight: 700;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.category-text {
-    color: #b0b0b0;
-    max-width: 750px;
-    margin: 0 auto;
-    line-height: 1.7;
-    font-size: 1.1rem;
-}
+.category-text .highlight-1 { background: linear-gradient(90deg, #39EDEA 31.26%, #686ACF 46.26%); }
+.category-text .highlight-2 { background: linear-gradient(90deg, #39EDEA 58.12%, #686ACF 67.66%); }
+.category-text .highlight-3 { background: linear-gradient(90deg, #39EDEA 69.20%, #686ACF 79.62%); }
+.category-text .highlight-4 { background: linear-gradient(90deg, #39EDEA 84.04%, #686ACF 97.36%); }
 
-.category-text strong, .category-text .highlight {
-    color: #39EDEA;
-    font-weight: 600;
-}
 
 /* --- PERUBAHAN INFO CARDS --- */
 .cards-container {
@@ -182,54 +195,70 @@ html, body, [class*="css"] {
     flex-wrap: wrap;
     position: relative;
     z-index: 1;
+    width: 100%;
 }
 
 .info-card {
-    background: linear-gradient(160deg, rgba(42, 42, 42, 0.8) 40%, rgba(80, 62, 138, 0.6) 110%), #1E1C2B;
-    border-radius: 16px;
-    padding: 2rem;
-    flex: 1;
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 15px;
+    border: 1px solid #FFF;
+    background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
+    box-shadow: 0px 4px 5.7px 0px rgba(0, 0, 0, 0.50);
+    text-align: center;
     min-width: 280px;
     max-width: 320px;
-    text-align: left;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s ease-in-out;
 }
 
 .info-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(120, 98, 204, 0.2);
-    border-color: rgba(160, 118, 249, 0.4);
+    transform: scale(1.03);
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.60);
 }
 
 .card-icon {
-    margin-bottom: 1.5rem;
+    display: flex;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid #FFF;
+    background: linear-gradient(180deg, #414141 0%, #212121 100%);
+    margin: 0;
 }
 
 .card-icon svg {
-    stroke: #A076F9; /* Warna ungu untuk ikon */
+    width: 20px;
+    height: 22px;
+    flex-shrink: 0;
+    fill: #39EDEA; /* Warna solid sebagai pengganti gradien */
 }
 
 .card-title {
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 0.5rem;
+    margin-bottom: -10px; /* Mengurangi jarak dengan subjudul */
 }
 
 .card-subtitle {
     font-size: 0.9rem;
-    color: #a0a0a0;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    color: #cccccc;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
 }
 
 .card-content {
     font-size: 1rem;
-    color: #c0c0c0;
+    color: #e0e0e0;
     line-height: 1.5;
+    font-weight: 500;
 }
 
 /* --- Responsive Design --- */
@@ -237,17 +266,18 @@ html, body, [class*="css"] {
     .main-title {
         font-size: 28px;
     }
-    
     .subtitle {
         font-size: 16px;
     }
-
+    .category-title {
+        font-size: 28px;
+    }
     .cards-container {
         flex-direction: column;
         align-items: center;
     }
-    
     .info-card {
         max-width: 100%;
+        width: 90%;
     }
 }

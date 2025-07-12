@@ -45,49 +45,43 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Feature Section ---
-st.markdown('<div class="feature-section">', unsafe_allow_html=True)
-st.markdown('<div class="top-pill">Fitur Utama</div>', unsafe_allow_html=True)
 st.markdown("""
-<div class="category-box">
-    <h2 class="category-title">Kategori Deteksi</h2>
-    <p class="category-text">
-        Pendeteksian ini dilakukan terhadap <strong>13 kategori</strong> berbeda. Ada kategori <span class="highlight">ujaran positif</span>, <span class="highlight">bahasa kasar</span>, dan <span class="highlight">ujaran kebencian</span> dengan berbagai sub-kategori.
-    </p>
+<div class="feature-section">
+    <div class="section-title-pill">Fitur Utama</div>
+    <div class="category-box">
+        <h2 class="category-title">Kategori Deteksi</h2>
+        <p class="category-text">
+            Pendeteksian ini dilakukan terhadap <span class="highlight-1">13 kategori</span> berbeda. Ada kategori <span class="highlight-2">ujaran positif</span>, <span class="highlight-3">bahasa kasar</span>, dan <span class="highlight-4">ujaran kebencian</span> dengan berbagai sub-kategori.
+        </p>
+    </div>
+    <div class="cards-container">
+        <div class="info-card">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5zm5 3c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/></svg>
+            </div>
+            <h3 class="card-title">Target</h3>
+            <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
+            <p class="card-content">Individual dan Grup</p>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+            </div>
+            <h3 class="card-title">Kategori</h3>
+            <p class="card-subtitle">Jenis Diskriminasi</p>
+            <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            </div>
+            <h3 class="card-title">Intensitas</h3>
+            <p class="card-subtitle">Tingkat Keparahan</p>
+            <p class="card-content">Ringan, Sedang, dan Berat</p>
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
-
-# --- PERUBAHAN INFO CARDS: Menggunakan ikon SVG ---
-st.markdown('<div class="cards-container">', unsafe_allow_html=True)
-st.markdown("""
-<div class="info-card">
-    <div class="card-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-    </div>
-    <h3 class="card-title">Target</h3>
-    <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
-    <p class="card-content">Individual dan Grup</p>
-</div>
-<div class="info-card">
-    <div class="card-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
-    </div>
-    <h3 class="card-title">Kategori</h3>
-    <p class="card-subtitle">Jenis Diskriminasi</p>
-    <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
-</div>
-<div class="info-card">
-    <div class="card-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
-    </div>
-    <h3 class="card-title">Intensitas</h3>
-    <p class="card-subtitle">Tingkat Keparahan</p>
-    <p class="card-content">Ringan, Sedang, dan Berat</p>
-</div>
-""", unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Menutup div 'feature-section'
-st.markdown('</div>', unsafe_allow_html=True)
 
 # SIDEBAR
 with st.sidebar:
