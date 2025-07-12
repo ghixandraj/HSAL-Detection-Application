@@ -15,46 +15,6 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🎬", layout="wide")
 
-Tentu, mari kita berikan aplikasi Anda tampilan yang benar-benar baru, modern, dan menarik!
-
-Saya akan merombak total antarmukanya dengan tema "Aurora Glass". Tema ini menggabungkan beberapa elemen desain modern:
-
-Latar Belakang Aurora: Latar belakang dengan gradien warna yang bergerak perlahan, memberikan kesan dinamis dan hidup.
-
-Efek Kaca Buram (Glassmorphism): Elemen seperti sidebar dan kartu akan memiliki tampilan seperti kaca buram, membuatnya terlihat elegan dan menonjol dari latar belakang.
-
-Tipografi Bersih: Menggunakan font "Inter" yang sangat mudah dibaca dan modern.
-
-Palet Warna Futuristik: Kombinasi warna ungu, biru, dan pink yang lembut dengan aksen cerah untuk tombol dan sorotan.
-
-Ikonografi & Tata Letak Modern: Menggunakan ikon yang lebih bersih dan menata ulang elemen agar lebih intuitif.
-
-Kode Lengkap dengan Tampilan Baru
-Cukup salin dan ganti seluruh kode Anda dengan kode di bawah ini. Tidak ada perubahan pada logika inti (model AI Anda), hanya pada bagian presentasi (UI).
-
-Python
-
-import streamlit as st
-import re
-import torch
-import torch.nn as nn
-import numpy as np
-import os
-import gdown
-import requests
-from typing import List, Dict, Optional
-from transformers import AutoTokenizer, AutoModel
-from safetensors.torch import load_file
-import time
-import streamlit.components.v1 as components
-
-# ✅ Konfigurasi halaman dengan tema baru
-st.set_page_config(
-    page_title="Hayu-IT: Sentiment Analysis Engine",
-    page_icon="✨",
-    layout="wide"
-)
-
 # --- CSS Tema Aurora Glass ---
 st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
