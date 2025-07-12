@@ -326,8 +326,8 @@ html, body, [class*="css"] {
 }
 
 .card-icon svg {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
     fill: #39EDEA; /* Warna solid sebagai pengganti gradien */
 }
