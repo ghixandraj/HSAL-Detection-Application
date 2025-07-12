@@ -82,24 +82,25 @@ html, body, [class*="css"] {
     color: #eee;
 }
 
-/* --- Info Section --- */
+/* --- Info Section (Diperbarui) --- */
 .info-section {
     background-color: #1a1a1a;
     border: 1px solid #333;
     border-radius: 16px;
     padding: 2rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
 .info-section-title {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: #f0f0f0;
     margin-bottom: 1rem;
     text-align: center;
 }
 
-.info-section-title span { /* For the icon */
+.info-section-title span { /* Untuk ikon */
     color: #4A90E2;
     margin-right: 0.5rem;
 }
@@ -107,14 +108,16 @@ html, body, [class*="css"] {
 .info-section-text {
     text-align: center;
     color: #d0d0d0;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem; /* Spasi lebih banyak */
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
 }
 
 .info-section-text strong {
-    color: #FF6B6B;
+    color: #FF8C6B; /* Warna oranye-merah yang lebih cerah */
+    font-weight: 600;
 }
 
 .cards-container {
@@ -145,14 +148,14 @@ html, body, [class*="css"] {
 }
 
 .info-card-title {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.2rem; /* Diperbesar */
+    font-weight: 700; /* Ditebalkan */
     color: #4A90E2;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .info-card-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Disesuaikan */
     font-weight: 600;
     color: #f0f0f0;
     margin-bottom: 1rem;
@@ -181,7 +184,6 @@ html, body, [class*="css"] {
     .header-box {
         padding: 1.5rem;
     }
-    /* Memberi lebih banyak ruang untuk konten di seluler */
     .main > div {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
