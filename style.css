@@ -329,7 +329,8 @@ html, body, [class*="css"] {
     font-size: 1.5rem;
     font-weight: 900;
     color: #ffffff;
-    margin-bottom: -50px; /* Mengurangi jarak dengan subjudul */
+    margin-bottom: 0.2rem; 
+    line-height: 1.2; 
 }
 
 .card-subtitle {
