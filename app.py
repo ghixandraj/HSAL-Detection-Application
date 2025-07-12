@@ -15,119 +15,22 @@ import streamlit.components.v1 as components
 # ✅ Konfigurasi halaman
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🎬", layout="wide")
 
-# CSS Styling
-st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-    html, body, [class*="css"] {
-        font-family: 'Nunito', sans-serif !important;
-        background-color: #111;
-        color: #f0f0f0;
-    }
+# --- Fungsi untuk memuat CSS eksternal ---
+def load_css(file_name):
+    """
+    Fungsi untuk memuat file CSS lokal dan menyuntikkannya ke dalam aplikasi Streamlit.
+    """
+    try:
+        with open(file_name) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.error(f"File CSS '{file_name}' tidak ditemukan. Pastikan file tersebut berada di direktori yang sama dengan app.py.")
 
-    /* Sidebar Styling */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-        border-right: 2px solid #333 !important;
-    }
+# --- Muat file CSS ---
+load_css("style.css")
 
-    [data-testid="stSidebar"] h2 {
-        color: #4A90E2 !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        margin-top: 1.5rem !important;
-        padding-bottom: 0.3rem !important;
-        border-bottom: 1px solid #444 !important;
-    }
-
-    /* Styling tombol sidebar BAWAAN Streamlit */
-    [data-testid="stSidebarNav"] button {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: white !important;
-        font-size: 18px !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        cursor: pointer;
-        z-index: 9999;
-        padding: 8px 12px !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-        backdrop-filter: blur(10px);
-    }
-    
-    [data-testid="stSidebarNav"] button:hover {
-        background-color: rgba(255, 255, 255, 0.2) !important;
-        transform: scale(1.05) !important;
-        border: 2px solid rgba(255, 255, 255, 0.5) !important;
-    }
-    
-    /* Sembunyikan ikon SVG default di dalam tombol */
-    [data-testid="stSidebarNav"] button svg {
-        display: none;
-    }
-
-    /* Tambahkan konten '<<' atau '>>' ke tombol */
-    [data-testid="stSidebarNav"] button::after {
-        content: '<<'; /* Teks saat sidebar terlihat */
-        font-weight: bold;
-    }
-
-    /* Ganti konten saat sidebar disembunyikan (collapsed) */
-    [data-testid="stSidebar"][aria-collapsed="true"] + header [data-testid="stSidebarNav"] button::after {
-        content: '>>'; /* Teks saat sidebar tersembunyi */
-    }
-
-    /* Header box */
-    .header-box {
-        background: linear-gradient(135deg, #4A90E2, #FF6B6B);
-        border-radius: 16px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .main-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #fff;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-        text-align: center;
-        color: #eee;
-    }
-
-    /* Video Responsif */
-    .stVideo {
-        max-width: 100%;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    /* Penyesuaian untuk layar kecil */
-    @media (max-width: 768px) {
-        .main-title {
-            font-size: 1.8rem;
-        }
-        .subtitle {
-            font-size: 1rem;
-        }
-        .header-box {
-            padding: 1.5rem;
-        }
-        /* Memberi lebih banyak ruang untuk konten di seluler */
-        .main > div {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-        }
-    }
-</style>
-""", unsafe_allow_html=True)
+# Tambahkan link Google Font secara terpisah
+st.markdown('<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 
 
 # HEADER
