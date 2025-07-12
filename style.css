@@ -138,7 +138,7 @@ html, body, [class*="css"] {
     bottom: 0;
     background: linear-gradient(to bottom, #FFF, #000);
     border-radius: 15px;
-    padding: 0.5px; /* sesuaikan dengan ketebalan border asli */
+    padding: 1px; /* sesuaikan dengan ketebalan border asli */
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
