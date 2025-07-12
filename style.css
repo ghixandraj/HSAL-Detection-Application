@@ -361,7 +361,6 @@ html, body, [class*="css"] {
 }
 
 /* --- SIDEBAR STYLES --- */
-
 /* Sidebar Container */
 .css-1d391kg, .css-1lcbmhc, .css-1cypcdb, .css-17eq0hr, .css-1y4p8pa {
     background: rgba(0, 0, 0, 0.20) !important;
@@ -374,9 +373,12 @@ html, body, [class*="css"] {
     padding: 1rem !important;
 }
 
-/* Sidebar Headers (h2 elements) */
+/* Sidebar Headers (h2 elements) dengan Gradient */
 .css-1cypcdb h2 {
-    color: #FFF !important;
+    background: linear-gradient(270deg, #7B39C6 46.48%, #39EDEA 74.27%, #FFF 99.99%) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
     font-family: 'Poppins', sans-serif !important;
     font-weight: 700 !important;
     margin-bottom: 1rem !important;
@@ -392,14 +394,9 @@ html, body, [class*="css"] {
     line-height: 1.5 !important;
 }
 
-/* Bold Text dengan Gradient Highlight */
+/* Bold Text tanpa perubahan warna */
 .css-1cypcdb strong, .css-1cypcdb b {
-    background: linear-gradient(270deg, #7B39C6 46.48%, #39EDEA 74.27%, #FFF 99.99%) !important;
-    background-clip: text !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
     font-weight: 700 !important;
-    color: transparent !important;
 }
 
 /* Sidebar Lists */
@@ -462,10 +459,6 @@ html, body, [class*="css"] {
 }
 
 .stSidebar .element-container strong {
-    background: linear-gradient(270deg, #7B39C6 46.48%, #39EDEA 74.27%, #FFF 99.99%) !important;
-    background-clip: text !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
     font-weight: 700 !important;
 }
 
