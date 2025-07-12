@@ -35,14 +35,12 @@ st.markdown('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400
 # Membungkus semua konten utama dalam div 'main-container'
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
-# --- Header ---
+# --- HEADER ---
 st.markdown("""
-<div class="top-pill">Aplikasi Deteksi Ujaran Kebencian dan Bahasa Kasar</div>
-<div class="main-header">
-    <h1 class="main-title">Hayu-IT: <span>HSAL Analysis on Youtube Indonesian Transcripts</span></h1>
-    <p class="subtitle">
-        Deteksi otomatis ujaran kebencian dan bahasa kasar dari transkrip video YouTube berbahasa Indonesia
-    </p>
+<div class="header-box">
+    <div class="top-pill">Aplikasi Deteksi Ujaran Kebencian dan Bahasa Kasar</div>
+    <h1 class="main-title">Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts</h1>
+    <p class="subtitle">Deteksi otomatis ujaran kebencian dan bahasa kasar dari transkrip video YouTube berbahasa Indonesia</p>
 </div>
 """, unsafe_allow_html=True)
 
