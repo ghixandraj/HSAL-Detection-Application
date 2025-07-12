@@ -84,8 +84,8 @@ html, body, [class*="css"] {
 }
 
 .main-title {
-    width: 680px;
-    max-width: 100%;
+    width: 100%; /* fill container */
+    max-width: 680px; /* batas maksimum */
     text-align: center;
     font-family: 'Poppins', sans-serif;
     font-size: 36px;
@@ -96,7 +96,7 @@ html, body, [class*="css"] {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 0;
+    margin: 0 auto; /* center horizontally */
 }
 
 .subtitle {
