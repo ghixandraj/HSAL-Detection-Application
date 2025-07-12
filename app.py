@@ -29,8 +29,8 @@ def load_css(file_name):
 # --- Muat file CSS ---
 load_css("style.css")
 
-# Tambahkan link Google Font secara terpisah
-st.markdown('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">', unsafe_allow_html=True)
+# Font
+st.markdown('<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 
 # Membungkus semua konten utama dalam div 'main-container'
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
@@ -56,23 +56,29 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- Info Cards (Fixed structure) ---
+# --- PERUBAHAN INFO CARDS: Menggunakan ikon SVG ---
 st.markdown('<div class="cards-container">', unsafe_allow_html=True)
 st.markdown("""
 <div class="info-card">
-    <div class="card-icon">🎯</div>
+    <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+    </div>
     <h3 class="card-title">Target</h3>
     <p class="card-subtitle">Sasaran Ujaran Kebencian</p>
     <p class="card-content">Individual dan Grup</p>
 </div>
 <div class="info-card">
-    <div class="card-icon">🔲</div>
+    <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+    </div>
     <h3 class="card-title">Kategori</h3>
     <p class="card-subtitle">Jenis Diskriminasi</p>
     <p class="card-content">Agama, Ras, Fisik, Gender, dan lain-lain</p>
 </div>
 <div class="info-card">
-    <div class="card-icon">📊</div>
+    <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+    </div>
     <h3 class="card-title">Intensitas</h3>
     <p class="card-subtitle">Tingkat Keparahan</p>
     <p class="card-content">Ringan, Sedang, dan Berat</p>
