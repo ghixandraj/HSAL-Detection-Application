@@ -1,14 +1,14 @@
 /* --- Global & Font --- */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
-    background-color: #0E1117 !important;
+    background-color: #fff !important;
     color: #e0e0e0 !important;
     position: relative;
     overflow-x: hidden;
 }
 
 .stApp {
-    background-color: #0E1117 !important;
+    background-color: #fff !important;
     position: relative;
     z-index: 1;
 }
