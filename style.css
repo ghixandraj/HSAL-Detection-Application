@@ -107,55 +107,25 @@ body::after {
     }
 }
 
-/* Enhanced feature section with animated texture */
-.feature-section {
-    display: flex;
-    padding: 25px;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    align-self: stretch;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, 
-        rgba(128, 128, 128, 0.3) 0%,
-        rgba(64, 64, 64, 0.4) 50%,
-        rgba(0, 0, 0, 0.5) 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 
-        0px 8px 32px rgba(0, 0, 0, 0.37),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
-    margin-bottom: 3rem;
-    overflow: visible;
+/* Ensure all main content has proper z-index */
+.main-container {
     position: relative;
-    width: 100%;
+    z-index: 2;
 }
 
-.feature-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 50%,
-        rgba(255, 255, 255, 0.0) 100%
-    );
-    border-radius: 15px;
-    pointer-events: none;
+.header-box {
+    position: relative;
+    z-index: 3;
 }
 
-.feature-section:hover {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0px 12px 40px rgba(0, 0, 0, 0.45),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+.feature-section {
+    position: relative;
+    z-index: 3;
+}
+
+.info-card {
+    position: relative;
+    z-index: 3;
 }
 
 /* --- Main Container & Layout --- */
