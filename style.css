@@ -13,6 +13,8 @@ html, body, [class*="css"] {
     z-index: 1;
 }
 
+
+
 /* Pastikan semua konten Streamlit memiliki z-index yang tepat */
 .stApp > div,
 .main .block-container,
@@ -66,7 +68,11 @@ html, body, [class*="css"] {
     align-self: stretch;
     border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: transparent;
+    background: linear-gradient(180deg, 
+        #0E1117 31.25%, 
+        rgba(50, 34, 77, 0.9) 65.62%, 
+        rgba(74, 33, 121, 0.9) 99.99%
+    );
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
@@ -78,22 +84,7 @@ html, body, [class*="css"] {
     transition: all 0.3s ease;
 }
 
-.header-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(57, 237, 234, 0.05) 0%,
-        rgba(104, 106, 207, 0.03) 50%,
-        rgba(255, 119, 198, 0.02) 100%
-    );
-    border-radius: 25px;
-    pointer-events: none;
-    z-index: -1;
-}
+
 
 .header-box:hover {
     border: 1px solid rgba(57, 237, 234, 0.3);
@@ -172,7 +163,11 @@ html, body, [class*="css"] {
     align-self: stretch;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: transparent;
+    background: linear-gradient(180deg, 
+        #0E1117 31.25%, 
+        rgba(50, 34, 77, 0.9) 65.62%, 
+        rgba(74, 33, 121, 0.9) 99.99%
+    );
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
@@ -184,22 +179,7 @@ html, body, [class*="css"] {
     transition: all 0.3s ease;
 }
 
-.feature-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(57, 237, 234, 0.05) 0%,
-        rgba(104, 106, 207, 0.03) 50%,
-        rgba(255, 119, 198, 0.02) 100%
-    );
-    border-radius: 15px;
-    pointer-events: none;
-    z-index: -1;
-}
+
 
 .feature-section:hover {
     border: 1px solid rgba(57, 237, 234, 0.3);
