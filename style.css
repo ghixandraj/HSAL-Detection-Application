@@ -1,19 +1,17 @@
 /* --- Global & Font --- */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
-    background-color: #fff !important;
+    background-color: #0E1117 !important;
     color: #e0e0e0 !important;
     position: relative;
     overflow-x: hidden;
 }
 
 .stApp {
-    background-color: #fff !important;
+    background-color: #0E1117 !important;
     position: relative;
     z-index: 1;
 }
-
-
 
 /* Pastikan semua konten Streamlit memiliki z-index yang tepat */
 .stApp > div,
