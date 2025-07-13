@@ -1,7 +1,7 @@
 /* --- Global & Font --- */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
-    background-color: #fff !important;
+    background-color: #0E1117 !important;
     color: #e0e0e0 !important;
     position: relative;
     overflow-x: hidden;
@@ -13,7 +13,7 @@ html, body, [class*="css"] {
     z-index: 1;
 }
 
-/* Animated texture background */
+/* Static texture background */
 body::before {
     content: '';
     position: fixed;
@@ -26,12 +26,11 @@ body::before {
         radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.25) 0%, transparent 60%),
         radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 60%),
         radial-gradient(circle at 60% 70%, rgba(186, 85, 211, 0.15) 0%, transparent 50%);
-    animation: textureMove 20s ease-in-out infinite;
     pointer-events: none;
     z-index: -2;
 }
 
-/* Floating particles and gradient mesh overlay */
+/* Static gradient mesh overlay */
 body::after {
     content: '';
     position: fixed;
@@ -53,63 +52,8 @@ body::after {
         radial-gradient(2px 2px at 200px 60px, rgba(255, 255, 255, 0.06), transparent);
     background-repeat: repeat;
     background-size: 300px 200px;
-    animation: combinedAnimation 25s ease-in-out infinite;
     pointer-events: none;
     z-index: -1;
-}
-
-/* Keyframe animations */
-@keyframes textureMove {
-    0%, 100% {
-        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-    }
-    25% {
-        transform: translateX(-30px) translateY(-40px) rotate(2deg) scale(1.05);
-    }
-    50% {
-        transform: translateX(25px) translateY(30px) rotate(-1.5deg) scale(0.95);
-    }
-    75% {
-        transform: translateX(-15px) translateY(-20px) rotate(1deg) scale(1.02);
-    }
-}
-
-@keyframes combinedAnimation {
-    0%, 100% {
-        transform: translateX(0) translateY(0) scale(1) rotate(0deg);
-        opacity: 1;
-    }
-    20% {
-        transform: translateX(10px) translateY(-15px) scale(1.03) rotate(0.5deg);
-        opacity: 0.8;
-    }
-    40% {
-        transform: translateX(-8px) translateY(12px) scale(0.97) rotate(-0.3deg);
-        opacity: 0.9;
-    }
-    60% {
-        transform: translateX(15px) translateY(8px) scale(1.01) rotate(0.8deg);
-        opacity: 0.85;
-    }
-    80% {
-        transform: translateX(-5px) translateY(-10px) scale(0.99) rotate(-0.2deg);
-        opacity: 0.95;
-    }
-}
-
-/* Pulsing glow effect */
-@keyframes pulseGlow {
-    0%, 100% {
-        filter: brightness(1) contrast(1);
-    }
-    50% {
-        filter: brightness(1.2) contrast(1.1);
-    }
-}
-
-/* Apply pulsing to texture */
-body::before {
-    animation: textureMove 20s ease-in-out infinite, pulseGlow 8s ease-in-out infinite;
 }
 
 /* Pastikan semua konten Streamlit memiliki z-index yang tepat */
@@ -194,7 +138,6 @@ body::before {
     border-radius: 25px;
     pointer-events: none;
     z-index: -1;
-    animation: sectionGlow 6s ease-in-out infinite;
 }
 
 .header-box:hover {
@@ -248,12 +191,6 @@ body::before {
     margin: 0 auto;
     position: relative;
     z-index: 16;
-    animation: titleGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes titleGlow {
-    0% { filter: brightness(1); }
-    100% { filter: brightness(1.2); }
 }
 
 .subtitle {
@@ -310,7 +247,6 @@ body::before {
     border-radius: 15px;
     pointer-events: none;
     z-index: -1;
-    animation: sectionGlow 6s ease-in-out infinite;
 }
 
 .feature-section:hover {
