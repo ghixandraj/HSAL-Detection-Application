@@ -1,67 +1,4 @@
-.feature-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, 
-        #0E1117 31.25%, 
-        rgba(50, 34, 77, 0.9) 65.62%, 
-        rgba(74, 33, 121, 0.9) 99.99%
-    );
-    border-radius: 15px;
-    pointer-events: none;
-    z-index: -1;
-    animation: gradientShift 8s ease-in-out infinite;
-}.header-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, 
-        #0E1117 31.25%, 
-        rgba(50, 34, 77, 0.9) 65.62%, 
-        rgba(74, 33, 121, 0.9) 99.99%
-    );
-    border-radius: 25px;
-    pointer-events: none;
-    z-index: -1;
-    animation: gradientShift 8s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-    0%, 100% {
-        background: linear-gradient(180deg, 
-            #0E1117 31.25%, 
-            rgba(50, 34, 77, 0.9) 65.62%, 
-            rgba(74, 33, 121, 0.9) 99.99%
-        );
-    }
-    25% {
-        background: linear-gradient(180deg, 
-            #0E1117 31.25%, 
-            rgba(57, 237, 234, 0.3) 65.62%, 
-            rgba(104, 106, 207, 0.9) 99.99%
-        );
-    }
-    50% {
-        background: linear-gradient(180deg, 
-            #0E1117 31.25%, 
-            rgba(255, 119, 198, 0.3) 65.62%, 
-            rgba(186, 85, 211, 0.9) 99.99%
-        );
-    }
-    75% {
-        background: linear-gradient(180deg, 
-            #0E1117 31.25%, 
-            rgba(120, 219, 255, 0.3) 65.62%, 
-            rgba(50, 34, 77, 0.9) 99.99%
-        );
-    }
-}/* --- Global & Font --- */
+/* --- Global & Font --- */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
     background-color: #0E1117 !important;
@@ -131,7 +68,11 @@ html, body, [class*="css"] {
     align-self: stretch;
     border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: transparent;
+    background: linear-gradient(180deg, 
+        #0E1117 31.25%, 
+        rgba(50, 34, 77, 0.9) 65.62%, 
+        rgba(74, 33, 121, 0.9) 99.99%
+    );
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
@@ -222,7 +163,11 @@ html, body, [class*="css"] {
     align-self: stretch;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: transparent;
+    background: linear-gradient(180deg, 
+        #0E1117 31.25%, 
+        rgba(50, 34, 77, 0.9) 65.62%, 
+        rgba(74, 33, 121, 0.9) 99.99%
+    );
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
