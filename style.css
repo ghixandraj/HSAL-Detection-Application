@@ -164,17 +164,56 @@ body::before {
     gap: 20px;
     align-self: stretch;
     border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(128, 128, 128, 0.4) 0%,
+        rgba(64, 64, 64, 0.5) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 
-        0px 8px 32px rgba(0, 0, 0, 0.6),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
+        0px 12px 40px rgba(0, 0, 0, 0.5),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
     margin-bottom: 4rem;
+    overflow: visible;
     position: relative;
+    width: 100%;
     z-index: 15;
+    transition: all 0.3s ease;
 }
 
+.header-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(57, 237, 234, 0.05) 0%,
+        rgba(104, 106, 207, 0.03) 50%,
+        rgba(255, 119, 198, 0.02) 100%
+    );
+    border-radius: 25px;
+    pointer-events: none;
+    z-index: -1;
+    animation: sectionGlow 6s ease-in-out infinite;
+}
+
+.header-box:hover {
+    border: 1px solid rgba(57, 237, 234, 0.3);
+    box-shadow: 
+        0px 16px 50px rgba(0, 0, 0, 0.6),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.2),
+        0px 0px 30px rgba(57, 237, 234, 0.1);
+    transform: translateY(-5px);
+}
+
+.header-box > * {
+    position: relative;
+    z-index: 2;
+}
 .top-pill {
     display: flex;
     padding: 10px 20px;
