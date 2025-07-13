@@ -10,7 +10,7 @@ html, body, [class*="css"] {
 .stApp {
     background-color: #0E1117 !important;
     position: relative;
-    z-index: 1; /* Tambahkan z-index untuk konten utama */
+    z-index: 1;
 }
 
 /* Animated texture background */
@@ -22,36 +22,16 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.06) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.25) 0%, transparent 60%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 60% 70%, rgba(186, 85, 211, 0.15) 0%, transparent 50%);
     animation: textureMove 20s ease-in-out infinite;
     pointer-events: none;
-    z-index: -2; /* Lebih rendah dari konten */
+    z-index: -2;
 }
 
-/* Floating particles effect */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.05), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.03), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.04), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.02), transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.03), transparent);
-    background-repeat: repeat;
-    background-size: 200px 100px;
-    animation: particlesFloat 15s linear infinite;
-    pointer-events: none;
-    z-index: -1; /* Lebih rendah dari konten */
-}
-
-/* Gradient mesh overlay - PINDAHKAN KE BODY */
+/* Floating particles and gradient mesh overlay */
 body::after {
     content: '';
     position: fixed;
@@ -60,18 +40,20 @@ body::after {
     width: 100%;
     height: 100%;
     background: 
-        linear-gradient(45deg, rgba(30, 41, 59, 0.1) 0%, transparent 50%),
-        linear-gradient(-45deg, rgba(15, 23, 42, 0.1) 0%, transparent 50%),
-        linear-gradient(90deg, rgba(51, 65, 85, 0.05) 0%, transparent 50%),
-        /* Gabungkan dengan particles */
-        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.05), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.03), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.04), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.02), transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.03), transparent);
+        /* Gradient mesh overlay */
+        linear-gradient(45deg, rgba(30, 41, 59, 0.2) 0%, transparent 50%),
+        linear-gradient(-45deg, rgba(15, 23, 42, 0.15) 0%, transparent 50%),
+        linear-gradient(90deg, rgba(51, 65, 85, 0.1) 0%, transparent 50%),
+        /* Floating particles */
+        radial-gradient(3px 3px at 20px 30px, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(57, 237, 234, 0.1), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.08), transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(104, 106, 207, 0.12), transparent),
+        radial-gradient(1px 1px at 160px 30px, rgba(255, 119, 198, 0.1), transparent),
+        radial-gradient(2px 2px at 200px 60px, rgba(255, 255, 255, 0.06), transparent);
     background-repeat: repeat;
-    background-size: 200px 100px;
-    animation: combinedAnimation 20s ease-in-out infinite;
+    background-size: 300px 200px;
+    animation: combinedAnimation 25s ease-in-out infinite;
     pointer-events: none;
     z-index: -1;
 }
@@ -79,41 +61,55 @@ body::after {
 /* Keyframe animations */
 @keyframes textureMove {
     0%, 100% {
-        transform: translateX(0) translateY(0) rotate(0deg);
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
     }
     25% {
-        transform: translateX(-10px) translateY(-20px) rotate(1deg);
+        transform: translateX(-30px) translateY(-40px) rotate(2deg) scale(1.05);
     }
     50% {
-        transform: translateX(10px) translateY(10px) rotate(-1deg);
+        transform: translateX(25px) translateY(30px) rotate(-1.5deg) scale(0.95);
     }
     75% {
-        transform: translateX(-5px) translateY(-10px) rotate(0.5deg);
-    }
-}
-
-@keyframes particlesFloat {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-20px) translateX(10px);
-    }
-    100% {
-        transform: translateY(0) translateX(0);
+        transform: translateX(-15px) translateY(-20px) rotate(1deg) scale(1.02);
     }
 }
 
 @keyframes combinedAnimation {
     0%, 100% {
-        transform: translateX(0) translateY(0) scale(1);
+        transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
     }
-    33% {
-        transform: translateX(5px) translateY(-10px) scale(1.02);
+    20% {
+        transform: translateX(10px) translateY(-15px) scale(1.03) rotate(0.5deg);
+        opacity: 0.8;
     }
-    66% {
-        transform: translateX(-5px) translateY(5px) scale(0.98);
+    40% {
+        transform: translateX(-8px) translateY(12px) scale(0.97) rotate(-0.3deg);
+        opacity: 0.9;
     }
+    60% {
+        transform: translateX(15px) translateY(8px) scale(1.01) rotate(0.8deg);
+        opacity: 0.85;
+    }
+    80% {
+        transform: translateX(-5px) translateY(-10px) scale(0.99) rotate(-0.2deg);
+        opacity: 0.95;
+    }
+}
+
+/* Pulsing glow effect */
+@keyframes pulseGlow {
+    0%, 100% {
+        filter: brightness(1) contrast(1);
+    }
+    50% {
+        filter: brightness(1.2) contrast(1.1);
+    }
+}
+
+/* Apply pulsing to texture */
+body::before {
+    animation: textureMove 20s ease-in-out infinite, pulseGlow 8s ease-in-out infinite;
 }
 
 /* Pastikan semua konten Streamlit memiliki z-index yang tepat */
@@ -125,7 +121,6 @@ body::after {
 .header-box,
 .feature-section,
 .info-card,
-/* Tambahkan selector Streamlit yang spesifik */
 [data-testid="stSidebar"],
 [data-testid="stHeader"],
 [data-testid="stToolbar"],
@@ -148,7 +143,7 @@ body::after {
 .stSubheader,
 .stHeader {
     position: relative;
-    z-index: 10 !important; /* Pastikan semua konten di atas background */
+    z-index: 10 !important;
 }
 
 /* --- Main Container & Layout --- */
@@ -169,9 +164,12 @@ body::after {
     gap: 20px;
     align-self: stretch;
     border-radius: 25px;
-    border: none;
-    background: rgba(0, 0, 0, 0.20);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+        0px 8px 32px rgba(0, 0, 0, 0.6),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     margin-bottom: 4rem;
     position: relative;
     z-index: 15;
@@ -184,10 +182,10 @@ body::after {
     align-items: center;
     gap: 10px;
     border-radius: 100px;
-    border: none;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
-    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
     color: #FFF;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
@@ -214,6 +212,12 @@ body::after {
     margin: 0 auto;
     position: relative;
     z-index: 16;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
 }
 
 .subtitle {
@@ -240,25 +244,25 @@ body::after {
     gap: 25px;
     align-self: stretch;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     background: linear-gradient(135deg, 
-        rgba(128, 128, 128, 0.3) 0%,
-        rgba(64, 64, 64, 0.4) 50%,
-        rgba(0, 0, 0, 0.5) 100%
+        rgba(128, 128, 128, 0.4) 0%,
+        rgba(64, 64, 64, 0.5) 50%,
+        rgba(0, 0, 0, 0.6) 100%
     );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 
-        0px 8px 32px rgba(0, 0, 0, 0.37),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
+        0px 12px 40px rgba(0, 0, 0, 0.5),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
     margin-bottom: 3rem;
     overflow: visible;
     position: relative;
     width: 100%;
     z-index: 15;
+    transition: all 0.3s ease;
 }
 
-/* Tambahan untuk efek glass yang lebih dramatis */
 .feature-section::before {
     content: '';
     position: absolute;
@@ -267,23 +271,28 @@ body::after {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 50%,
-        rgba(255, 255, 255, 0.0) 100%
+        rgba(57, 237, 234, 0.05) 0%,
+        rgba(104, 106, 207, 0.03) 50%,
+        rgba(255, 119, 198, 0.02) 100%
     );
     border-radius: 15px;
     pointer-events: none;
-    z-index: -1; /* Relative terhadap parent */
+    z-index: -1;
+    animation: sectionGlow 6s ease-in-out infinite;
 }
 
-/* Hover effect untuk interaktivitas */
+@keyframes sectionGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
 .feature-section:hover {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(57, 237, 234, 0.3);
     box-shadow: 
-        0px 12px 40px rgba(0, 0, 0, 0.45),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+        0px 16px 50px rgba(0, 0, 0, 0.6),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.2),
+        0px 0px 30px rgba(57, 237, 234, 0.1);
+    transform: translateY(-5px);
 }
 
 .feature-section > * {
@@ -298,10 +307,10 @@ body::after {
     align-items: center;
     gap: 10px;
     border-radius: 100px;
-    border: none;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
-    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
     color: #FFF;
     font-weight: 500;
     margin: 0;
@@ -404,17 +413,29 @@ body::after {
     flex: 1;
     align-self: stretch;
     border-radius: 15px;
-    background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
-    box-shadow: 0px 4px 5.7px 0px rgba(0, 0, 0, 0.50);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, 
+        rgba(25, 34, 33, 0.9) 31.25%, 
+        rgba(50, 34, 77, 0.9) 65.62%, 
+        rgba(74, 33, 121, 0.9) 99.99%
+    );
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0px 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     text-align: left;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     position: relative;
     z-index: 16;
 }
 
 .info-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.60);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0px 15px 40px rgba(0, 0, 0, 0.7),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.2),
+        0px 0px 25px rgba(57, 237, 234, 0.1);
+    border: 1px solid rgba(57, 237, 234, 0.3);
 }
 
 .card-icon {
@@ -424,10 +445,23 @@ body::after {
     justify-content: center;
     align-items: center;
     border-radius: 100px;
-    background: linear-gradient(180deg, #414141 0%, #212121 100%);
+    background: linear-gradient(180deg, 
+        rgba(65, 65, 65, 0.8) 0%, 
+        rgba(33, 33, 33, 0.9) 100%
+    );
+    backdrop-filter: blur(5px);
     margin: 0;
     position: relative;
     z-index: 17;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover .card-icon {
+    background: linear-gradient(180deg, 
+        rgba(57, 237, 234, 0.3) 0%, 
+        rgba(104, 106, 207, 0.4) 100%
+    );
+    box-shadow: 0px 0px 20px rgba(57, 237, 234, 0.3);
 }
 
 .card-icon svg {
@@ -435,6 +469,12 @@ body::after {
     height: 36px;
     flex-shrink: 0;
     fill: #39EDEA;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover .card-icon svg {
+    fill: #FFF;
+    filter: drop-shadow(0px 0px 5px rgba(57, 237, 234, 0.5));
 }
 
 .card-title,
