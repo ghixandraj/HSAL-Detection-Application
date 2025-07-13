@@ -10,6 +10,7 @@ html, body, [class*="css"] {
 .stApp {
     background-color: #0E1117 !important;
     position: relative;
+    z-index: 1; /* Tambahkan z-index untuk konten utama */
 }
 
 /* Animated texture background */
@@ -26,7 +27,7 @@ body::before {
         radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.06) 0%, transparent 50%);
     animation: textureMove 20s ease-in-out infinite;
     pointer-events: none;
-    z-index: -1;
+    z-index: -2; /* Lebih rendah dari konten */
 }
 
 /* Floating particles effect */
@@ -47,11 +48,11 @@ body::after {
     background-size: 200px 100px;
     animation: particlesFloat 15s linear infinite;
     pointer-events: none;
-    z-index: -1;
+    z-index: -1; /* Lebih rendah dari konten */
 }
 
-/* Gradient mesh overlay */
-.stApp::before {
+/* Gradient mesh overlay - PINDAHKAN KE BODY */
+body::after {
     content: '';
     position: fixed;
     top: 0;
@@ -61,8 +62,16 @@ body::after {
     background: 
         linear-gradient(45deg, rgba(30, 41, 59, 0.1) 0%, transparent 50%),
         linear-gradient(-45deg, rgba(15, 23, 42, 0.1) 0%, transparent 50%),
-        linear-gradient(90deg, rgba(51, 65, 85, 0.05) 0%, transparent 50%);
-    animation: meshMove 25s ease-in-out infinite;
+        linear-gradient(90deg, rgba(51, 65, 85, 0.05) 0%, transparent 50%),
+        /* Gabungkan dengan particles */
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.05), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.03), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.04), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.02), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.03), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: combinedAnimation 20s ease-in-out infinite;
     pointer-events: none;
     z-index: -1;
 }
@@ -95,7 +104,7 @@ body::after {
     }
 }
 
-@keyframes meshMove {
+@keyframes combinedAnimation {
     0%, 100% {
         transform: translateX(0) translateY(0) scale(1);
     }
@@ -107,25 +116,39 @@ body::after {
     }
 }
 
-/* Ensure all main content has proper z-index */
-.main-container {
+/* Pastikan semua konten Streamlit memiliki z-index yang tepat */
+.stApp > div,
+.main .block-container,
+.stSidebar,
+.stSidebar > div,
+.main-container,
+.header-box,
+.feature-section,
+.info-card,
+/* Tambahkan selector Streamlit yang spesifik */
+[data-testid="stSidebar"],
+[data-testid="stHeader"],
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+.stButton,
+.stTextInput,
+.stTextArea,
+.stSelectbox,
+.stVideo,
+.stProgress,
+.stAlert,
+.stSuccess,
+.stError,
+.stWarning,
+.stInfo,
+.stExpander,
+.stSpinner,
+.stMarkdown,
+.stSubheader,
+.stHeader {
     position: relative;
-    z-index: 2;
-}
-
-.header-box {
-    position: relative;
-    z-index: 3;
-}
-
-.feature-section {
-    position: relative;
-    z-index: 3;
-}
-
-.info-card {
-    position: relative;
-    z-index: 3;
+    z-index: 10 !important; /* Pastikan semua konten di atas background */
 }
 
 /* --- Main Container & Layout --- */
@@ -133,6 +156,8 @@ body::after {
     max-width: 1200px;
     margin: auto;
     padding: 2rem 1rem;
+    position: relative;
+    z-index: 10;
 }
 
 /* --- STYLES HEADER BARU --- */
@@ -144,30 +169,13 @@ body::after {
     gap: 20px;
     align-self: stretch;
     border-radius: 25px;
-    border: none; /* hapus border */
+    border: none;
     background: rgba(0, 0, 0, 0.20);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     margin-bottom: 4rem;
-    position: relative; /* tambahkan ini */
+    position: relative;
+    z-index: 15;
 }
-
-/*
-.header-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, #FFF, #000);
-    border-radius: 25px;
-    padding: 1px;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-}
-*/
 
 .top-pill {
     display: flex;
@@ -185,31 +193,14 @@ body::after {
     font-size: 18px;
     font-weight: 400;
     margin: 0;
-    position: relative; 
+    position: relative;
+    z-index: 16;
     text-align: center;
 }
 
-/*
-.top-pill::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, #FFF, #000);
-    border-radius: 100px;
-    padding: 1px;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-}
-*/
-
 .main-title {
-    width: 100%; /* fill container */
-    max-width: 680px; /* batas maksimum */
+    width: 100%;
+    max-width: 680px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
     font-size: 36px;
@@ -220,7 +211,9 @@ body::after {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 0 auto; /* center horizontally */
+    margin: 0 auto;
+    position: relative;
+    z-index: 16;
 }
 
 .subtitle {
@@ -234,6 +227,8 @@ body::after {
     line-height: normal;
     margin: 0;
     max-width: none;
+    position: relative;
+    z-index: 16;
 }
 
 /* --- Feature Section --- */
@@ -245,21 +240,22 @@ body::after {
     gap: 25px;
     align-self: stretch;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* border glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(135deg, 
-        rgba(128, 128, 128, 0.3) 0%,   /* abu-abu dengan opacity */
-        rgba(64, 64, 64, 0.4) 50%,     /* abu gelap */
-        rgba(0, 0, 0, 0.5) 100%        /* hitam */
+        rgba(128, 128, 128, 0.3) 0%,
+        rgba(64, 64, 64, 0.4) 50%,
+        rgba(0, 0, 0, 0.5) 100%
     );
-    backdrop-filter: blur(10px); /* efek blur untuk glassmorphism */
-    -webkit-backdrop-filter: blur(10px); /* untuk browser webkit */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 
         0px 8px 32px rgba(0, 0, 0, 0.37),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1); /* inner highlight */
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     margin-bottom: 3rem;
     overflow: visible;
     position: relative;
     width: 100%;
+    z-index: 15;
 }
 
 /* Tambahan untuk efek glass yang lebih dramatis */
@@ -276,7 +272,8 @@ body::after {
         rgba(255, 255, 255, 0.0) 100%
     );
     border-radius: 15px;
-    pointer-events: none; /* agar tidak menghalangi interaksi */
+    pointer-events: none;
+    z-index: -1; /* Relative terhadap parent */
 }
 
 /* Hover effect untuk interaktivitas */
@@ -289,44 +286,9 @@ body::after {
     transition: all 0.3s ease;
 }
 
-/*
-.feature-section {
-    display: flex;
-    padding: 25px;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    align-self: stretch;
-    border-radius: 15px;
-    border: none;
-    background: rgba(0, 0, 0, 0.20); 
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    margin-bottom: 3rem;
-    overflow: visible;
-    position: relative; 
-    width: 100%;
-}
-
-.feature-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, #FFF, #000);
-    border-radius: 15px;
-    padding: 1px;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-}
-*/
-
 .feature-section > * {
     position: relative;
-    z-index: 1; /* pastikan konten berada di atas pseudo-elements */
+    z-index: 2;
 }
 
 .section-title-pill {
@@ -336,39 +298,22 @@ body::after {
     align-items: center;
     gap: 10px;
     border-radius: 100px;
-    border: none; /* hapus border */
+    border: none;
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     backdrop-filter: blur(5px);
     color: #FFF;
     font-weight: 500;
     margin: 0;
-    z-index: 1;
-    position: relative; /* tambahkan ini */
+    z-index: 16;
+    position: relative;
 }
-
-/*
-.section-title-pill::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, #FFF, #000);
-    border-radius: 100px;
-    padding: 1px;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    z-index: -1; /* pastikan pseudo-element berada di belakang konten */
-}
-*/
 
 .category-box {
     text-align: center;
     margin: 0;
+    position: relative;
+    z-index: 16;
 }
 
 .category-title {
@@ -382,6 +327,8 @@ body::after {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 1rem;
+    position: relative;
+    z-index: 16;
 }
 
 .category-text {
@@ -393,6 +340,8 @@ body::after {
     line-height: normal;
     max-width: 750px;
     margin: 0 auto;
+    position: relative;
+    z-index: 16;
 }
 
 .category-text span {
@@ -441,9 +390,9 @@ body::after {
     gap: 2rem;
     flex-wrap: wrap;
     position: relative;
-    z-index: 1;
+    z-index: 16;
     width: 100%;
-    margin: 0 auto; /* Center container */
+    margin: 0 auto;
 }
 
 .info-card {
@@ -454,40 +403,14 @@ body::after {
     gap: 5px;
     flex: 1;
     align-self: stretch;
-    border-radius: 15px; /* diperbesar dari 15px ke 25px */
-    /*border: none;*/
+    border-radius: 15px;
     background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
     box-shadow: 0px 4px 5.7px 0px rgba(0, 0, 0, 0.50);
     text-align: left;
     transition: all 0.2s ease-in-out;
     position: relative;
+    z-index: 16;
 }
-
-/*
-.info-card::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    background: linear-gradient(to bottom, #FFF, #000);
-    border-radius: 26px; 
-    z-index: -1;
-}
-
-.info-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, #192221 31.25%, #32224D 65.62%, #4A2179 99.99%);
-    border-radius: 15px; 
-    z-index: -1;
-}
-*/
 
 .info-card:hover {
     transform: scale(1.03);
@@ -501,16 +424,17 @@ body::after {
     justify-content: center;
     align-items: center;
     border-radius: 100px;
-    /*border: 1px solid #FFF;*/
     background: linear-gradient(180deg, #414141 0%, #212121 100%);
     margin: 0;
+    position: relative;
+    z-index: 17;
 }
 
 .card-icon svg {
     width: 36px;
     height: 36px;
     flex-shrink: 0;
-    fill: #39EDEA; /* Warna solid sebagai pengganti gradien */
+    fill: #39EDEA;
 }
 
 .card-title,
@@ -518,6 +442,8 @@ body::after {
     display: block;
     margin: 0;
     padding: 0;
+    position: relative;
+    z-index: 17;
 }
 
 .card-title {
@@ -539,6 +465,8 @@ body::after {
     color: #e0e0e0;
     line-height: 1.5;
     font-weight: 500;
+    position: relative;
+    z-index: 17;
 }
 
 /* --- Responsive Design --- */
