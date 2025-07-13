@@ -405,6 +405,7 @@ body::before {
         rgba(104, 106, 207, 0.4) 100%
     );
     box-shadow: 0px 0px 20px rgba(57, 237, 234, 0.3);
+    transform: rotate(15deg);
 }
 
 .card-icon svg {
