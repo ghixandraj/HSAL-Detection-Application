@@ -1,92 +1,43 @@
 /* --- Global & Font --- */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
-    background-color: transparent !important; /* HARUS TRANSPARAN agar background animasi terlihat */
+    background-color: transparent !important; /* Changed to transparent */
     color: #e0e0e0 !important;
     position: relative;
     overflow-x: hidden;
 }
 
 .stApp {
-    background-color: transparent !important; /* HARUS TRANSPARAN agar background animasi terlihat */
+    background-color: transparent !important; /* Changed to transparent */
     position: relative;
     z-index: 1;
 }
 
-/* Animasi Background Garis Gelombang */
+/* Animated Background */
 body::before {
     content: '';
-    position: fixed; /* Memastikan background menutupi seluruh viewport */
-    top: -25%; /* Mulai sedikit di luar viewport untuk transisi halus */
-    left: -25%; /* Mulai sedikit di luar viewport untuk transisi halus */
-    width: 150%; /* Lebih besar dari viewport untuk efek pergerakan */
-    height: 150%; /* Lebih besar dari viewport untuk efek pergerakan */
-    background:
-        /* Lapisan utama gelombang yang tebal, lebih fokus ke tengah */
-        repeating-radial-gradient(circle at center,
-            rgba(168, 93, 247, 0.1) 0px,
-            transparent 1px,
-            transparent 20px,
-            rgba(168, 93, 247, 0.05) 21px,
-            transparent 22px,
-            transparent 40px
-        ),
-        /* Lapisan gelombang halus dari pojok kiri atas */
-        repeating-radial-gradient(circle at 0% 0%,
-            rgba(168, 93, 247, 0.08) 0px,
-            transparent 1px,
-            transparent 15px,
-            rgba(168, 93, 247, 0.03) 16px,
-            transparent 17px,
-            transparent 30px
-        ),
-        /* Lapisan gelombang halus dari pojok kanan bawah */
-        repeating-radial-gradient(circle at 100% 100%,
-            rgba(168, 93, 247, 0.06) 0px,
-            transparent 1px,
-            transparent 18px,
-            rgba(168, 93, 247, 0.02) 19px,
-            transparent 20px,
-            transparent 35px
-        ),
-        /* Gradien dasar untuk warna gelap */
-        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%);
-
-    background-size:
-        80% 80%,   /* Ukuran untuk repeating-radial-gradient pertama */
-        70% 70%,   /* Ukuran untuk repeating-radial-gradient kedua */
-        60% 60%,   /* Ukuran untuk repeating-radial-gradient ketiga */
-        cover;     /* Ukuran untuk linear-gradient dasar */
-
-    /* Posisi awal untuk setiap lapisan background */
-    background-position:
-        50% 50%,   /* Center */
-        0% 0%,     /* Top-left */
-        100% 100%, /* Bottom-right */
-        0% 0%;     /* Base */
-
-    animation: wave-motion 60s ease-in-out infinite alternate; /* Animasi yang lebih lambat dan halus */
-    transform-origin: center center; /* Titik asal transformasi */
-    z-index: -1;
-    pointer-events: none; /* Memastikan elemen di belakangnya bisa diklik */
+    position: fixed; /* Use fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(104, 106, 207, 0.05) 0%, transparent 70%),
+        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%); /* Base dark background */
+    background-size: 200% 200%; /* Larger than viewport to allow movement */
+    animation: wave-move 30s ease-in-out infinite alternate; /* Slower, gentler animation */
+    z-index: -1; /* Ensure it's behind all content */
+    pointer-events: none; /* Allow clicks to pass through */
 }
 
-@keyframes wave-motion {
+@keyframes wave-move {
     0% {
-        transform: translate(0%, 0%) scale(1) rotate(0deg);
-        background-position:
-            50% 50%,   /* Center */
-            0% 0%,     /* Top-left */
-            100% 100%, /* Bottom-right */
-            0% 0%;
+        background-position: 0% 0%;
     }
     100% {
-        transform: translate(25%, 25%) scale(1.1) rotate(5deg);
-        background-position:
-            0% 0%,     /* Shifted */
-            100% 100%, /* Shifted */
-            0% 0%,     /* Shifted */
-            0% 0%;
+        background-position: 100% 100%;
     }
 }
 
