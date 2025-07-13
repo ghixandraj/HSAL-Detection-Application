@@ -329,7 +329,7 @@ html, body, [class*="css"] {
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(180deg, 
-        rgba(25, 34, 33, 0.9) 31.25%, 
+        #0E1117 31.25%, 
         rgba(50, 34, 77, 0.9) 65.62%, 
         rgba(74, 33, 121, 0.9) 99.99%
     );
