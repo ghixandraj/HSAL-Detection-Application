@@ -1,43 +1,64 @@
 /* --- Global & Font --- */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
-    background-color: transparent !important; /* Changed to transparent */
+    background-color: transparent !important; /* HARUS TRANSPARAN agar background animasi terlihat */
     color: #e0e0e0 !important;
     position: relative;
     overflow-x: hidden;
 }
 
 .stApp {
-    background-color: transparent !important; /* Changed to transparent */
+    background-color: transparent !important; /* HARUS TRANSPARAN agar background animasi terlihat */
     position: relative;
     z-index: 1;
 }
 
-/* Animated Background */
+/* Animasi Background Garis Bergejolak */
 body::before {
     content: '';
-    position: fixed; /* Use fixed to cover the entire viewport */
+    position: fixed; /* Memastikan background menutupi seluruh viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:
-        radial-gradient(circle at 20% 80%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(104, 106, 207, 0.05) 0%, transparent 70%),
-        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%); /* Base dark background */
-    background-size: 200% 200%; /* Larger than viewport to allow movement */
-    animation: wave-move 30s ease-in-out infinite alternate; /* Slower, gentler animation */
-    z-index: -1; /* Ensure it's behind all content */
-    pointer-events: none; /* Allow clicks to pass through */
+    /* Menggunakan multiple linear-gradient untuk menciptakan garis dan warna dasar */
+    background:
+        /* Lapisan garis-garis ungu yang bergerak */
+        linear-gradient(270deg, rgba(104, 106, 207, 0.15) 0%, rgba(104, 106, 207, 0) 10%),
+        linear-gradient(90deg, rgba(104, 106, 207, 0.15) 0%, rgba(104, 106, 207, 0) 10%),
+        linear-gradient(180deg, rgba(104, 106, 207, 0.1) 0%, rgba(104, 106, 207, 0) 10%),
+        linear-gradient(0deg, rgba(104, 106, 207, 0.1) 0%, rgba(104, 106, 207, 0) 10%),
+        /* Lapisan garis yang lebih halus */
+        linear-gradient(45deg, rgba(104, 106, 207, 0.08) 0%, transparent 5%),
+        linear-gradient(135deg, rgba(104, 106, 207, 0.08) 0%, transparent 5%),
+        /* Warna latar belakang dasar */
+        #0E1117; /* Warna gelap solid */
+
+    background-size:
+        300px 300px, /* Ukuran untuk garis horizontal 1 */
+        350px 350px, /* Ukuran untuk garis horizontal 2 */
+        400px 400px, /* Ukuran untuk garis vertikal 1 */
+        450px 450px, /* Ukuran untuk garis vertikal 2 */
+        250px 250px, /* Ukuran untuk garis diagonal 1 */
+        280px 280px, /* Ukuran untuk garis diagonal 2 */
+        cover; /* Ukuran untuk warna dasar */
+
+    background-position:
+        0% 0%, 50% 50%, 0% 0%, 50% 50%, 0% 0%, 50% 50%; /* Posisi awal untuk setiap lapisan */
+
+    animation: wave-move 45s linear infinite alternate; /* Durasi lebih panjang, gerakan lebih lambat dan halus */
+    z-index: -1;
+    pointer-events: none; /* Memastikan elemen di belakangnya bisa diklik */
 }
 
 @keyframes wave-move {
     0% {
-        background-position: 0% 0%;
+        background-position:
+            0% 0%, 50% 50%, 0% 0%, 50% 50%, 0% 0%, 50% 50%;
     }
     100% {
-        background-position: 100% 100%;
+        background-position:
+            100% 100%, 0% 0%, 100% 100%, 0% 0%, 100% 100%, 0% 0%;
     }
 }
 
