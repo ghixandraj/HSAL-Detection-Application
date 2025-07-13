@@ -126,16 +126,68 @@ html, body, [class*="css"] {
     gap: 25px;
     align-self: stretch;
     border-radius: 15px;
-    border: none;
-    background: rgba(0, 0, 0, 0.20); /* latar belakang hitam dengan opacity 20% */
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* border glass effect */
+    background: linear-gradient(135deg, 
+        rgba(128, 128, 128, 0.3) 0%,   /* abu-abu dengan opacity */
+        rgba(64, 64, 64, 0.4) 50%,     /* abu gelap */
+        rgba(0, 0, 0, 0.5) 100%        /* hitam */
+    );
+    backdrop-filter: blur(10px); /* efek blur untuk glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* untuk browser webkit */
+    box-shadow: 
+        0px 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1); /* inner highlight */
     margin-bottom: 3rem;
     overflow: visible;
-    position: relative; /* tambahkan ini untuk pseudo-element */
+    position: relative;
     width: 100%;
 }
 
+/* Tambahan untuk efek glass yang lebih dramatis */
+.feature-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.02) 50%,
+        rgba(255, 255, 255, 0.0) 100%
+    );
+    border-radius: 15px;
+    pointer-events: none; /* agar tidak menghalangi interaksi */
+}
+
+/* Hover effect untuk interaktivitas */
+.feature-section:hover {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0px 12px 40px rgba(0, 0, 0, 0.45),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
 /*
+.feature-section {
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    align-self: stretch;
+    border-radius: 15px;
+    border: none;
+    background: rgba(0, 0, 0, 0.20); 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 3rem;
+    overflow: visible;
+    position: relative; 
+    width: 100%;
+}
+
 .feature-section::before {
     content: '';
     position: absolute;
