@@ -16,18 +16,112 @@ import streamlit.components.v1 as components
 st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🎬", layout="wide")
 
 # --- Fungsi untuk memuat CSS eksternal ---
-def load_css(file_name):
-    """
-    Fungsi untuk memuat file CSS lokal dan menyuntikkannya ke dalam aplikasi Streamlit.
-    """
-    try:
-        with open(file_name) as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-    except FileNotFoundError:
-        st.error(f"File CSS '{file_name}' tidak ditemukan. Pastikan file tersebut berada di direktori yang sama dengan app.py.")
+def load_css():
+    """Load CSS untuk background dinamis"""
+    css_content = """
+    <style>
+    /* Paste CSS dari artifact sebelumnya di sini */
+    
+    /* --- BACKGROUND DINAMIS UNTUK STREAMLIT --- */
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif !important;
+        background: linear-gradient(135deg, #0E1117 0%, #1a1f2e 50%, #2a1f3d 100%) !important;
+        background-size: 400% 400% !important;
+        animation: gradientShift 15s ease infinite !important;
+        color: #e0e0e0 !important;
+        position: relative;
+        overflow-x: hidden;
+    }
 
-# --- Muat file CSS ---
-load_css("style.css")
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .stApp {
+        background: transparent !important;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Animated background elements */
+    .stApp::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 20% 80%, rgba(57, 237, 234, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(255, 119, 198, 0.05) 0%, transparent 50%);
+        animation: backgroundMove 20s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    @keyframes backgroundMove {
+        0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+        25% { transform: translateX(50px) translateY(-30px) rotate(90deg); }
+        50% { transform: translateX(-30px) translateY(50px) rotate(180deg); }
+        75% { transform: translateX(30px) translateY(30px) rotate(270deg); }
+    }
+
+    /* Floating particles */
+    .main .block-container::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(2px 2px at 20px 30px, rgba(57, 237, 234, 0.6), transparent),
+            radial-gradient(2px 2px at 40px 70px, rgba(104, 106, 207, 0.4), transparent),
+            radial-gradient(1px 1px at 90px 40px, rgba(255, 119, 198, 0.5), transparent),
+            radial-gradient(1px 1px at 130px 80px, rgba(57, 237, 234, 0.3), transparent),
+            radial-gradient(2px 2px at 160px 30px, rgba(104, 106, 207, 0.6), transparent);
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        animation: particleFloat 25s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    @keyframes particleFloat {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(-200px, -200px); }
+    }
+
+    /* Grid pattern overlay */
+    .main .block-container::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(57, 237, 234, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(57, 237, 234, 0.03) 1px, transparent 1px);
+        background-size: 100px 100px;
+        animation: gridMove 30s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 100px 100px; }
+    }
+
+    /* Paste sisa CSS dari artifact sebelumnya... */
+    </style>
+    """
+    
+    st.markdown(css_content, unsafe_allow_html=True)
 
 # Font
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">', unsafe_allow_html=True)
