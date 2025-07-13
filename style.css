@@ -42,128 +42,131 @@ body::before {
 }
 
 /* --- Animasi Partikel --- */
-/* Anda perlu menambahkan elemen HTML berikut di dalam body Anda:
-   <div class="particles-container">
-       <div class="particle"></div>
-       <div class="particle"></div>
-       <div class="particle"></div>
-       </div>
-*/
 .particles-container {
-    position: fixed; /* Penting agar partikel selalu di latar belakang */
+    position: fixed; /* Tetap penting */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Pastikan partikel tidak terlihat di luar container */
-    z-index: -2; /* Di bawah background utama Anda */
-    pointer-events: none; /* Izinkan klik melewati partikel */
+    overflow: hidden;
+    z-index: -2;
+    pointer-events: none;
 }
 
 .particle {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.3); /* Warna putih transparan */
-    border-radius: 50%; /* Bentuk lingkaran */
-    opacity: 0; /* Mulai dengan tidak terlihat */
-    animation: floatAndFade infinite ease-in-out; /* Animasi utama */
+    background-color: #a892ee; /* Warna ungu muda (sesuaikan jika perlu) */
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(10px); /* Efek blur */
+    animation: floatAndFadeBig 25s infinite ease-in-out; /* Animasi baru */
 }
 
-/* Pengaturan individual untuk setiap partikel. Sesuaikan atau tambahkan lebih banyak! */
+/* Pengaturan individual untuk setiap partikel */
 .particles-container .particle:nth-child(1) {
-    width: 5px; height: 5px;
-    left: 10%; top: 20%;
+    width: 20px; height: 20px;
+    left: 15%; top: 25%;
     animation-delay: 0s;
-    animation-duration: 15s;
+    animation-duration: 20s;
+    background-color: #bba0ee; /* Sedikit variasi warna */
 }
 
 .particles-container .particle:nth-child(2) {
-    width: 8px; height: 8px;
-    left: 80%; top: 50%;
-    animation-delay: 2s;
-    animation-duration: 20s;
+    width: 25px; height: 25px;
+    left: 75%; top: 55%;
+    animation-delay: 3s;
+    animation-duration: 28s;
+    background-color: #cbb0ff;
 }
 
 .particles-container .particle:nth-child(3) {
-    width: 6px; height: 6px;
-    left: 30%; top: 90%;
-    animation-delay: 5s;
-    animation-duration: 18s;
+    width: 18px; height: 18px;
+    left: 35%; top: 85%;
+    animation-delay: 7s;
+    animation-duration: 22s;
+    background-color: #a088e8;
 }
 
 .particles-container .particle:nth-child(4) {
-    width: 7px; height: 7px;
-    left: 60%; top: 10%;
-    animation-delay: 8s;
-    animation-duration: 22s;
+    width: 22px; height: 22px;
+    left: 65%; top: 15%;
+    animation-delay: 10s;
+    animation-duration: 25s;
+    background-color: #b39cee;
 }
 
 .particles-container .particle:nth-child(5) {
-    width: 4px; height: 4px;
+    width: 15px; height: 15px;
     left: 5%; top: 70%;
-    animation-delay: 3s;
-    animation-duration: 17s;
+    animation-delay: 5s;
+    animation-duration: 23s;
+    background-color: #d4c2ff;
 }
 
 .particles-container .particle:nth-child(6) {
-    width: 9px; height: 9px;
+    width: 28px; height: 28px;
     left: 90%; top: 5%;
-    animation-delay: 10s;
-    animation-duration: 25s;
+    animation-delay: 1s;
+    animation-duration: 30s;
+    background-color: #9880e0;
 }
 
 .particles-container .particle:nth-child(7) {
-    width: 5px; height: 5px;
-    left: 20%; top: 40%;
-    animation-delay: 1s;
-    animation-duration: 19s;
+    width: 16px; height: 16px;
+    left: 25%; top: 45%;
+    animation-delay: 9s;
+    animation-duration: 21s;
+    background-color: #aea8f0;
 }
 
 .particles-container .particle:nth-child(8) {
-    width: 7px; height: 7px;
-    left: 70%; top: 75%;
-    animation-delay: 6s;
-    animation-duration: 21s;
+    width: 24px; height: 24px;
+    left: 85%; top: 75%;
+    animation-delay: 4s;
+    animation-duration: 27s;
+    background-color: #c5b8f8;
 }
 
 .particles-container .particle:nth-child(9) {
-    width: 6px; height: 6px;
-    left: 40%; top: 0%;
-    animation-delay: 4s;
-    animation-duration: 16s;
+    width: 19px; height: 19px;
+    left: 45%; top: 0%;
+    animation-delay: 12s;
+    animation-duration: 24s;
+    background-color: #9078d8;
 }
 
 .particles-container .particle:nth-child(10) {
-    width: 8px; height: 8px;
+    width: 21px; height: 21px;
     left: 0%; top: 60%;
-    animation-delay: 7s;
-    animation-duration: 23s;
+    animation-delay: 2s;
+    animation-duration: 29s;
+    background-color: #b8a8f0;
 }
 
-/* Keyframes untuk animasi melayang dan memudar */
-@keyframes floatAndFade {
+/* Keyframes untuk animasi melayang dan memudar (dengan ukuran lebih besar) */
+@keyframes floatAndFadeBig {
     0% {
         transform: translateY(0) translateX(0);
-        opacity: 0;
-        transform: scale(0.5); /* Mulai lebih kecil */
+        opacity: 0.1; /* Lebih redup di awal */
+        transform: scale(0.8); /* Mulai sedikit lebih kecil */
     }
     25% {
-        opacity: 0.8; /* Puncak opasitas */
+        opacity: 0.6;
     }
     50% {
-        transform: translateY(-100vh) translateX(50vw); /* Bergerak ke atas dan ke samping */
-        opacity: 0.5;
-        transform: scale(1.2); /* Membesar */
+        transform: translateY(-120vh) translateX(60vw); /* Jarak lebih jauh */
+        opacity: 0.4;
+        transform: scale(1.2); /* Sedikit membesar */
     }
     75% {
-        opacity: 0.2;
+        opacity: 0.3;
     }
     100% {
-        transform: translateY(-200vh) translateX(100vw); /* Bergerak jauh ke atas dan ke samping */
-        opacity: 0;
-        transform: scale(0.8); /* Kembali mengecil */
+        transform: translateY(-220vh) translateX(110vw); /* Jauh lebih jauh */
+        opacity: 0.1; /* Lebih redup di akhir */
+        transform: scale(1); /* Kembali ke ukuran normal */
     }
 }
-
 
 /* Pastikan semua konten Streamlit memiliki z-index yang tepat */
 .stApp > div,
