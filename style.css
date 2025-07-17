@@ -946,18 +946,11 @@ body::before {
 }
 
 .stExpander details summary::after {
-    content: '▶'; /* Custom arrow for closed state */
     font-size: 0.8em;
     margin-left: auto;
     transition: transform 0.2s ease-in-out;
     color: #fff;
 }
-
-.stExpander details[open] summary::after {
-    content: '▼'; /* Custom arrow for open state */
-    transform: rotate(0deg); /* No rotation needed if using a down arrow */
-}
-
 
 .stExpander > div > div { /* Content inside the expander */
     padding: 15px 20px;
