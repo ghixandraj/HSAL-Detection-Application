@@ -994,26 +994,33 @@ body::before {
     display: flex; /* Menggunakan flexbox untuk penataan ikon dan teks */
     align-items: center;
     gap: 10px;
-    width: 100%; /* Pastikan semua stAlert mengisi lebar */
-    box-sizing: border-box; /* Pastikan padding dihitung dalam width */
+    /* Tambahkan ini jika tidak secara otomatis mengisi lebar */
+    width: 100%;
+    box-sizing: border-box; /* Penting untuk padding agar tidak melebihi width 100% */
 }
 
 .stSuccess {
+    background-color: rgba(46, 204, 113, 0.15); /* Warna hijau dengan transparansi */
     color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.3); /* Border hijau */
 }
 
 .stInfo {
+    background-color: rgba(52, 152, 219, 0.15); /* Warna biru dengan transparansi */
     color: #3498db;
+    border: 1px solid rgba(52, 152, 219, 0.3); /* Border biru */
 }
 
 .stWarning {
+    background-color: rgba(241, 196, 15, 0.15); /* Warna kuning dengan transparansi */
     color: #f1c40f;
-    text-shadow: 0px 0px 8px rgba(241, 196, 15, 0.7);
-    font-weight: 600;
+    border: 1px solid rgba(241, 196, 15, 0.3); /* Border kuning */
 }
 
 .stError {
+    background-color: rgba(231, 76, 60, 0.15); /* Warna merah dengan transparansi */
     color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3); /* Border merah */
 }
 
 /* Spinner */
