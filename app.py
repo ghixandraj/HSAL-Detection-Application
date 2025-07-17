@@ -32,23 +32,7 @@ load_css("style.css")
 # Font
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 
-st.markdown("""
-<div class="particles-container">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    </div>
-""", unsafe_allow_html=True)
 
-# Membungkus semua konten utama dalam div 'main-container'
-st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
 # --- HEADER ---
 st.markdown("""
