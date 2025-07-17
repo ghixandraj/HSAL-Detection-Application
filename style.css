@@ -722,58 +722,32 @@ body::before {
 /* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
 /* Style for Buttons (st.button) */
 .stButton > button {
-    display: flex; /* Use flexbox for alignment of content inside the button */
-    padding: 15px; /* Match info-card padding */
-    flex-direction: column;
-    align-items: center; /* Align text to the start */
-    gap: 5px; /* Match info-card gap */
-    /* flex: 1; Uncomment if you want buttons to stretch within a flex container */
-    align-self: stretch;
-    border-radius: 15px; /* Match info-card border-radius */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Match info-card border */
-    background: linear-gradient(180deg,
-        #0E1117 31.25%,
-        rgba(50, 34, 77, 0.9) 65.62%,
-        rgba(74, 33, 121, 0.9) 99.99%
-    ); /* Match info-card background */
-    backdrop-filter: blur(10px); /* Match info-card backdrop-filter */
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow:
-        0px 8px 25px rgba(0, 0, 0, 0.5),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1); /* Match info-card box-shadow */
-    text-align: center; 
-    transition: all 0.3s ease-in-out; /* Match info-card transition */
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, #39EDEA 0%, #686ACF 100%);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
-    z-index: 16; /* Ensure it's above background elements */
-
-    /* Reset/adjust specific button styles that don't fit the info-card look */
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem; /* Adjust font size to match card titles */
-    font-weight: 900; /* Bold font for button text */
-    color: #ffffff; /* White text for contrast */
-    text-shadow: none; /* Remove previous text shadow */
-    line-height: 1.1; /* Adjust line height */
+    /* Perbaikan untuk kontras teks pada tombol analisis video */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Tambahkan shadow teks */
 }
 
 .stButton > button:hover {
-    box-shadow:
-        0px 15px 40px rgba(0, 0, 0, 0.7),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.2),
-        0px 0px 25px rgba(57, 237, 234, 0.1); /* Match info-card hover box-shadow */
-    border: 1px solid rgba(57, 237, 234, 0.3); /* Match info-card hover border */
-    background: linear-gradient(180deg,
-        #0E1117 31.25%,
-        rgba(50, 34, 77, 0.95) 65.62%, /* Slightly more opaque on hover */
-        rgba(74, 33, 121, 0.95) 99.99%
-    );
+    background: linear-gradient(90deg, #686ACF 0%, #39EDEA 100%);
+    box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.7), 0px 0px 20px rgba(57, 237, 234, 0.3);
+    transform: translateY(-3px) scale(1.01);
 }
 
 .stButton > button:active {
-    box-shadow:
-        0px 10px 30px rgba(0, 0, 0, 0.6),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
+    transform: translateY(0);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Style for "Load Model" and "Load Tokenizer" buttons */
@@ -988,42 +962,44 @@ body::before {
 
 /* Style for Processing Text Messages (st.info, st.success, st.warning, st.error, st.spinner) */
 .stAlert {
-    border-radius: 15px;
-    padding: 15px 20px;
+    /* Menghilangkan background dan shadow bawaan */
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important; /* Pastikan blur juga hilang */
+    -webkit-backdrop-filter: none !important;
+
+    /* Menyesuaikan dengan ukuran layar */
+    width: 100%; /* Pastikan mengisi lebar kontainer */
+    padding: 0; /* Hapus padding agar teks menempel sisi */
+    margin-bottom: 0.5rem; /* Kurangi margin bawah jika perlu */
+
     font-family: 'Poppins', sans-serif;
     font-size: 1.05rem;
     font-weight: 500;
-    margin-bottom: 1rem;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* Jaga gap untuk ikon jika ada */
 }
 
+/* Menyesuaikan warna teks spesifik untuk setiap jenis notifikasi tanpa background */
 .stSuccess {
-    background-color: rgba(46, 204, 113, 0.15); /* Green with transparency */
-    color: #2ecc71;
-    border: 1px solid rgba(46, 204, 113, 0.3);
+    color: #2ecc71; /* Warna hijau */
 }
 
 .stInfo {
-    background-color: rgba(52, 152, 219, 0.15); /* Blue with transparency */
-    color: #3498db;
-    border: 1px solid rgba(52, 152, 219, 0.3);
+    color: #3498db; /* Warna biru */
 }
 
 .stWarning {
-    background-color: rgba(241, 196, 15, 0.15); /* Yellow with transparency */
-    color: #f1c40f;
-    border: 1px solid rgba(241, 196, 15, 0.3);
+    color: #f1c40f; /* Warna kuning */
+    /* Tambahkan efek glow untuk PERINGATAN */
+    text-shadow: 0px 0px 8px rgba(241, 196, 15, 0.7);
+    font-weight: 600; /* Jadikan lebih tebal */
 }
 
 .stError {
-    background-color: rgba(231, 76, 60, 0.15); /* Red with transparency */
-    color: #e74c3c;
-    border: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c; /* Warna merah */
 }
 
 /* Spinner */
@@ -1063,6 +1039,25 @@ p {
     color: #e0e0e0;
     line-height: 1.6;
     margin-bottom: 1em;
+}
+
+/* Tambahan: Pastikan teks di dalam markdown juga responsif */
+.stMarkdown {
+    width: 100%; /* Pastikan markdown mengisi lebar yang tersedia */
+    /* Hapus jika ada background atau padding yang tidak diinginkan dari gaya sebelumnya */
+    background-color: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Untuk paragraf spesifik seperti "Berikut adalah kalimat-kalimat yang terdeteksi bermasalah:" */
+/* Jika Anda menempatkan teks ini dalam p tag Streamlit biasa: */
+.stMarkdown p {
+    font-size: 1rem; /* Ukuran font default untuk p */
+    color: #e0e0e0; /* Warna teks default */
+    margin-bottom: 1em;
+    width: 100%; /* Memastikan lebar responsif */
+    box-sizing: border-box; /* Pastikan padding/border dihitung dalam lebar */
 }
 
 /* Sidebar styling to match the main theme */
