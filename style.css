@@ -630,7 +630,6 @@ body::before {
 }
 
 /* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
-
 /* Style for Buttons (st.button) */
 .stButton > button {
     border: none;
@@ -670,48 +669,49 @@ body::before {
 
 /* Style for YouTube Video Input Field (st.text_input) */
 .stTextInput > div > div > input {
-    background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent dark */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Border default */
+    background-color: rgba(14, 17, 23, 0.7); /* Lebih gelap, mendekati background */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default lebih tipis dan transparan */
     border-radius: 15px;
     padding: 15px 20px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Warna teks lebih terang */
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
-    transition: all 0.3s ease-in-out; /* Tambah transisi untuk box-shadow dan border */
-    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-    border-color: rgba(255, 255, 255, 0.15) !important; /* Memastikan warna border normal */
+    transition: all 0.3s ease-in-out; /* Transisi untuk semua properti */
+    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4); /* Inner shadow lebih dalam */
+    backdrop-filter: blur(8px); /* Efek blur lebih kuat */
+    -webkit-backdrop-filter: blur(8px);
+    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1; /* Default gradient border */
+    border-style: solid; /* Pastikan border style adalah solid untuk gradient border */
+    border-width: 1px;
 }
 
-/* Modifikasi INI untuk efek hover */
+/* Efek HOVER untuk input field */
 .stTextInput > div > div > input:hover {
-    border-color: rgba(57, 237, 234, 0.3) !important; /* Border terang seperti info-card hover */
+    background-color: rgba(14, 17, 23, 0.85); /* Sedikit lebih solid saat hover */
+    border-color: transparent !important; /* Hilangkan border solid */
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1; /* Border gradient penuh */
     box-shadow:
-        0px 0px 25px rgba(57, 237, 234, 0.1), /* Glow effect */
-        inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Pertahankan shadow inset */
-    transform: translateY(-2px); /* Sedikit naik saat dihover, seperti info-card */
+        0px 0px 20px rgba(57, 237, 234, 0.2), /* Glow effect */
+        inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important; /* Inner shadow lebih gelap */
+    transform: translateY(-2px); /* Sedikit naik */
+    outline: none !important; /* Pastikan outline tetap hilang */
 }
 
-
-/* Ini adalah inti perbaikannya untuk saat fokus (ditekan/diketik) */
+/* Efek FOKUS untuk input field */
 .stTextInput > div > div > input:focus {
+    background-color: rgba(14, 17, 23, 0.95); /* Lebih solid saat fokus */
     outline: none !important; /* Hapus outline bawaan browser/streamlit */
-    border-color: rgba(57, 237, 234, 0.5) !important; /* Border lebih kuat saat fokus */
+    border-color: transparent !important; /* Hilangkan border solid */
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1; /* Border gradient yang lebih kaya */
     box-shadow:
-        0px 0px 30px rgba(57, 237, 234, 0.4), /* Bayangan fokus lebih kuat */
-        inset 0px 2px 8px rgba(0, 0, 0, 0.6) !important; /* Inset shadow lebih gelap */
+        0px 0px 35px rgba(57, 237, 234, 0.5), /* Bayangan fokus lebih kuat */
+        inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important; /* Inner shadow paling gelap */
     transform: translateY(-1px); /* Sedikit naik saat fokus */
 }
 
 /* Penyesuaian agar border div pembungkus juga tidak mengganggu visual */
 .stTextInput div[data-baseweb="input"],
 .stTextInput > div {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-/* Jika ada kelas 'st-emotion-cache' yang perlu ditargetkan lagi */
-.stTextInput div.st-emotion-cache-1cxhd8x { /* Sesuaikan kelas jika berbeda di browser Anda */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
@@ -726,33 +726,43 @@ body::before {
 
 /* Style for Text Area (st.text_area) - used for transcript display */
 .stTextArea > div > div > textarea {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Border default */
+    background-color: rgba(14, 17, 23, 0.7); /* Lebih gelap, mendekati background */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default lebih tipis dan transparan */
     border-radius: 15px;
     padding: 15px 20px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Warna teks lebih terang */
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    transition: all 0.3s ease-in-out; /* Tambah transisi untuk box-shadow dan border */
-    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-    border-color: rgba(255, 255, 255, 0.15) !important; /* Memastikan warna border normal */
+    transition: all 0.3s ease-in-out; /* Transisi untuk semua properti */
+    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4); /* Inner shadow lebih dalam */
+    backdrop-filter: blur(8px); /* Efek blur lebih kuat */
+    -webkit-backdrop-filter: blur(8px);
+    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1; /* Default gradient border */
+    border-style: solid; /* Pastikan border style adalah solid untuk gradient border */
+    border-width: 1px;
 }
 
+/* Efek HOVER untuk text area */
 .stTextArea > div > div > textarea:hover {
-    border-color: rgba(57, 237, 234, 0.3) !important; /* Border terang seperti info-card hover */
+    background-color: rgba(14, 17, 23, 0.85); /* Sedikit lebih solid saat hover */
+    border-color: transparent !important; /* Hilangkan border solid */
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1; /* Border gradient penuh */
     box-shadow:
-        0px 0px 25px rgba(57, 237, 234, 0.1), /* Glow effect */
-        inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Pertahankan shadow inset */
-    transform: translateY(-2px); /* Sedikit naik saat dihover, seperti info-card */
+        0px 0px 20px rgba(57, 237, 234, 0.2), /* Glow effect */
+        inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important; /* Inner shadow lebih gelap */
+    transform: translateY(-2px); /* Sedikit naik */
+    outline: none !important; /* Pastikan outline tetap hilang */
 }
 
+/* Efek FOKUS untuk text area */
 .stTextArea > div > div > textarea:focus {
+    background-color: rgba(14, 17, 23, 0.95); /* Lebih solid saat fokus */
     outline: none !important; /* Hapus outline bawaan browser/streamlit */
-    border-color: rgba(57, 237, 234, 0.5) !important; /* Border lebih kuat saat fokus */
+    border-color: transparent !important; /* Hilangkan border solid */
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1; /* Border gradient yang lebih kaya */
     box-shadow:
-        0px 0px 30px rgba(57, 237, 234, 0.4), /* Bayangan fokus lebih kuat */
-        inset 0px 2px 8px rgba(0, 0, 0, 0.6) !important; /* Inset shadow lebih gelap */
+        0px 0px 35px rgba(57, 237, 234, 0.5), /* Bayangan fokus lebih kuat */
+        inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important; /* Inner shadow paling gelap */
     transform: translateY(-1px); /* Sedikit naik saat fokus */
 }
 
