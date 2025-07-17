@@ -600,3 +600,268 @@ body::before {
         width: 100%;
     }
 }
+
+/* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
+
+/* Style for Buttons (st.button) */
+.stButton > button {
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, #39EDEA 0%, #686ACF 100%);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(90deg, #686ACF 0%, #39EDEA 100%);
+    box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.7), 0px 0px 20px rgba(57, 237, 234, 0.3);
+    transform: translateY(-3px) scale(1.01);
+}
+
+.stButton > button:active {
+    transform: translateY(0);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Style for YouTube Video Input Field (st.text_input) */
+.stTextInput > div > div > input {
+    background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent dark */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 15px 20px;
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: #39EDEA;
+    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.stTextInput > label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-bottom: 0.5rem;
+}
+
+/* Style for Text Area (st.text_area) - used for transcript display */
+.stTextArea > div > div > textarea {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 15px 20px;
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.stTextArea > div > div > textarea:focus {
+    border-color: #39EDEA;
+    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+/* Style for Dropdowns (st.expander) - Transcript and Probability Details */
+.stExpander {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05); /* Lighter transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.stExpander:hover {
+    border-color: rgba(57, 237, 234, 0.3);
+    box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.6), 0px 0px 20px rgba(57, 237, 234, 0.2);
+}
+
+.stExpander details summary {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #39EDEA; /* Color for the expander title */
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+}
+
+.stExpander details[open] summary {
+    color: #686ACF; /* Color when open */
+    border-bottom-color: rgba(57, 237, 234, 0.3);
+}
+
+.stExpander details summary::after {
+    content: '▶'; /* Custom arrow for closed state */
+    font-size: 0.8em;
+    margin-left: auto;
+    transition: transform 0.2s ease-in-out;
+    color: #fff;
+}
+
+.stExpander details[open] summary::after {
+    content: '▼'; /* Custom arrow for open state */
+    transform: rotate(0deg); /* No rotation needed if using a down arrow */
+}
+
+
+.stExpander > div > div { /* Content inside the expander */
+    padding: 15px 20px;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.stExpander > div > div > p {
+    margin-bottom: 0.5em; /* Adjust spacing for content paragraphs */
+}
+
+/* Style for Progress Bar (st.progress) */
+.stProgress > div > div > div > div {
+    background-color: #39EDEA; /* Main progress color */
+    border-radius: 10px;
+    height: 15px;
+    box-shadow: 0px 0px 10px rgba(57, 237, 234, 0.5);
+    transition: width 0.5s ease-out;
+}
+
+.stProgress > div > div > div { /* Background track for the progress bar */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 15px;
+    box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for Processing Text Messages (st.info, st.success, st.warning, st.error, st.spinner) */
+.stAlert {
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stSuccess {
+    background-color: rgba(46, 204, 113, 0.15); /* Green with transparency */
+    color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.stInfo {
+    background-color: rgba(52, 152, 219, 0.15); /* Blue with transparency */
+    color: #3498db;
+    border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.stWarning {
+    background-color: rgba(241, 196, 15, 0.15); /* Yellow with transparency */
+    color: #f1c40f;
+    border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+.stError {
+    background-color: rgba(231, 76, 60, 0.15); /* Red with transparency */
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+/* Spinner */
+.stSpinner > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #39EDEA;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Styling for `st.markdown` elements used for headings and text in the main content area */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff; /* Default for general headings */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #39EDEA; /* Highlight subheaders */
+}
+
+h3 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #686ACF;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+/* Sidebar styling to match the main theme */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0E1117 0%, #1a0f2e 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 1.5rem;
+}
+
+[data-testid="stSidebar"] .stMarkdown h2 {
+    color: #39EDEA;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(57, 237, 234, 0.3);
+    padding-bottom: 5px;
+}
+
+[data-testid="stSidebar"] .stMarkdown p {
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin-bottom: 0.5rem;
+}
+
+[data-testid="stSidebar"] .stMarkdown strong {
+    color: #fff;
+}
+
+[data-testid="stSidebar"] hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
+}
