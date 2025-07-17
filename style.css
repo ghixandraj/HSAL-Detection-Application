@@ -652,14 +652,39 @@ body::before {
     transition: all 0.3s ease-in-out;
     box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
-    /* Penting: Pastikan tidak ada default border-color yang menimpa */
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important; /* Memastikan warna border normal */
 }
 
+/* Ini adalah inti perbaikannya untuk saat fokus */
 .stTextInput > div > div > input:focus {
-    outline: none !important; /* Hapus outline default browser */
-    border: none !important; /* Hapus border sama sekali saat fokus */
-    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Hanya pakai shadow untuk efek fokus */
+    outline: none !important; /* Hapus outline bawaan browser/streamlit */
+    border-color: transparent !important; /* Jadikan border transparan saat fokus */
+    border: none !important; /* Hapus border sama sekali jika masih ada */
+    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Tetap pertahankan shadow fokus */
+}
+
+/* Kita juga harus menimpa border di elemen div internal Streamlit jika ada */
+/* Di screenshot Anda, terlihat ada border di 'st-emotion-cache' atau div sekitarnya. */
+/* Mari kita coba targetkan div pembungkus input yang mungkin punya border juga */
+.stTextInput div[data-baseweb="input"] {
+    border: none !important; /* Hapus border dari elemen pembungkus input */
+    outline: none !important; /* Hapus outline dari elemen pembungkus input */
+    box-shadow: none !important; /* Hapus shadow dari elemen pembungkus input */
+}
+
+/* Juga, targetkan elemen 'st-emotion-cache' yang terlihat memiliki border atau outline bawaan */
+/* Sesuaikan selektor ini jika Streamlit mengganti data-testid */
+[data-testid="stTextInput"] div.st-emotion-cache-1cxhd8x { /* Sesuaikan kelas jika berbeda di browser Anda */
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Juga menargetkan div paling luar dari input Streamlit */
+.stTextInput > div {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .stTextInput > label {
@@ -681,14 +706,26 @@ body::before {
     transition: all 0.3s ease-in-out;
     box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
-    /* Penting: Pastikan tidak ada default border-color yang menimpa */
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important; /* Memastikan warna border normal */
 }
 
 .stTextArea > div > div > textarea:focus {
-    outline: none !important; /* Hapus outline default browser */
-    border: none !important; /* Hapus border sama sekali saat fokus */
-    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Hanya pakai shadow untuk efek fokus */
+    outline: none !important; /* Hapus outline bawaan browser/streamlit */
+    border-color: transparent !important; /* Jadikan border transparan saat fokus */
+    border: none !important; /* Hapus border sama sekali jika masih ada */
+    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Tetap pertahankan shadow fokus */
+}
+
+.stTextArea div[data-baseweb="textarea"] { 
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.stTextArea > div {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* Style for Dropdowns (st.expander) - Transcript and Probability Details */
