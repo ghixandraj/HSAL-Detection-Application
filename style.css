@@ -722,32 +722,60 @@ body::before {
 /* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
 /* Style for Buttons (st.button) */
 .stButton > button {
-    border: none;
-    border-radius: 15px;
-    padding: 15px 30px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #FFFFFF;
-    background: linear-gradient(90deg, #39EDEA 0%, #686ACF 100%);
-    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+    display: flex; /* Use flexbox for alignment of content inside the button */
+    padding: 25px; /* Match info-card padding */
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the start */
+    gap: 5px; /* Match info-card gap */
+    /* flex: 1; Uncomment if you want buttons to stretch within a flex container */
+    align-self: stretch;
+    border-radius: 15px; /* Match info-card border-radius */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Match info-card border */
+    background: linear-gradient(180deg,
+        #0E1117 31.25%,
+        rgba(50, 34, 77, 0.9) 65.62%,
+        rgba(74, 33, 121, 0.9) 99.99%
+    ); /* Match info-card background */
+    backdrop-filter: blur(10px); /* Match info-card backdrop-filter */
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow:
+        0px 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1); /* Match info-card box-shadow */
+    text-align: left; /* Align text to left */
+    transition: all 0.3s ease-in-out; /* Match info-card transition */
     position: relative;
     overflow: hidden;
-    /* Perbaikan untuk kontras teks pada tombol analisis video */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Tambahkan shadow teks */
+    cursor: pointer;
+    z-index: 16; /* Ensure it's above background elements */
+
+    /* Reset/adjust specific button styles that don't fit the info-card look */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem; /* Adjust font size to match card titles */
+    font-weight: 900; /* Bold font for button text */
+    color: #ffffff; /* White text for contrast */
+    text-shadow: none; /* Remove previous text shadow */
+    line-height: 1.1; /* Adjust line height */
 }
 
 .stButton > button:hover {
-    background: linear-gradient(90deg, #686ACF 0%, #39EDEA 100%);
-    box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.7), 0px 0px 20px rgba(57, 237, 234, 0.3);
-    transform: translateY(-3px) scale(1.01);
+    transform: translateY(-8px) scale(1.02); /* Match info-card hover transform */
+    box-shadow:
+        0px 15px 40px rgba(0, 0, 0, 0.7),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.2),
+        0px 0px 25px rgba(57, 237, 234, 0.1); /* Match info-card hover box-shadow */
+    border: 1px solid rgba(57, 237, 234, 0.3); /* Match info-card hover border */
+    background: linear-gradient(180deg,
+        #0E1117 31.25%,
+        rgba(50, 34, 77, 0.95) 65.62%, /* Slightly more opaque on hover */
+        rgba(74, 33, 121, 0.95) 99.99%
+    );
 }
 
 .stButton > button:active {
-    transform: translateY(0);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px) scale(1.01); /* Adjust active state for consistency */
+    box-shadow:
+        0px 10px 30px rgba(0, 0, 0, 0.6),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.15);
 }
 
 /* Style for "Load Model" and "Load Tokenizer" buttons */
