@@ -965,10 +965,10 @@ body::before {
 
 /* Style for Progress Bar (st.progress) */
 .stProgress > div > div > div > div {
-    background-color: #39EDEA; /* Main progress color */
+    background: linear-gradient(90deg, #FFF 0%, #39EDEA 50%, #686ACF 100%);
     border-radius: 10px;
     height: 15px;
-    box-shadow: 0px 0px 10px rgba(57, 237, 234, 0.5);
+    box-shadow: 0px 0px 10px rgba(57, 237, 234, 0.7); /* Sedikit lebih kuat glow-nya */
     transition: width 0.5s ease-out;
 }
 

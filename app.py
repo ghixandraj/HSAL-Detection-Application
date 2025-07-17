@@ -436,6 +436,7 @@ def main():
                 progress_text = "Analisis kalimat sedang berjalan. Mohon tunggu..."
                 my_bar = st.progress(0, text=progress_text)
 
+                # --- MULAI PERHITUNGAN WAKTU ANALISIS ---
                 start_time = time.time()
 
                 for i, sentence in enumerate(clean_sentences):
@@ -474,6 +475,7 @@ def main():
 
                 my_bar.empty()
 
+                # --- AKHIR PERHITUNGAN WAKTU ANALISIS ---
                 end_time = time.time()
                 elapsed_time = end_time - start_time
 
