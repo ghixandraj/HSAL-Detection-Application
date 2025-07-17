@@ -980,47 +980,6 @@ body::before {
     box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Style for Processing Text Messages (st.info, st.success, st.warning, st.error, st.spinner) */
-.stAlert {
-    /* Menghilangkan background dan shadow bawaan */
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important; /* Pastikan blur juga hilang */
-    -webkit-backdrop-filter: none !important;
-
-    /* Menyesuaikan dengan ukuran layar */
-    width: 100%;
-    padding: 0 !important;
-    margin-left: 0 !important; /* Pastikan tidak ada margin kiri */
-    margin-right: 0 !important; /* Pastikan tidak ada margin kanan */
-
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 500;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px; /* Jaga gap untuk ikon jika ada */
-}
-
-.stSuccess {
-    color: #2ecc71;
-}
-
-.stInfo {
-    color: #3498db;
-}
-
-.stWarning {
-    color: #f1c40f;
-    text-shadow: 0px 0px 8px rgba(241, 196, 15, 0.7);
-    font-weight: 600;
-}
-
-.stError {
-    color: #e74c3c;
-}
-
 /* Spinner */
 .stSpinner > div {
     display: flex;
