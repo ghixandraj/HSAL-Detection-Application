@@ -774,7 +774,6 @@ body::before {
     box-shadow:
         0px 10px 30px rgba(0, 0, 0, 0.6),
         inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(57, 237, 234, 0.3);
 }
 
 /* Style for "Load Model" and "Load Tokenizer" buttons */
@@ -969,6 +968,7 @@ body::before {
     background: linear-gradient(90deg, #FFF 0%, #39EDEA 50%, #686ACF 100%);
     border-radius: 10px;
     height: 15px;
+
     box-shadow: 0px 0px 10px rgba(57, 237, 234, 0.7); /* Sedikit lebih kuat glow-nya */
     transition: width 0.5s ease-out;
 }
@@ -982,42 +982,43 @@ body::before {
 
 /* Style for Processing Text Messages (st.info, st.success, st.warning, st.error, st.spinner) */
 .stAlert {
-    border-radius: 15px; /* Memberi sudut membulat */
-    padding: 15px 20px; /* Jarak di sekitar teks */
+    /* Menghilangkan background dan shadow bawaan */
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important; /* Pastikan blur juga hilang */
+    -webkit-backdrop-filter: none !important;
+
+    /* Menyesuaikan dengan ukuran layar */
+    width: 100%;
+    padding: 0 !important;
+    margin-left: 0 !important; /* Pastikan tidak ada margin kiri */
+    margin-right: 0 !important; /* Pastikan tidak ada margin kanan */
+
     font-family: 'Poppins', sans-serif;
     font-size: 1.05rem;
     font-weight: 500;
-    margin-bottom: 1rem;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Efek bayangan */
-    backdrop-filter: blur(8px); /* Efek blur pada latar belakang */
-    -webkit-backdrop-filter: blur(8px);
-    display: flex; /* Menggunakan flexbox untuk penataan ikon dan teks */
-    align-items: center;
-    gap: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* Jaga gap untuk ikon jika ada */
 }
 
 .stSuccess {
-    background-color: rgba(46, 204, 113, 0.15); /* Warna hijau dengan transparansi */
     color: #2ecc71;
-    border: 1px solid rgba(46, 204, 113, 0.3); /* Border hijau */
 }
 
 .stInfo {
-    background-color: rgba(52, 152, 219, 0.15); /* Warna biru dengan transparansi */
     color: #3498db;
-    border: 1px solid rgba(52, 152, 219, 0.3); /* Border biru */
 }
 
 .stWarning {
-    background-color: rgba(241, 196, 15, 0.15); /* Warna kuning dengan transparansi */
     color: #f1c40f;
-    border: 1px solid rgba(241, 196, 15, 0.3); /* Border kuning */
+    text-shadow: 0px 0px 8px rgba(241, 196, 15, 0.7);
+    font-weight: 600;
 }
 
 .stError {
-    background-color: rgba(231, 76, 60, 0.15); /* Warna merah dengan transparansi */
     color: #e74c3c;
-    border: 1px solid rgba(231, 76, 60, 0.3); /* Border merah */
 }
 
 /* Spinner */
