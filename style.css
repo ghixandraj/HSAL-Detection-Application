@@ -5,7 +5,7 @@ html, body {
     color: #e0e0e0 !important;
     position: relative;
     overflow-x: hidden; 
-    overflow-y: auto;   
+    overflow-y: auto;  
     height: 100%;       
 }
 
@@ -629,6 +629,96 @@ body::before {
     }
 }
 
+/* Section Title --- */
+.section-title {
+    width: 100%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    background: linear-gradient(90deg, #FFF 0%, #39EDEA 50%, #686ACF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 auto 2rem auto; /* Margin bawah untuk spasi */
+    position: relative;
+    z-index: 16;
+}
+
+/* Input Section Container --- */
+.input-section-container,
+.results-section-container {
+    display: flex;
+    padding: 30px; /* Padding lebih besar */
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    align-self: stretch;
+    border-radius: 20px; /* Radius sedikit lebih kecil dari header */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    backdrop-filter: blur(25px); /* Efek blur lebih kuat */
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.6); /* Shadow lebih gelap dan besar */
+    margin-bottom: 4rem; /* Jarak antar section */
+    overflow: visible;
+    position: relative;
+    width: 100%;
+    z-index: 15;
+    transition: all 0.3s ease;
+}
+
+.input-section-container::before,
+.results-section-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+        rgba(57, 237, 234, 0.08) 0%, /* Lebih terang */
+        rgba(104, 106, 207, 0.05) 50%, /* Lebih terang */
+        rgba(255, 119, 198, 0.03) 100%
+    );
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.input-section-container:hover,
+.results-section-container:hover {
+    border: 1px solid rgba(57, 237, 234, 0.4); /* Border hover lebih jelas */
+    box-shadow:
+        0px 20px 60px rgba(0, 0, 0, 0.8), /* Shadow lebih besar saat hover */
+        0px 0px 40px rgba(57, 237, 234, 0.2); /* Glow hover lebih kuat */
+    transform: translateY(-8px); /* Efek naik lebih tinggi saat hover */
+}
+
+.input-section-container > *,
+.results-section-container > * {
+    position: relative;
+    z-index: 2; /* Pastikan konten di atas pseudo-element */
+}
+
+/* Pastikan video player di dalam input-section-container menyesuaikan */
+.input-section-container .stVideo {
+    width: 100%;
+    max-width: 700px; /* Batasi lebar video */
+    margin: 20px auto; /* Pusatkan video */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.input-section-container .stVideo:hover {
+    transform: scale(1.01);
+}
+
+
 /* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
 /* Style for Buttons (st.button) */
 .stButton > button {
@@ -669,54 +759,42 @@ body::before {
 
 /* Style for YouTube Video Input Field (st.text_input) */
 .stTextInput > div > div > input {
-    background-color: rgba(14, 17, 23, 0.7); /* Lebih gelap, mendekati background */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default lebih tipis dan transparan */
+    background-color: rgba(14, 17, 23, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 15px 20px;
-    color: #f0f0f0; /* Warna teks lebih terang */
+    color: #f0f0f0;
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
-    transition: all 0.3s ease-in-out; /* Transisi untuk semua properti */
-    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4); /* Inner shadow lebih dalam */
-    backdrop-filter: blur(8px); /* Efek blur lebih kuat */
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1; /* Default gradient border */
-    border-style: solid; /* Pastikan border style adalah solid untuk gradient border */
+    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1;
+    border-style: solid;
     border-width: 1px;
 }
-
-/* Efek HOVER untuk input field */
 .stTextInput > div > div > input:hover {
-    background-color: rgba(14, 17, 23, 0.85); /* Sedikit lebih solid saat hover */
-    border-color: transparent !important; /* Hilangkan border solid */
-    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1; /* Border gradient penuh */
-    box-shadow:
-        0px 0px 20px rgba(57, 237, 234, 0.2), /* Glow effect */
-        inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important; /* Inner shadow lebih gelap */
-    transform: translateY(-2px); /* Sedikit naik */
-    outline: none !important; /* Pastikan outline tetap hilang */
+    background-color: rgba(14, 17, 23, 0.85);
+    border-color: transparent !important;
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1;
+    box-shadow: 0px 0px 20px rgba(57, 237, 234, 0.2), inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important;
+    transform: translateY(-2px);
+    outline: none !important;
 }
-
-/* Efek FOKUS untuk input field */
 .stTextInput > div > div > input:focus {
-    background-color: rgba(14, 17, 23, 0.95); /* Lebih solid saat fokus */
-    outline: none !important; /* Hapus outline bawaan browser/streamlit */
-    border-color: transparent !important; /* Hilangkan border solid */
-    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1; /* Border gradient yang lebih kaya */
-    box-shadow:
-        0px 0px 35px rgba(57, 237, 234, 0.5), /* Bayangan fokus lebih kuat */
-        inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important; /* Inner shadow paling gelap */
-    transform: translateY(-1px); /* Sedikit naik saat fokus */
+    background-color: rgba(14, 17, 23, 0.95);
+    outline: none !important;
+    border-color: transparent !important;
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1;
+    box-shadow: 0px 0px 35px rgba(57, 237, 234, 0.5), inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important;
+    transform: translateY(-1px);
 }
-
-/* Penyesuaian agar border div pembungkus juga tidak mengganggu visual */
-.stTextInput div[data-baseweb="input"],
-.stTextInput > div {
+.stTextInput div[data-baseweb="input"], .stTextInput > div {
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
-
 .stTextInput > label {
     font-size: 1.1rem;
     font-weight: 600;
