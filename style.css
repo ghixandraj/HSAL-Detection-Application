@@ -633,8 +633,8 @@ body::before {
 
 /* Style for YouTube Video Input Field (st.text_input) */
 .stTextInput > div > div > input {
-    background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent dark */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Border default */
     border-radius: 15px;
     padding: 15px 20px;
     color: #e0e0e0;
@@ -646,9 +646,9 @@ body::before {
 }
 
 .stTextInput > div > div > input:focus {
-    outline: none !important;
-    border-color: transparent !important;
-    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important;
+    outline: none !important; /* Pastikan outline dihilangkan */
+    border: none !important; /* Hapus border sama sekali saat fokus */
+    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Hanya pakai shadow untuk efek fokus */
 }
 
 .stTextInput > label {
@@ -661,7 +661,7 @@ body::before {
 /* Style for Text Area (st.text_area) - used for transcript display */
 .stTextArea > div > div > textarea {
     background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Border default */
     border-radius: 15px;
     padding: 15px 20px;
     color: #e0e0e0;
@@ -673,9 +673,9 @@ body::before {
 }
 
 .stTextArea > div > div > textarea:focus {
-    outline: none !important;
-    border-color: transparent !important;
-    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important;
+    outline: none !important; /* Pastikan outline dihilangkan */
+    border: none !important; /* Hapus border sama sekali saat fokus */
+    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Hanya pakai shadow untuk efek fokus */
 }
 
 /* Style for Dropdowns (st.expander) - Transcript and Probability Details */
