@@ -4,28 +4,28 @@ html, body {
     background-color: transparent !important;
     color: #e0e0e0 !important;
     position: relative;
-    overflow-x: hidden; 
-    overflow-y: auto;  
-    height: 100%;       
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
 }
 
 .stApp {
     background-color: transparent !important;
     position: relative;
     z-index: 1;
-    overflow-y: auto !important; 
-    overflow-x: hidden !important; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .main .block-container {
     flex-grow: 1; /* Biarkan block-container mengambil sisa ruang yang tersedia */
     padding-top: 2rem;
     padding-bottom: 2rem;
-    min-height: auto !important; 
-    overflow: hidden !important; 
+    min-height: auto !important;
+    overflow: hidden !important;
 }
 
 [data-testid="stHeader"] {
@@ -735,6 +735,8 @@ body::before {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    /* Perbaikan untuk kontras teks pada tombol analisis video */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Tambahkan shadow teks */
 }
 
 .stButton > button:hover {
@@ -747,6 +749,37 @@ body::before {
     transform: translateY(0);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
 }
+
+/* Style for "Load Model" and "Load Tokenizer" buttons */
+.model-load-button > button,
+.tokenizer-load-button > button {
+    border: 1px solid rgba(57, 237, 234, 0.4); /* Subtle glow border */
+    background: radial-gradient(circle at center, rgba(104, 106, 207, 0.2) 0%, transparent 70%); /* Light ethereal background */
+    color: #39EDEA; /* Primary theme color for text */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    text-shadow: 0px 0px 5px rgba(57, 237, 234, 0.7); /* Text glow */
+}
+
+.model-load-button > button:hover,
+.tokenizer-load-button > button:hover {
+    background: radial-gradient(circle at center, rgba(104, 106, 207, 0.4) 0%, transparent 70%);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.6), 0px 0px 25px rgba(57, 237, 234, 0.5);
+    border-color: #39EDEA;
+    transform: translateY(-2px);
+    color: #FFF; /* Text turns white on hover */
+}
+
+.model-load-button > button:active,
+.tokenizer-load-button > button:active {
+    transform: translateY(0);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 
 /* General styling for Streamlit input containers */
 [data-testid="stTextInput"],
