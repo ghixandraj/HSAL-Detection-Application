@@ -725,7 +725,7 @@ body::before {
     display: flex; /* Use flexbox for alignment of content inside the button */
     padding: 15px; /* Match info-card padding */
     flex-direction: column;
-    align-items: flex-start; /* Align text to the start */
+    align-items: center; /* Align text to the start */
     gap: 5px; /* Match info-card gap */
     /* flex: 1; Uncomment if you want buttons to stretch within a flex container */
     align-self: stretch;
