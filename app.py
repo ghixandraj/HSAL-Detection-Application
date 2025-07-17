@@ -500,8 +500,10 @@ def main():
                 else:
                     st.warning("Tidak ada kalimat untuk dianalisis.")
 
+                st.markdown(f"---")
+
                 if problematic_sentences_details:
-                    st.info("🚨 Berikut adalah kalimat-kalimat yang terdeteksi bermasalah:")
+                    st.subheader("🚨 Berikut adalah kalimat-kalimat yang terdeteksi bermasalah:")
                     for idx, detail in enumerate(problematic_sentences_details, 1):
                         st.markdown(f"---")
                         st.markdown(f"**Kalimat {idx}** _(pada menit {detail['timestamp']})_: {detail['kalimat']}")
