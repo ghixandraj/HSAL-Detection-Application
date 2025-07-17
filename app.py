@@ -382,7 +382,7 @@ def main():
     if "analysis_done" not in st.session_state:
         st.session_state.analysis_done = False
 
-    
+    st.markdown(f"---")
     st.subheader("📹 Masukkan URL Video Youtube untuk Analisis")
     youtube_url = st.text_input("URL Video YouTube:")
 
