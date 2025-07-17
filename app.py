@@ -382,7 +382,8 @@ def main():
     if "analysis_done" not in st.session_state:
         st.session_state.analysis_done = False
 
-    youtube_url = st.text_input("🔗 Masukkan URL Video YouTube:")
+    st.subheader("🔗 Masukkan URL Video Youtube untuk Analisis")
+    youtube_url = st.text_input("URL Video YouTube:")
 
     if youtube_url:
         video_id = extract_video_id(youtube_url)
