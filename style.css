@@ -649,39 +649,41 @@ body::before {
     color: #e0e0e0;
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; /* Tambah transisi untuk box-shadow dan border */
     box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
     border-color: rgba(255, 255, 255, 0.15) !important; /* Memastikan warna border normal */
 }
 
-/* Ini adalah inti perbaikannya untuk saat fokus */
+/* Modifikasi INI untuk efek hover */
+.stTextInput > div > div > input:hover {
+    border-color: rgba(57, 237, 234, 0.3) !important; /* Border terang seperti info-card hover */
+    box-shadow:
+        0px 0px 25px rgba(57, 237, 234, 0.1), /* Glow effect */
+        inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Pertahankan shadow inset */
+    transform: translateY(-2px); /* Sedikit naik saat dihover, seperti info-card */
+}
+
+
+/* Ini adalah inti perbaikannya untuk saat fokus (ditekan/diketik) */
 .stTextInput > div > div > input:focus {
     outline: none !important; /* Hapus outline bawaan browser/streamlit */
-    border-color: transparent !important; /* Jadikan border transparan saat fokus */
-    border: none !important; /* Hapus border sama sekali jika masih ada */
-    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Tetap pertahankan shadow fokus */
+    border-color: rgba(57, 237, 234, 0.5) !important; /* Border lebih kuat saat fokus */
+    box-shadow:
+        0px 0px 30px rgba(57, 237, 234, 0.4), /* Bayangan fokus lebih kuat */
+        inset 0px 2px 8px rgba(0, 0, 0, 0.6) !important; /* Inset shadow lebih gelap */
+    transform: translateY(-1px); /* Sedikit naik saat fokus */
 }
 
-/* Kita juga harus menimpa border di elemen div internal Streamlit jika ada */
-/* Di screenshot Anda, terlihat ada border di 'st-emotion-cache' atau div sekitarnya. */
-/* Mari kita coba targetkan div pembungkus input yang mungkin punya border juga */
-.stTextInput div[data-baseweb="input"] {
-    border: none !important; /* Hapus border dari elemen pembungkus input */
-    outline: none !important; /* Hapus outline dari elemen pembungkus input */
-    box-shadow: none !important; /* Hapus shadow dari elemen pembungkus input */
-}
-
-/* Juga, targetkan elemen 'st-emotion-cache' yang terlihat memiliki border atau outline bawaan */
-/* Sesuaikan selektor ini jika Streamlit mengganti data-testid */
-[data-testid="stTextInput"] div.st-emotion-cache-1cxhd8x { /* Sesuaikan kelas jika berbeda di browser Anda */
+/* Penyesuaian agar border div pembungkus juga tidak mengganggu visual */
+.stTextInput div[data-baseweb="input"],
+.stTextInput > div {
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
-
-/* Juga menargetkan div paling luar dari input Streamlit */
-.stTextInput > div {
+/* Jika ada kelas 'st-emotion-cache' yang perlu ditargetkan lagi */
+.stTextInput div.st-emotion-cache-1cxhd8x { /* Sesuaikan kelas jika berbeda di browser Anda */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
@@ -703,25 +705,31 @@ body::before {
     color: #e0e0e0;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; /* Tambah transisi untuk box-shadow dan border */
     box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
     border-color: rgba(255, 255, 255, 0.15) !important; /* Memastikan warna border normal */
 }
 
+.stTextArea > div > div > textarea:hover {
+    border-color: rgba(57, 237, 234, 0.3) !important; /* Border terang seperti info-card hover */
+    box-shadow:
+        0px 0px 25px rgba(57, 237, 234, 0.1), /* Glow effect */
+        inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Pertahankan shadow inset */
+    transform: translateY(-2px); /* Sedikit naik saat dihover, seperti info-card */
+}
+
 .stTextArea > div > div > textarea:focus {
     outline: none !important; /* Hapus outline bawaan browser/streamlit */
-    border-color: transparent !important; /* Jadikan border transparan saat fokus */
-    border: none !important; /* Hapus border sama sekali jika masih ada */
-    box-shadow: 0px 0px 15px rgba(57, 237, 234, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.5) !important; /* Tetap pertahankan shadow fokus */
+    border-color: rgba(57, 237, 234, 0.5) !important; /* Border lebih kuat saat fokus */
+    box-shadow:
+        0px 0px 30px rgba(57, 237, 234, 0.4), /* Bayangan fokus lebih kuat */
+        inset 0px 2px 8px rgba(0, 0, 0, 0.6) !important; /* Inset shadow lebih gelap */
+    transform: translateY(-1px); /* Sedikit naik saat fokus */
 }
 
-.stTextArea div[data-baseweb="textarea"] { 
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
+/* Penyesuaian agar border div pembungkus juga tidak mengganggu visual */
+.stTextArea div[data-baseweb="textarea"],
 .stTextArea > div {
     border: none !important;
     outline: none !important;
