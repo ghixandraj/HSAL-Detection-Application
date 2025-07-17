@@ -723,7 +723,7 @@ body::before {
 /* Style for Buttons (st.button) */
 .stButton > button {
     display: flex; /* Use flexbox for alignment of content inside the button */
-    padding: 25px; /* Match info-card padding */
+    padding: 15px; /* Match info-card padding */
     flex-direction: column;
     align-items: flex-start; /* Align text to the start */
     gap: 5px; /* Match info-card gap */
@@ -741,7 +741,7 @@ body::before {
     box-shadow:
         0px 8px 25px rgba(0, 0, 0, 0.5),
         inset 0px 1px 0px rgba(255, 255, 255, 0.1); /* Match info-card box-shadow */
-    text-align: left; /* Align text to left */
+    text-align: center; 
     transition: all 0.3s ease-in-out; /* Match info-card transition */
     position: relative;
     overflow: hidden;
@@ -758,7 +758,6 @@ body::before {
 }
 
 .stButton > button:hover {
-    transform: translateY(-8px) scale(1.02); /* Match info-card hover transform */
     box-shadow:
         0px 15px 40px rgba(0, 0, 0, 0.7),
         inset 0px 1px 0px rgba(255, 255, 255, 0.2),
@@ -772,7 +771,6 @@ body::before {
 }
 
 .stButton > button:active {
-    transform: translateY(-4px) scale(1.01); /* Adjust active state for consistency */
     box-shadow:
         0px 10px 30px rgba(0, 0, 0, 0.6),
         inset 0px 1px 0px rgba(255, 255, 255, 0.15);
