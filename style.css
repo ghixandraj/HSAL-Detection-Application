@@ -1,75 +1,37 @@
 /* --- Global & Font --- */
-html, body {
+html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
     background-color: transparent !important;
     color: #e0e0e0 !important;
     position: relative;
-    overflow-x: hidden; 
-    overflow-y: auto;  
-    height: 100%;       
+    overflow-x: hidden;
+}
+
+/* Pastikan html dan body mengisi tinggi penuh dan menangani overflow */
+html, body {
+    min-height: 100vh; /* Set minimal tinggi sama dengan viewport */
+    height: 100%; /* Atau 100% jika ingin mengembang */
+    overflow-y: auto; /* Izinkan scroll vertikal hanya jika konten melebihi */
 }
 
 .stApp {
     background-color: transparent !important;
     position: relative;
     z-index: 1;
-    overflow-y: auto !important; 
-    overflow-x: hidden !important; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-}
-
-.main .block-container {
-    flex-grow: 1; /* Biarkan block-container mengambil sisa ruang yang tersedia */
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    min-height: auto !important; 
-    overflow: hidden !important; 
-}
-
-[data-testid="stHeader"] {
-    background-color: transparent; /* Pastikan header Streamlit tidak mengganggu */
-    height: auto !important; /* Hindari tinggi tetap yang terlalu besar */
-}
-
-/* Animated Background */
-body::before {
-    content: '';
-    position: fixed; /* Use fixed to cover the entire viewport */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-        radial-gradient(circle at 20% 80%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(104, 106, 207, 0.05) 0%, transparent 70%),
-        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%); /* Base dark background */
-    background-size: 200% 200%; /* Larger than viewport to allow movement */
-    animation: wave-move 30s ease-in-out infinite alternate; /* Slower, gentler animation */
-    z-index: -1; /* Ensure it's behind all content */
-    pointer-events: none; /* Allow clicks to pass through */
-}
-
-@keyframes wave-move {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
+    overflow-y: visible !important; /* Biarkan konten mengalir ke bawah */
+    overflow-x: hidden !important;
+    min-height: 100vh; /* Setidaknya setinggi viewport */
 }
 
 /* --- Animasi Partikel --- */
 .particles-container {
-    position: fixed; /* Tetap fixed */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -2;
+    z-index: -2; /* Di bawah background utama Anda */
     pointer-events: none;
 }
 
@@ -79,12 +41,9 @@ body::before {
     opacity: 0; /* Mulai dengan tidak terlihat */
     filter: blur(25px); /* Efek blur yang lebih kuat */
     animation: rainLightBlur 30s infinite ease-in-out; /* Animasi baru dan lebih lambat */
-    /* Box-shadow dihapus, filter: blur lebih cocok untuk efek ini */
 }
 
 /* Pengaturan individual untuk setiap partikel. Anda bisa menyesuaikan jumlah dan nilai! */
-/* Menggunakan campuran warna terang yang bisa mirip cahaya lampu */
-
 .particles-container .particle:nth-child(1) {
     width: 80px; height: 80px;
     left: 15%; top: 20%;
@@ -233,10 +192,12 @@ body::before {
     min-height: auto !important;
 }
 
-/* Reset margin pada elemen terakhir di main-container untuk mencegah dorongan ekstra */
-.main-container > *:last-child {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+/* Menimpa padding default Streamlit pada main content block */
+.main .block-container {
+    padding: 0 !important; /* Hapus padding default di sini */
+    margin: 0 !important; /* Hapus margin default juga */
+    min-height: auto !important; /* Ini penting agar tidak memaksakan tinggi */
+    overflow: visible !important; /* Biarkan overflow, scroll akan di handle body/html */
 }
 
 /* --- STYLES HEADER BARU --- */
@@ -607,29 +568,7 @@ body::before {
     z-index: 17;
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 28px;
-    }
-    .subtitle {
-        font-size: 16px;
-    }
-    .category-title {
-        font-size: 28px;
-    }
-    .cards-container {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-    }
-    .info-card {
-        flex: 1;
-        width: 100%;
-    }
-}
-
-/* Section Title --- */
+/* --- BARU: Gaya untuk Section Title --- */
 .section-title {
     width: 100%;
     text-align: center;
@@ -647,23 +586,23 @@ body::before {
     z-index: 16;
 }
 
-/* Input Section Container --- */
+/* --- BARU: Gaya untuk Input Section Container dan Results Section Container --- */
 .input-section-container,
 .results-section-container {
-    display: flex;
-    padding: 30px; /* Padding lebih besar */
+    display: flex; /* Gunakan flexbox untuk tata letak internal yang rapi */
+    padding: 30px; /* Padding internal */
     flex-direction: column;
-    align-items: center;
-    gap: 25px;
+    align-items: center; /* Pusatkan konten horizontal */
+    gap: 25px; /* Jarak antar elemen anak */
     align-self: stretch;
-    border-radius: 20px; /* Radius sedikit lebih kecil dari header */
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: transparent;
-    backdrop-filter: blur(25px); /* Efek blur lebih kuat */
+    backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.6); /* Shadow lebih gelap dan besar */
-    margin-bottom: 4rem; /* Jarak antar section */
-    overflow: visible;
+    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.6);
+    margin-bottom: 4rem; /* Jarak antar section atau ke bawah */
+    overflow: hidden; /* Konten di dalamnya tidak boleh meluap keluar */
     position: relative;
     width: 100%;
     z-index: 15;
@@ -679,8 +618,8 @@ body::before {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg,
-        rgba(57, 237, 234, 0.08) 0%, /* Lebih terang */
-        rgba(104, 106, 207, 0.05) 50%, /* Lebih terang */
+        rgba(57, 237, 234, 0.08) 0%,
+        rgba(104, 106, 207, 0.05) 50%,
         rgba(255, 119, 198, 0.03) 100%
     );
     border-radius: 20px;
@@ -690,24 +629,45 @@ body::before {
 
 .input-section-container:hover,
 .results-section-container:hover {
-    border: 1px solid rgba(57, 237, 234, 0.4); /* Border hover lebih jelas */
+    border: 1px solid rgba(57, 237, 234, 0.4);
     box-shadow:
-        0px 20px 60px rgba(0, 0, 0, 0.8), /* Shadow lebih besar saat hover */
-        0px 0px 40px rgba(57, 237, 234, 0.2); /* Glow hover lebih kuat */
-    transform: translateY(-8px); /* Efek naik lebih tinggi saat hover */
+        0px 20px 60px rgba(0, 0, 0, 0.8),
+        0px 0px 40px rgba(57, 237, 234, 0.2);
+    transform: translateY(-8px);
 }
 
 .input-section-container > *,
 .results-section-container > * {
     position: relative;
-    z-index: 2; /* Pastikan konten di atas pseudo-element */
+    z-index: 2;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 100%; /* Pastikan elemen anak mengisi lebar kontainer */
+    max-width: 700px; /* Batasi lebar komponen internal agar tidak terlalu lebar */
+}
+
+/* Streamlit specific elements within the custom containers */
+.input-section-container .stTextInput,
+.input-section-container .stButton,
+.input-section-container .stVideo,
+.input-section-container .stAlert,
+.input-section-container .stExpander,
+.input-section-container .stProgress,
+.results-section-container .stSubheader,
+.results-section-container .stWarning,
+.results-section-container .stInfo,
+.results-section-container .stError,
+.results-section-container .stSuccess,
+.results-section-container .stExpander,
+.results-section-container .stMarkdown {
+    margin: 10px auto !important; /* Beri margin vertikal dan pusatkan */
+    width: 100%; /* Pastikan mereka mengisi lebar kontainer */
+    max-width: 700px; /* Batasi lebar agar tidak terlalu lebar di layar besar */
 }
 
 /* Pastikan video player di dalam input-section-container menyesuaikan */
 .input-section-container .stVideo {
-    width: 100%;
-    max-width: 700px; /* Batasi lebar video */
-    margin: 20px auto; /* Pusatkan video */
+    margin: 20px auto; /* Margin atas/bawah yang lebih spesifik untuk video */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
@@ -718,8 +678,15 @@ body::before {
     transform: scale(1.01);
 }
 
+/* Khusus untuk teks area di dalam expander */
+.stExpander .stTextArea {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
 
 /* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
+
 /* Style for Buttons (st.button) */
 .stButton > button {
     border: none;
@@ -748,59 +715,63 @@ body::before {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* General styling for Streamlit input containers */
-[data-testid="stTextInput"],
-[data-testid="stTextArea"] {
-    /* Pastikan kontainer ini tidak punya border aneh */
+/* Style for YouTube Video Input Field (st.text_input) */
+.stTextInput > div > div > input {
+    background-color: rgba(14, 17, 23, 0.7); /* Lebih gelap, mendekati background */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default lebih tipis dan transparan */
+    border-radius: 15px;
+    padding: 15px 20px;
+    color: #f0f0f0; /* Warna teks lebih terang */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out; /* Transisi untuk semua properti */
+    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4); /* Inner shadow lebih dalam */
+    backdrop-filter: blur(8px); /* Efek blur lebih kuat */
+    -webkit-backdrop-filter: blur(8px);
+    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1; /* Default gradient border */
+    border-style: solid; /* Pastikan border style adalah solid untuk gradient border */
+    border-width: 1px;
+}
+
+/* Efek HOVER untuk input field */
+.stTextInput > div > div > input:hover {
+    background-color: rgba(14, 17, 23, 0.85); /* Sedikit lebih solid saat hover */
+    border-color: transparent !important; /* Hilangkan border solid */
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1; /* Border gradient penuh */
+    box-shadow:
+        0px 0px 20px rgba(57, 237, 234, 0.2), /* Glow effect */
+        inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important; /* Inner shadow lebih gelap */
+    transform: translateY(-2px); /* Sedikit naik */
+    outline: none !important; /* Pastikan outline tetap hilang */
+}
+
+/* Efek FOKUS untuk input field */
+.stTextInput > div > div > input:focus {
+    background-color: rgba(14, 17, 23, 0.95); /* Lebih solid saat fokus */
+    outline: none !important; /* Hapus outline bawaan browser/streamlit */
+    border-color: transparent !important; /* Hilangkan border solid */
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1; /* Border gradient yang lebih kaya */
+    box-shadow:
+        0px 0px 35px rgba(57, 237, 234, 0.5), /* Bayangan fokus lebih kuat */
+        inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important; /* Inner shadow paling gelap */
+    transform: translateY(-1px); /* Sedikit naik saat fokus */
+}
+
+/* Penyesuaian agar border div pembungkus juga tidak mengganggu visual */
+.stTextInput div[data-baseweb="input"],
+.stTextInput > div {
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
 
-/* Style for YouTube Video Input Field (st.text_input) */
-.stTextInput > div > div > input {
-    background-color: rgba(14, 17, 23, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 15px 20px;
-    color: #f0f0f0;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    transition: all 0.3s ease-in-out;
-    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1;
-    border-style: solid;
-    border-width: 1px;
-}
-.stTextInput > div > div > input:hover {
-    background-color: rgba(14, 17, 23, 0.85);
-    border-color: transparent !important;
-    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1;
-    box-shadow: 0px 0px 20px rgba(57, 237, 234, 0.2), inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important;
-    transform: translateY(-2px);
-    outline: none !important;
-}
-.stTextInput > div > div > input:focus {
-    background-color: rgba(14, 17, 23, 0.95);
-    outline: none !important;
-    border-color: transparent !important;
-    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1;
-    box-shadow: 0px 0px 35px rgba(57, 237, 234, 0.5), inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important;
-    transform: translateY(-1px);
-}
-.stTextInput div[data-baseweb="input"], .stTextInput > div {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
 .stTextInput > label {
     font-size: 1.1rem;
     font-weight: 600;
     color: #f0f0f0;
     margin-bottom: 0.5rem;
 }
+
 
 /* Style for Text Area (st.text_area) - used for transcript display */
 .stTextArea > div > div > textarea {
@@ -851,6 +822,7 @@ body::before {
     outline: none !important;
     box-shadow: none !important;
 }
+
 
 /* Style for Dropdowns (st.expander) - Transcript and Probability Details */
 .stExpander {
