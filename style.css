@@ -1020,41 +1020,103 @@ p {
 }
 
 /* Sidebar styling to match the main theme */
+/* Sidebar styling to match the main theme */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0E1117 0%, #1a0f2e 100%);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem; /* Padding internal sidebar */
+
+    /* PROPERTI PENTING UNTUK MENGATASI UKURAN SIDEBAR */
+    overflow-y: auto !important; /* Memastikan scrollbar vertikal muncul jika konten melebihi tinggi */
+    height: 100vh; /* Memastikan sidebar memenuhi tinggi viewport */
+    display: flex; /* Mengaktifkan Flexbox untuk menata konten anak */
+    flex-direction: column; /* Mengatur arah flexbox ke kolom */
+    box-sizing: border-box; /* **PENTING**: Memastikan padding dan border dihitung dalam total lebar/tinggi */
+    /* Opsional: Tentukan lebar spesifik jika default Streamlit tidak sesuai */
+    /* width: 250px; */ /* Atur lebar sesuai kebutuhan Anda */
+    /* max-width: 300px; */
+    /* min-width: 200px; */
 }
 
+/* Container utama konten di dalam sidebar (penting untuk flexbox) */
 [data-testid="stSidebarContent"] {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Memastikan konten mengisi ruang yang tersedia */
+    flex-grow: 1; /* Memastikan konten mengisi ruang yang tersisa */
+    /* Tambahkan overflow-x: hidden; untuk mencegah scrollbar horizontal di konten sidebar */
+    overflow-x: hidden;
+    /* overflow-y: auto; */ /* Sudah diatur di parent, tidak perlu di sini kecuali ada kebutuhan khusus */
 }
 
+
 [data-testid="stSidebar"] .stMarkdown h2 {
-    color: #39EDEA;
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.8rem;
-    border-bottom: 2px solid rgba(57, 237, 234, 0.3);
-    padding-bottom: 5px;
+    color: #39EDEA;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(57, 237, 234, 0.3);
+    padding-bottom: 5px;
+    /* Tambahkan word-break untuk teks panjang */
+    word-break: break-word; /* Memastikan kata panjang pecah baris */
+    overflow-wrap: break-word; /* Alternatif/pelengkap word-break */
 }
 
 [data-testid="stSidebar"] .stMarkdown p {
-    font-size: 0.9rem;
-    color: #cccccc;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin-bottom: 0.5rem;
+    /* Tambahkan word-break untuk teks panjang */
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 [data-testid="stSidebar"] .stMarkdown strong {
-    color: #fff;
+    color: #fff;
 }
 
 [data-testid="stSidebar"] hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
+}
+
+/* Tombol Sticky Sidebar */
+.sticky-sidebar-button-container { /* Jika Anda menggunakan div pembungkus khusus */
+    position: sticky;
+    bottom: 20px;
+    width: 100%; /* Pastikan ini 100% dari parent content */
+    z-index: 999;
+    background: rgba(14, 17, 23, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 1.5rem 0;
+    box-sizing: border-box; /* Penting untuk padding */
+}
+
+/* Jika Anda menargetkan stButton:last-of-type langsung */
+[data-testid="stSidebar"] .stButton:last-of-type {
+    position: sticky;
+    bottom: 20px;
+    z-index: 999;
+    background: rgba(14, 17, 23, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: auto;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Lebar tombol harus memperhitungkan padding parent container sidebar. */
+    /* Lebar sidebar default Streamlit adalah sekitar 210px. */
+    /* padding-left/right di sidebar adalah 1.5rem (24px). */
+    /* Jadi, lebar konten efektif di sidebar adalah sekitar 210px - (2 * 24px) = 162px. */
+    /* Sesuaikan ini jika Anda mengatur lebar sidebar secara eksplisit */
+    width: calc(100% - 30px); /* Adjust to 100% minus sidebar's horizontal padding. Your sidebar padding is 1.5rem (24px) each side, so 48px total. Let's try 30px as a starting point. You might need to use `calc(100% - (2 * 1.5rem))` for accuracy. */
+    left: 15px; /* Sesuaikan dengan padding kiri sidebar (1.5rem = 24px). Ini untuk mengatur posisi 'sticky' */
+    box-sizing: border-box; /* Sangat penting */
 }
