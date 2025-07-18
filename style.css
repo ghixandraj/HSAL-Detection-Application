@@ -1069,3 +1069,42 @@ p {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin: 1.5rem 0;
 }
+
+/* Tombol Sticky Sidebar */
+.sticky-sidebar-button-container { /* Jika Anda menggunakan div pembungkus khusus */
+    position: sticky;
+    bottom: 20px;
+    width: 100%; /* Pastikan ini 100% dari parent content */
+    z-index: 999;
+    background: rgba(14, 17, 23, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box; /* Penting untuk padding */
+}
+
+/* Jika Anda menargetkan stButton:last-of-type langsung */
+[data-testid="stSidebar"] .stButton:last-of-type {
+    position: sticky;
+    bottom: 20px;
+    z-index: 999;
+    background: rgba(14, 17, 23, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: auto;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Lebar tombol harus memperhitungkan padding parent container sidebar. */
+    /* Lebar sidebar default Streamlit adalah sekitar 210px. */
+    /* padding-left/right di sidebar adalah 1.5rem (24px). */
+    /* Jadi, lebar konten efektif di sidebar adalah sekitar 210px - (2 * 24px) = 162px. */
+    /* Sesuaikan ini jika Anda mengatur lebar sidebar secara eksplisit */
+    width: calc(100% - 30px); /* Adjust to 100% minus sidebar's horizontal padding. Your sidebar padding is 1.5rem (24px) each side, so 48px total. Let's try 30px as a starting point. You might need to use `calc(100% - (2 * 1.5rem))` for accuracy. */
+    left: 15px; /* Sesuaikan dengan padding kiri sidebar (1.5rem = 24px). Ini untuk mengatur posisi 'sticky' */
+    box-sizing: border-box; /* Sangat penting */
+}
