@@ -7,6 +7,8 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .stApp {
@@ -18,6 +20,8 @@ html, body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    /* PENTING: Padding-top untuk memberikan ruang bagi fixed header */
+    padding-top: 180px; /* Sesuaikan dengan tinggi header + margin */
 }
 
 .main .block-container {
@@ -26,11 +30,16 @@ html, body {
     padding-bottom: 2rem;
     min-height: auto !important;
     overflow: hidden !important;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 [data-testid="stHeader"] {
     background-color: transparent;
-    height: auto !important;
+    height: 0px !important; /* Hilangkan header default Streamlit */
+    position: fixed;
+    top: 0;
+    z-index: 998; /* Di bawah header custom */
 }
 
 /* Animated Background */
@@ -81,6 +90,7 @@ body::before {
     animation: rainLightBlur 30s infinite ease-in-out;
 }
 
+/* Particle configurations */
 .particles-container .particle:nth-child(1) {
     width: 80px; height: 80px;
     left: 15%; top: 20%;
@@ -188,11 +198,9 @@ body::before {
 .stSidebar,
 .stSidebar > div,
 .main-container,
-.header-box,
 .feature-section,
 .info-card,
 [data-testid="stSidebar"],
-[data-testid="stHeader"],
 [data-testid="stToolbar"],
 [data-testid="stDecoration"],
 [data-testid="stStatusWidget"],
@@ -225,8 +233,6 @@ body::before {
     z-index: 10;
     padding-bottom: 5rem;
     min-height: auto !important;
-    /* Add padding-top to account for fixed header */
-    padding-top: 180px; /* Adjust this value based on your header height */
 }
 
 .main-container > *:last-child {
@@ -236,39 +242,35 @@ body::before {
 
 /* --- FIXED HEADER STYLES --- */
 .header-box {
-    /* Make header sticky/fixed */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000; /* High z-index to stay above other content */
-    
-    /* Responsive width and centering */
-    width: 100%;
-    max-width: 1200px; /* Match main-container max-width */
-    margin: 0 auto;
-    
-    /* Styling */
     display: flex;
     padding: 25px;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    border-radius: 0 0 25px 25px; /* Only round bottom corners */
+    align-self: stretch;
+    border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-top: none; /* Remove top border since it's at the top of screen */
-    background: rgba(14, 17, 23, 0.95); /* More opaque background for better visibility */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
+    background: rgba(14, 17, 23, 0.95); /* Semi-transparent background */
+    backdrop-filter: blur(25px); /* Stronger blur effect */
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 
+        0px 12px 40px rgba(0, 0, 0, 0.8),
+        0px 4px 20px rgba(0, 0, 0, 0.6); /* Stronger shadow for fixed header */
     overflow: visible;
-    transition: all 0.3s ease;
     
-    /* Add some side margin for mobile */
-    margin-left: 1rem;
-    margin-right: 1rem;
+    /* FIXED HEADER POSITIONING */
+    position: fixed;
+    top: 20px; /* Distance from top of viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px); /* Full width minus margins */
+    max-width: 1200px; /* Match main container width */
+    z-index: 1000; /* Highest z-index to stay above everything */
+    
+    transition: all 0.3s ease-in-out;
 }
 
+/* Enhanced fixed header background */
 .header-box::before {
     content: '';
     position: absolute;
@@ -277,27 +279,37 @@ body::before {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg,
-        rgba(57, 237, 234, 0.05) 0%,
-        rgba(104, 106, 207, 0.03) 50%,
-        rgba(255, 119, 198, 0.02) 100%
+        rgba(57, 237, 234, 0.08) 0%,
+        rgba(104, 106, 207, 0.05) 50%,
+        rgba(255, 119, 198, 0.03) 100%
     );
-    border-radius: 0 0 25px 25px;
+    border-radius: 25px;
     pointer-events: none;
     z-index: -1;
 }
 
 .header-box:hover {
-    border: 1px solid rgba(57, 237, 234, 0.3);
-    border-top: none;
+    border: 1px solid rgba(57, 237, 234, 0.4);
     box-shadow:
-        0px 16px 50px rgba(0, 0, 0, 0.6),
-        0px 0px 30px rgba(57, 237, 234, 0.1);
-    transform: translateY(0); /* Remove translateY on hover since it's fixed */
+        0px 16px 50px rgba(0, 0, 0, 0.9),
+        0px 0px 40px rgba(57, 237, 234, 0.2);
+    transform: translateX(-50%) translateY(-2px); /* Maintain centering while lifting */
 }
 
 .header-box > * {
     position: relative;
     z-index: 2;
+}
+
+/* Enhanced scroll behavior for fixed header */
+.header-box.scrolled {
+    top: 10px; /* Closer to top when scrolled */
+    padding: 20px; /* Slightly smaller padding */
+    border-radius: 20px;
+    box-shadow: 
+        0px 8px 32px rgba(0, 0, 0, 0.9),
+        0px 2px 16px rgba(0, 0, 0, 0.7);
+    background: rgba(14, 17, 23, 0.98); /* More opaque when scrolled */
 }
 
 .top-pill {
@@ -617,22 +629,20 @@ body::before {
 }
 
 /* --- Responsive Design --- */
-@media (max-width: 1240px) {
-    .header-box {
-        max-width: calc(100% - 2rem); /* Account for margin */
-    }
-}
-
 @media (max-width: 768px) {
-    .header-box {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        padding: 20px;
-        border-radius: 0 0 20px 20px;
+    .stApp {
+        padding-top: 140px; /* Adjust for smaller mobile header */
     }
     
-    .main-container {
-        padding-top: 160px; /* Adjust for smaller header on mobile */
+    .header-box {
+        top: 10px;
+        padding: 15px;
+        width: calc(100% - 20px); /* Smaller margins on mobile */
+    }
+    
+    .header-box.scrolled {
+        top: 5px;
+        padding: 12px;
     }
     
     .main-title {
@@ -660,14 +670,14 @@ body::before {
 }
 
 @media (max-width: 480px) {
-    .header-box {
-        margin-left: 0.25rem;
-        margin-right: 0.25rem;
-        padding: 15px;
+    .stApp {
+        padding-top: 120px;
     }
     
-    .main-container {
-        padding-top: 150px;
+    .header-box {
+        top: 5px;
+        padding: 12px;
+        border-radius: 15px;
     }
     
     .main-title {
@@ -675,12 +685,16 @@ body::before {
     }
     
     .top-pill {
-        font-size: 16px;
+        font-size: 14px;
         padding: 8px 16px;
+    }
+    
+    .subtitle {
+        font-size: 14px;
     }
 }
 
-/* Section Title --- */
+/* Section Title */
 .section-title {
     width: 100%;
     text-align: center;
@@ -698,7 +712,7 @@ body::before {
     z-index: 16;
 }
 
-/* Input Section Container --- */
+/* Input Section Container */
 .input-section-container,
 .results-section-container {
     display: flex;
@@ -768,7 +782,7 @@ body::before {
     transform: scale(1.01);
 }
 
-/* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
+/* Button Styles */
 .stButton > button {
     display: flex;
     padding: 15px;
@@ -821,46 +835,7 @@ body::before {
         inset 0px 1px 0px rgba(255, 255, 255, 0.15);
 }
 
-.model-load-button > button,
-.tokenizer-load-button > button {
-    border: 1px solid rgba(57, 237, 234, 0.4);
-    background: radial-gradient(circle at center, rgba(104, 106, 207, 0.2) 0%, transparent 70%);
-    color: #39EDEA;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
-    text-shadow: 0px 0px 5px rgba(57, 237, 234, 0.7);
-}
-
-.model-load-button > button:hover,
-.tokenizer-load-button > button:hover {
-    background: radial-gradient(circle at center, rgba(104, 106, 207, 0.4) 0%, transparent 70%);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.6), 0px 0px 25px rgba(57, 237, 234, 0.5);
-    border-color: #39EDEA;
-    transform: translateY(-2px);
-    color: #FFF;
-}
-
-.model-load-button > button:active,
-.tokenizer-load-button > button:active {
-    transform: translateY(0);
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-
-/* General styling for Streamlit input containers */
-[data-testid="stTextInput"],
-[data-testid="stTextArea"] {
-    /* Pastikan kontainer ini tidak punya border aneh */
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-/* Style for YouTube Video Input Field (st.text_input) */
+/* Input Field Styles */
 .stTextInput > div > div > input {
     background-color: rgba(14, 17, 23, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.1);
