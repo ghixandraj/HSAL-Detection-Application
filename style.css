@@ -1020,7 +1020,7 @@ p {
     flex-grow: 1; 
 }
 
-[data-testid="stSidebar"] .stMarkdown .stSubheader {
+[data-testid="stSidebar"] .stSubheader {
     color: #39EDEA;
     font-size: 1.5rem;
     margin-top: 1.5rem;
