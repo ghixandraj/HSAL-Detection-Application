@@ -18,6 +18,7 @@ html, body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 150px;
 }
 
 .main .block-container {
@@ -255,9 +256,15 @@ body::before {
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
     margin-bottom: 4rem;
     overflow: visible;
-    position: relative;
+    /*position: relative;*/
+    position: fixed;
+    top: 0; /* Menempatkan header di bagian atas */
+    left: 50%; /* Pusatkan secara horizontal */
+    transform: translateX(-50%); /* Geser ke kiri setengah lebar untuk pusat */
     width: 100%;
-    z-index: 15;
+    /*z-index: 15;*/
+    max-width: 1200px; /* Batasi lebar maksimum sesuai main-container */
+    z-index: 999; /* Pastikan header selalu di atas konten lain */
     transition: all 0.3s ease;
 }
 
@@ -609,6 +616,12 @@ body::before {
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
+    .stApp {
+        padding-top: 120px; /* Sesuaikan jika header lebih kecil di mobile */
+    }
+    .header-box {
+        padding: 15px; /* Sesuaikan padding header di mobile */
+    }
     .main-title {
         font-size: 28px;
     }
