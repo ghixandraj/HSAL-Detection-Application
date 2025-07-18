@@ -1021,11 +1021,14 @@ p {
 }
 
 [data-testid="stSidebar"] .stMarkdown h1 {
-    color:  linear-gradient(#FFF 0%, #39EDEA 50%, #686ACF 100%);
     font-size: 2rem;
     margin-top: 2rem;
     margin-bottom: 0.8rem;
     padding-bottom: 5px;
+
+    background: linear-gradient(90deg, #FFF 0%, #39EDEA 50%, #686ACF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 [data-testid="stSidebar"] .stMarkdown h2 {
