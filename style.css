@@ -994,7 +994,7 @@ body::before {
     font-weight: 600;
 }
 
-/* Styling for `st.markdown` elements used for headings and text in the main content area */
+/* Styling for st.markdown elements used for headings and text in the main content area */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
     color: #ffffff; /* Default for general headings */
