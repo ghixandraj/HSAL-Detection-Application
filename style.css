@@ -1029,6 +1029,12 @@ p {
     padding: 2rem 1.5rem;
 }
 
+[data-testid="stSidebarContent"] {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Memastikan konten mengisi ruang yang tersedia */
+}
+
 [data-testid="stSidebar"] .stMarkdown h2 {
     color: #39EDEA;
     font-size: 1.5rem;
