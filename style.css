@@ -23,7 +23,7 @@ html, body {
 
 .main .block-container {
     flex-grow: 1; /* Biarkan block-container mengambil sisa ruang yang tersedia */
-    padding-top: 180px;
+    padding-top: 0rem;
     padding-bottom: 2rem;
     min-height: auto !important;
     overflow: hidden !important;
@@ -244,8 +244,6 @@ body::before {
 /* --- STYLES HEADER BARU --- */
 .header-box {
     position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
     padding: 25px;
     flex-direction: column;
@@ -259,8 +257,8 @@ body::before {
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
     margin-bottom: 4rem;
-    /*overflow: visible;
-    position: relative;*/
+    overflow: visible;
+    position: relative;
     width: 100%;
     z-index: 999;
     transition: all 0.3s ease;
