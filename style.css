@@ -22,7 +22,6 @@ html, body {
 
 .main .block-container {
     flex-grow: 1; /* Biarkan block-container mengambil sisa ruang yang tersedia */
-    padding-top: 0.5rem;
     padding-bottom: 2rem;
     min-height: auto !important;
     overflow: hidden !important;
