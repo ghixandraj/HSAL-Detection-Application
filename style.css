@@ -1,24 +1,21 @@
 /* --- Global & Font --- */
-html, body {
-    font-family: 'Poppins', sans-serif !important;
-    background-color: transparent !important;
-    color: #e0e0e0 !important;
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 100%;
+html, body, .stApp {
+    font-family: 'Poppins', sans-serif !important;
+    background: transparent !important;
+    color: #e0e0e0 !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
+/* Pastikan Streamlit container tidak override background */
 .stApp {
-    background-color: transparent !important;
-    position: relative;
-    z-index: 1;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background: transparent !important;
+    position: relative;
+    z-index: 0;
 }
+
 
 /* Tweak this area to minimize the top gap */
 .main .block-container {
@@ -66,135 +63,79 @@ html, body {
 }
 
 /* Animated Background */
-body::before {
-    content: '';
-    position: fixed; /* Use fixed to cover the entire viewport */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-        radial-gradient(circle at 20% 80%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(104, 106, 207, 0.05) 0%, transparent 70%),
-        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%); /* Base dark background */
-    background-size: 200% 200%; /* Larger than viewport to allow movement */
-    animation: wave-move 30s ease-in-out infinite alternate; /* Slower, gentler animation */
-    z-index: -1; /* Ensure it's behind all content */
-    pointer-events: none; /* Allow clicks to pass through */
-}
-
-@keyframes wave-move {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(104, 106, 207, 0.05) 0%, transparent 70%),
+        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%);
+    background-size: 200% 200%;
+    animation: wave-move 30s ease-in-out infinite alternate;
+    z-index: -2 !important;
+    pointer-events: none;
 }
 
 /* --- Animasi Partikel --- */
 .particles-container {
-    position: fixed; /* Tetap fixed */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -2;
-    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1 !important;
+    pointer-events: none;
 }
 
 .particle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0; /* Mulai dengan tidak terlihat */
-    filter: blur(25px); /* Efek blur yang lebih kuat */
-    animation: rainLightBlur 30s infinite ease-in-out; /* Animasi baru dan lebih lambat */
-    /* Box-shadow dihapus, filter: blur lebih cocok untuk efek ini */
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(25px);
+    animation: rainLightBlur 30s infinite ease-in-out;
 }
 
-/* Pengaturan individual untuk setiap partikel. Anda bisa menyesuaikan jumlah dan nilai! */
-/* Menggunakan campuran warna terang yang bisa mirip cahaya lampu */
-
+/* Contoh partikel */
 .particles-container .particle:nth-child(1) {
-    width: 80px; height: 80px;
-    left: 15%; top: 20%;
-    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.4) 0%, transparent 70%); /* Biru muda transparan */
-    animation-delay: 0s;
-    animation-duration: 25s;
+    width: 80px; height: 80px;
+    left: 15%; top: 20%;
+    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.4) 0%, transparent 70%);
+    animation-delay: 0s;
+    animation-duration: 25s;
 }
 
 .particles-container .particle:nth-child(2) {
-    width: 100px; height: 100px;
-    left: 70%; top: 50%;
-    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.4) 0%, transparent 70%); /* Ungu muda transparan */
-    animation-delay: 5s;
-    animation-duration: 35s;
+    width: 100px; height: 100px;
+    left: 70%; top: 50%;
+    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.4) 0%, transparent 70%);
+    animation-delay: 5s;
+    animation-duration: 35s;
 }
 
-.particles-container .particle:nth-child(3) {
-    width: 60px; height: 60px;
-    left: 30%; top: 85%;
-    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.3) 0%, transparent 70%);
-    animation-delay: 10s;
-    animation-duration: 30s;
+/* --- Keyframes animasi --- */
+@keyframes wave-move {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
-.particles-container .particle:nth-child(4) {
-    width: 90px; height: 90px;
-    left: 5%; top: 10%;
-    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.3) 0%, transparent 70%);
-    animation-delay: 2s;
-    animation-duration: 28s;
+@keyframes rainLightBlur {
+    0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+    20% { opacity: 0.7; }
+    50% { transform: translate(calc(50vw - 50%), -50vh) scale(1); opacity: 0.5; }
+    80% { opacity: 0.3; }
+    100% { transform: translate(calc(100vw - 100%), -100vh) scale(0.7); opacity: 0; }
 }
 
-.particles-container .particle:nth-child(5) {
-    width: 70px; height: 70px;
-    left: 90%; top: 70%;
-    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.4) 0%, transparent 70%);
-    animation-delay: 7s;
-    animation-duration: 32s;
-}
-
-.particles-container .particle:nth-child(6) {
-    width: 110px; height: 110px;
-    left: 45%; top: 5%;
-    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.4) 0%, transparent 70%);
-    animation-delay: 12s;
-    animation-duration: 40s;
-}
-
-.particles-container .particle:nth-child(7) {
-    width: 75px; height: 75px;
-    left: 25%; top: 60%;
-    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.35) 0%, transparent 70%);
-    animation-delay: 3s;
-    animation-duration: 27s;
-}
-
-.particles-container .particle:nth-child(8) {
-    width: 95px; height: 95px;
-    left: 80%; top: 25%;
-    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.35) 0%, transparent 70%);
-    animation-delay: 8s;
-    animation-duration: 33s;
-}
-
-.particles-container .particle:nth-child(9) {
-    width: 65px; height: 65px;
-    left: 55%; top: 90%;
-    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.3) 0%, transparent 70%);
-    animation-delay: 1s;
-    animation-duration: 29s;
-}
-
-.particles-container .particle:nth-child(10) {
-    width: 85px; height: 85px;
-    left: 0%; top: 40%;
-    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.4) 0%, transparent 70%);
-    animation-delay: 6s;
-    animation-duration: 36s;
+/* --- Pastikan konten di atas background --- */
+.stApp > div, .main, .block-container, .stSidebar {
+    position: relative;
+    z-index: 10 !important;
 }
 
 
