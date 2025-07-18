@@ -1021,7 +1021,7 @@ p {
 }
 
 [data-testid="stSidebar"] .stMarkdown h1 {
-    color:  #FFF 0%, #39EDEA 50%, #686ACF 100%;
+    color:  linear-gradient(#FFF 0%, #39EDEA 50%, #686ACF 100%);
     font-size: 2rem;
     margin-top: 2rem;
     margin-bottom: 0.8rem;
