@@ -4,9 +4,8 @@ html, body {
     background-color: transparent !important;
     color: #e0e0e0 !important;
     position: relative;
-    /*overflow-x: hidden;
-    overflow-y: auto;*/
-    overflow: hidden !important;
+    overflow-x: hidden;
+    overflow-y: auto;
     height: 100%;
 }
 
@@ -234,7 +233,6 @@ body::before {
     padding-top: 140px;
     padding-bottom: 5rem;
     min-height: auto !important;
-    overflow-y: auto;
 }
 
 /* Reset margin pada elemen terakhir di main-container untuk mencegah dorongan ekstra */
