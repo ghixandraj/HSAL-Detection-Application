@@ -1027,12 +1027,19 @@ p {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 2rem 1.5rem;
+
+    overflow-y: auto !important; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    box-sizing: border-box;
 }
 
 [data-testid="stSidebarContent"] {
     display: flex;
     flex-direction: column;
     flex-grow: 1; /* Memastikan konten mengisi ruang yang tersedia */
+    overflow-x: hidden;
 }
 
 [data-testid="stSidebar"] .stMarkdown h2 {
@@ -1042,12 +1049,16 @@ p {
     margin-bottom: 0.8rem;
     border-bottom: 2px solid rgba(57, 237, 234, 0.3);
     padding-bottom: 5px;
+    word-break: break-word; 
+    overflow-wrap: break-word;
 }
 
 [data-testid="stSidebar"] .stMarkdown p {
     font-size: 0.9rem;
     color: #cccccc;
     margin-bottom: 0.5rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 [data-testid="stSidebar"] .stMarkdown strong {
