@@ -241,23 +241,20 @@ body::before {
 
 /* --- STYLES HEADER BARU --- */
 .header-box {
-    display: flex;
-    padding: 25px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    align-self: stretch;
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: sticky; /* atau fixed jika kamu ingin selalu di viewport walau scroll jauh */
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1200px; /* agar responsif mengikuti main-container */
+    margin: 0 auto 4rem auto; /* tetap kasih margin bawah, margin atas dihilangkan */
+    z-index: 999 !important; /* pastikan berada di atas semua elemen lain */
     background: transparent;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    padding: 25px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.5);
-    margin-bottom: 4rem;
-    overflow: visible;
-    position: relative;
-    width: 100%;
-    z-index: 15;
     transition: all 0.3s ease;
 }
 
