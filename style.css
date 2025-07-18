@@ -21,7 +21,6 @@ html, body {
 
 .main .block-container {
     flex-grow: 1;
-    padding-top: 0rem;
     padding-bottom: 2rem;
     min-height: auto !important;
     overflow: hidden !important;
