@@ -13,8 +13,9 @@ html, body {
     background-color: transparent !important;
     position: relative;
     z-index: 1;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
+    overflow: visible !important;
+    /*overflow-y: auto !important;
+    overflow-x: hidden !important;*/
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -229,6 +230,7 @@ body::before {
     padding: 2rem 1rem;
     position: relative;
     z-index: 10;
+    padding-top: 140px;
     padding-bottom: 5rem;
     min-height: auto !important;
 }
@@ -258,7 +260,7 @@ body::before {
     overflow: visible;
     position: relative;
     width: 100%;
-    z-index: 15;
+    z-index: 999;
     transition: all 0.3s ease;
 }
 
