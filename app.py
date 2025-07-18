@@ -131,7 +131,7 @@ st.markdown("""
 # SIDEBAR
 with st.sidebar:
     # 🔍 FITUR UTAMA
-    st.subheader("Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts")
+    st.markdown("# Hayu-IT: HSAL Analysis on Youtube Indonesian Transcripts")
     st.markdown("## 🔍 Fitur Utama")
     st.markdown("""
     **Analisis Komprehensif:**
