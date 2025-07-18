@@ -14,15 +14,13 @@ html, body {
     position: relative;
     z-index: 1;
     overflow: visible !important;
-    /*overflow-y: auto !important;
-    overflow-x: hidden !important;*/
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .main .block-container {
-    flex-grow: 1; /* Biarkan block-container mengambil sisa ruang yang tersedia */
+    flex-grow: 1;
     padding-top: 0rem;
     padding-bottom: 2rem;
     min-height: auto !important;
@@ -30,14 +28,14 @@ html, body {
 }
 
 [data-testid="stHeader"] {
-    background-color: transparent; /* Pastikan header Streamlit tidak mengganggu */
-    height: auto !important; /* Hindari tinggi tetap yang terlalu besar */
+    background-color: transparent;
+    height: auto !important;
 }
 
 /* Animated Background */
 body::before {
     content: '';
-    position: fixed; /* Use fixed to cover the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -46,11 +44,11 @@ body::before {
         radial-gradient(circle at 20% 80%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(104, 106, 207, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 50% 50%, rgba(104, 106, 207, 0.05) 0%, transparent 70%),
-        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%); /* Base dark background */
-    background-size: 200% 200%; /* Larger than viewport to allow movement */
-    animation: wave-move 30s ease-in-out infinite alternate; /* Slower, gentler animation */
-    z-index: -1; /* Ensure it's behind all content */
-    pointer-events: none; /* Allow clicks to pass through */
+        linear-gradient(135deg, #0E1117 0%, #1a0f2e 100%);
+    background-size: 200% 200%;
+    animation: wave-move 30s ease-in-out infinite alternate;
+    z-index: -1;
+    pointer-events: none;
 }
 
 @keyframes wave-move {
@@ -64,7 +62,7 @@ body::before {
 
 /* --- Animasi Partikel --- */
 .particles-container {
-    position: fixed; /* Tetap fixed */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -77,19 +75,15 @@ body::before {
 .particle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0; /* Mulai dengan tidak terlihat */
-    filter: blur(25px); /* Efek blur yang lebih kuat */
-    animation: rainLightBlur 30s infinite ease-in-out; /* Animasi baru dan lebih lambat */
-    /* Box-shadow dihapus, filter: blur lebih cocok untuk efek ini */
+    opacity: 0;
+    filter: blur(25px);
+    animation: rainLightBlur 30s infinite ease-in-out;
 }
-
-/* Pengaturan individual untuk setiap partikel. Anda bisa menyesuaikan jumlah dan nilai! */
-/* Menggunakan campuran warna terang yang bisa mirip cahaya lampu */
 
 .particles-container .particle:nth-child(1) {
     width: 80px; height: 80px;
     left: 15%; top: 20%;
-    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.4) 0%, transparent 70%); /* Biru muda transparan */
+    background: radial-gradient(circle at center, rgba(171, 230, 255, 0.4) 0%, transparent 70%);
     animation-delay: 0s;
     animation-duration: 25s;
 }
@@ -97,7 +91,7 @@ body::before {
 .particles-container .particle:nth-child(2) {
     width: 100px; height: 100px;
     left: 70%; top: 50%;
-    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.4) 0%, transparent 70%); /* Ungu muda transparan */
+    background: radial-gradient(circle at center, rgba(255, 200, 255, 0.4) 0%, transparent 70%);
     animation-delay: 5s;
     animation-duration: 35s;
 }
@@ -166,30 +160,27 @@ body::before {
     animation-duration: 36s;
 }
 
-
-/* Keyframes untuk animasi melayang dan memudar dengan efek blur lampu */
 @keyframes rainLightBlur {
     0% {
         transform: translate(0, 0) scale(0.6);
         opacity: 0;
     }
     20% {
-        opacity: 0.7; /* Puncak opasitas */
+        opacity: 0.7;
     }
     50% {
-        transform: translate(calc(50vw - 50%), -50vh) scale(1); /* Bergerak ke atas dan sedikit ke samping */
+        transform: translate(calc(50vw - 50%), -50vh) scale(1);
         opacity: 0.5;
     }
     80% {
         opacity: 0.3;
     }
     100% {
-        transform: translate(calc(100vw - 100%), -100vh) scale(0.7); /* Bergerak jauh ke atas, memudar dan mengecil */
+        transform: translate(calc(100vw - 100%), -100vh) scale(0.7);
         opacity: 0;
     }
 }
 
-/* Pastikan semua konten Streamlit memiliki z-index yang tepat */
 .stApp > div,
 .main .block-container,
 .stSidebar,
@@ -235,7 +226,6 @@ body::before {
     min-height: auto !important;
 }
 
-/* Reset margin pada elemen terakhir di main-container untuk mencegah dorongan ekstra */
 .main-container > *:last-child {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
@@ -575,7 +565,7 @@ body::before {
 .info-card:hover .card-icon svg {
     fill: #FFF;
     filter: drop-shadow(0px 0px 5px rgba(57, 237, 234, 0.5));
-    transform: rotate(15deg); /* Efek miring saat di hover */
+    transform: rotate(15deg); 
 }
 
 .card-title,
@@ -645,7 +635,7 @@ body::before {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 0 auto 2rem auto; /* Margin bawah untuk spasi */
+    margin: 0 auto 2rem auto; 
     position: relative;
     z-index: 16;
 }
@@ -654,18 +644,18 @@ body::before {
 .input-section-container,
 .results-section-container {
     display: flex;
-    padding: 30px; /* Padding lebih besar */
+    padding: 30px; 
     flex-direction: column;
     align-items: center;
     gap: 25px;
     align-self: stretch;
-    border-radius: 20px; /* Radius sedikit lebih kecil dari header */
+    border-radius: 20px; 
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: transparent;
-    backdrop-filter: blur(25px); /* Efek blur lebih kuat */
+    backdrop-filter: blur(25px); 
     -webkit-backdrop-filter: blur(25px);
-    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.6); /* Shadow lebih gelap dan besar */
-    margin-bottom: 4rem; /* Jarak antar section */
+    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.6); 
+    margin-bottom: 4rem; 
     overflow: visible;
     position: relative;
     width: 100%;
@@ -682,8 +672,8 @@ body::before {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg,
-        rgba(57, 237, 234, 0.08) 0%, /* Lebih terang */
-        rgba(104, 106, 207, 0.05) 50%, /* Lebih terang */
+        rgba(57, 237, 234, 0.08) 0%, 
+        rgba(104, 106, 207, 0.05) 50%, 
         rgba(255, 119, 198, 0.03) 100%
     );
     border-radius: 20px;
@@ -693,24 +683,23 @@ body::before {
 
 .input-section-container:hover,
 .results-section-container:hover {
-    border: 1px solid rgba(57, 237, 234, 0.4); /* Border hover lebih jelas */
+    border: 1px solid rgba(57, 237, 234, 0.4); 
     box-shadow:
-        0px 20px 60px rgba(0, 0, 0, 0.8), /* Shadow lebih besar saat hover */
-        0px 0px 40px rgba(57, 237, 234, 0.2); /* Glow hover lebih kuat */
-    transform: translateY(-8px); /* Efek naik lebih tinggi saat hover */
+        0px 20px 60px rgba(0, 0, 0, 0.8),
+        0px 0px 40px rgba(57, 237, 234, 0.2); 
+    transform: translateY(-8px); 
 }
 
 .input-section-container > *,
 .results-section-container > * {
     position: relative;
-    z-index: 2; /* Pastikan konten di atas pseudo-element */
+    z-index: 2; 
 }
 
-/* Pastikan video player di dalam input-section-container menyesuaikan */
 .input-section-container .stVideo {
     width: 100%;
-    max-width: 700px; /* Batasi lebar video */
-    margin: 20px auto; /* Pusatkan video */
+    max-width: 700px; 
+    margin: 20px auto; 
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
@@ -725,50 +714,48 @@ body::before {
 /* --- CUSTOM STYLES FOR BUTTONS, INPUTS, DROPDOWNS, AND PROGRESS --- */
 /* Style for Buttons (st.button) */
 .stButton > button {
-    display: flex; /* Use flexbox for alignment of content inside the button */
-    padding: 15px; /* Match info-card padding */
+    display: flex; 
+    padding: 15px; 
     flex-direction: column;
-    align-items: center; /* Align text to the start */
-    gap: 5px; /* Match info-card gap */
-    /* flex: 1; Uncomment if you want buttons to stretch within a flex container */
+    align-items: center; 
+    gap: 5px; 
     align-self: stretch;
-    border-radius: 15px; /* Match info-card border-radius */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Match info-card border */
+    border-radius: 15px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
     background: linear-gradient(180deg,
         #0E1117 31.25%,
         rgba(50, 34, 77, 0.9) 65.62%,
         rgba(74, 33, 121, 0.9) 99.99%
-    ); /* Match info-card background */
-    backdrop-filter: blur(10px); /* Match info-card backdrop-filter */
+    );
+    backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px);
     box-shadow:
         0px 8px 25px rgba(0, 0, 0, 0.5),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1); /* Match info-card box-shadow */
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1); 
     text-align: center; 
-    transition: all 0.3s ease-in-out; /* Match info-card transition */
+    transition: all 0.3s ease-in-out; 
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    z-index: 16; /* Ensure it's above background elements */
+    z-index: 16; 
 
-    /* Reset/adjust specific button styles that don't fit the info-card look */
     font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem; /* Adjust font size to match card titles */
-    font-weight: 900; /* Bold font for button text */
-    color: #ffffff; /* White text for contrast */
-    text-shadow: none; /* Remove previous text shadow */
-    line-height: 1.1; /* Adjust line height */
+    font-size: 1.5rem; 
+    font-weight: 900; 
+    color: #ffffff; 
+    text-shadow: none; 
+    line-height: 1.1; 
 }
 
 .stButton > button:hover {
     box-shadow:
         0px 15px 40px rgba(0, 0, 0, 0.7),
         inset 0px 1px 0px rgba(255, 255, 255, 0.2),
-        0px 0px 25px rgba(57, 237, 234, 0.1); /* Match info-card hover box-shadow */
-    border: 1px solid rgba(57, 237, 234, 0.3); /* Match info-card hover border */
+        0px 0px 25px rgba(57, 237, 234, 0.1); 
+    border: 1px solid rgba(57, 237, 234, 0.3); 
     background: linear-gradient(180deg,
         #0E1117 31.25%,
-        rgba(50, 34, 77, 0.95) 65.62%, /* Slightly more opaque on hover */
+        rgba(50, 34, 77, 0.95) 65.62%, 
         rgba(74, 33, 121, 0.95) 99.99%
     );
 }
@@ -779,19 +766,18 @@ body::before {
         inset 0px 1px 0px rgba(255, 255, 255, 0.15);
 }
 
-/* Style for "Load Model" and "Load Tokenizer" buttons */
 .model-load-button > button,
 .tokenizer-load-button > button {
-    border: 1px solid rgba(57, 237, 234, 0.4); /* Subtle glow border */
+    border: 1px solid rgba(57, 237, 234, 0.4); 
     background: radial-gradient(circle at center, rgba(104, 106, 207, 0.2) 0%, transparent 70%); /* Light ethereal background */
-    color: #39EDEA; /* Primary theme color for text */
+    color: #39EDEA; 
     font-size: 1rem;
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
-    text-shadow: 0px 0px 5px rgba(57, 237, 234, 0.7); /* Text glow */
+    text-shadow: 0px 0px 5px rgba(57, 237, 234, 0.7); 
 }
 
 .model-load-button > button:hover,
@@ -800,7 +786,7 @@ body::before {
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.6), 0px 0px 25px rgba(57, 237, 234, 0.5);
     border-color: #39EDEA;
     transform: translateY(-2px);
-    color: #FFF; /* Text turns white on hover */
+    color: #FFF; 
 }
 
 .model-load-button > button:active,
@@ -809,11 +795,8 @@ body::before {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-
-/* General styling for Streamlit input containers */
 [data-testid="stTextInput"],
 [data-testid="stTextArea"] {
-    /* Pastikan kontainer ini tidak punya border aneh */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
@@ -866,47 +849,46 @@ body::before {
 
 /* Style for Text Area (st.text_area) - used for transcript display */
 .stTextArea > div > div > textarea {
-    background-color: rgba(14, 17, 23, 0.7); /* Lebih gelap, mendekati background */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default lebih tipis dan transparan */
+    background-color: rgba(14, 17, 23, 0.7); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 15px 20px;
-    color: #f0f0f0; /* Warna teks lebih terang */
+    color: #f0f0f0; 
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    transition: all 0.3s ease-in-out; /* Transisi untuk semua properti */
-    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4); /* Inner shadow lebih dalam */
-    backdrop-filter: blur(8px); /* Efek blur lebih kuat */
+    transition: all 0.3s ease-in-out; 
+    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(8px); 
     -webkit-backdrop-filter: blur(8px);
-    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1; /* Default gradient border */
-    border-style: solid; /* Pastikan border style adalah solid untuk gradient border */
+    border-image: linear-gradient(45deg, rgba(57, 237, 234, 0.3), rgba(104, 106, 207, 0.3)) 1; 
+    border-style: solid; 
     border-width: 1px;
 }
 
 /* Efek HOVER untuk text area */
 .stTextArea > div > div > textarea:hover {
-    background-color: rgba(14, 17, 23, 0.85); /* Sedikit lebih solid saat hover */
-    border-color: transparent !important; /* Hilangkan border solid */
-    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1; /* Border gradient penuh */
+    background-color: rgba(14, 17, 23, 0.85); 
+    border-color: transparent !important; 
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF) 1; 
     box-shadow:
-        0px 0px 20px rgba(57, 237, 234, 0.2), /* Glow effect */
-        inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important; /* Inner shadow lebih gelap */
-    transform: translateY(-2px); /* Sedikit naik */
-    outline: none !important; /* Pastikan outline tetap hilang */
+        0px 0px 20px rgba(57, 237, 234, 0.2), 
+        inset 0px 3px 10px rgba(0, 0, 0, 0.6) !important; 
+    transform: translateY(-2px); 
+    outline: none !important; 
 }
 
 /* Efek FOKUS untuk text area */
 .stTextArea > div > div > textarea:focus {
-    background-color: rgba(14, 17, 23, 0.95); /* Lebih solid saat fokus */
-    outline: none !important; /* Hapus outline bawaan browser/streamlit */
-    border-color: transparent !important; /* Hilangkan border solid */
-    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1; /* Border gradient yang lebih kaya */
+    background-color: rgba(14, 17, 23, 0.95); 
+    outline: none !important; 
+    border-color: transparent !important; 
+    border-image: linear-gradient(45deg, #39EDEA, #686ACF, #7B39C6) 1; 
     box-shadow:
-        0px 0px 35px rgba(57, 237, 234, 0.5), /* Bayangan fokus lebih kuat */
-        inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important; /* Inner shadow paling gelap */
-    transform: translateY(-1px); /* Sedikit naik saat fokus */
+        0px 0px 35px rgba(57, 237, 234, 0.5), 
+        inset 0px 4px 12px rgba(0, 0, 0, 0.7) !important; 
+    transform: translateY(-1px); 
 }
 
-/* Penyesuaian agar border div pembungkus juga tidak mengganggu visual */
 .stTextArea div[data-baseweb="textarea"],
 .stTextArea > div {
     border: none !important;
@@ -918,7 +900,7 @@ body::before {
 .stExpander {
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.05); /* Lighter transparent background */
+    background: rgba(255, 255, 255, 0.05); 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
@@ -935,16 +917,16 @@ body::before {
     padding: 15px 20px;
     font-size: 1.1rem;
     font-weight: 600;
-    color: #39EDEA; /* Color for the expander title */
+    color: #39EDEA; 
     cursor: pointer;
     transition: color 0.3s ease;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
 }
 
 .stExpander details[open] summary {
-    color: #686ACF; /* Color when open */
+    color: #686ACF; 
     border-bottom-color: rgba(57, 237, 234, 0.3);
 }
 
@@ -955,7 +937,7 @@ body::before {
     color: #fff;
 }
 
-.stExpander > div > div { /* Content inside the expander */
+.stExpander > div > div { 
     padding: 15px 20px;
     color: #e0e0e0;
     font-size: 0.95rem;
@@ -963,7 +945,7 @@ body::before {
 }
 
 .stExpander > div > div > p {
-    margin-bottom: 0.5em; /* Adjust spacing for content paragraphs */
+    margin-bottom: 0.5em;
 }
 
 /* Style for Progress Bar (st.progress) */
@@ -972,11 +954,11 @@ body::before {
     border-radius: 10px;
     height: 15px;
 
-    box-shadow: 0px 0px 10px rgba(57, 237, 234, 0.7); /* Sedikit lebih kuat glow-nya */
+    box-shadow: 0px 0px 10px rgba(57, 237, 234, 0.7); 
     transition: width 0.5s ease-out;
 }
 
-.stProgress > div > div > div { /* Background track for the progress bar */
+.stProgress > div > div > div { 
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     height: 15px;
@@ -997,7 +979,7 @@ body::before {
 /* Styling for st.markdown elements used for headings and text in the main content area */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
-    color: #ffffff; /* Default for general headings */
+    color: #ffffff; 
     margin-top: 2rem;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -1006,7 +988,7 @@ h1, h2, h3, h4, h5, h6 {
 h2 {
     font-size: 2rem;
     font-weight: 700;
-    color: #39EDEA; /* Highlight subheaders */
+    color: #39EDEA; 
 }
 
 h3 {
@@ -1035,7 +1017,7 @@ p {
 [data-testid="stSidebarContent"] {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Memastikan konten mengisi ruang yang tersedia */
+    flex-grow: 1; 
 }
 
 [data-testid="stSidebar"] .stMarkdown h2 {
