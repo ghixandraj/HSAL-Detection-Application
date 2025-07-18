@@ -17,11 +17,14 @@ st.set_page_config(page_title="Hayu-IT: HSAL Analysis", page_icon="🎬", layout
 
 # --- Fungsi untuk memuat CSS eksternal ---
 def load_css(file_name):
-    css = ""
-    with open(file_name) as f:
-        css = f.read()
-    # Tambahkan .stApp agar tidak kalah
-    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+    """
+    Fungsi untuk memuat file CSS lokal dan menyuntikkannya ke dalam aplikasi Streamlit.
+    """
+    try:
+        with open(file_name) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.error(f"File CSS '{file_name}' tidak ditemukan. Pastikan file tersebut berada di direktori yang sama dengan app.py.")
 
 # --- Muat file CSS ---
 load_css("style.css")
