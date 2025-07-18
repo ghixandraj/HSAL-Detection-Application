@@ -1025,7 +1025,7 @@ p {
     margin-top: 2rem;
     margin-bottom: 0.8rem;
     padding-bottom: 5px;
-    align-items: center;
+    text-align: center;
 
     background: linear-gradient(90deg, #FFF 0%, #39EDEA 50%, #686ACF 100%);
     -webkit-background-clip: text;
